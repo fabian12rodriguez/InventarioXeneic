@@ -7,24 +7,26 @@ namespace Inventario.Models
 {
     public class Articulo
     {
-        private int id_usuario;
-        private string codigo_usuario;
-        private string nombre_usuario;
-        private string apellido_usuario;
-        private string mail_usuario;
-        private bool habilitado_usuario;
-        private int id_rol;
+        
 
-        public int Id_usuario { get => id_usuario; set => id_usuario = value; }
-        public string Codigo_usuario { get => codigo_usuario; set => codigo_usuario = value; }
-        public string Nombre_usuario { get => nombre_usuario; set => nombre_usuario = value; }
-        public string Apellido_usuario { get => apellido_usuario; set => apellido_usuario = value; }
-        public string Mail_usuario { get => mail_usuario; set => mail_usuario = value; }
 
-        public bool Habilitado_usuario { get => habilitado_usuario; set => habilitado_usuario = value; }
 
-        public int Id_rol { get => id_rol; set => id_rol = value; }
+        private int id_articulo;
+        private string nombre_articulo;
+        private string modelo_articulo;
+        private int id_marca;
+        private int id_tipo_articulo;
+        private string imagen_articulo ;
 
+        public int Id_articulo { get => id_articulo; set => id_articulo = value; }
+        public string Nombre_articulo { get => nombre_articulo; set => nombre_articulo = value; }
+        public string Modelo_articulo { get => modelo_articulo; set => modelo_articulo = value; }
+        public int Id_marca { get => id_marca; set => id_marca = value; }
+        public int Id_tipo_articulo { get => id_tipo_articulo; set => id_tipo_articulo = value; }
+
+        public string Imagen_articulo { get => imagen_articulo; set => imagen_articulo = value; }
+
+        
 
     }
 }

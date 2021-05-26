@@ -12,16 +12,21 @@ namespace Inventario.Controllers
 {
     public class ArticuloController : Controller
     {
-        /*  // GET: Articulo
-        public ActionResult ListadoInstrumentos()
+        // GET: Articulo
+       public ActionResult AltaArticulo()
+        {
+            return View();
+        }
+
+        /*public ActionResult ListadoInstrumentos()
         {
             List<Instrumento> lista = AD_Instrumentos.ListarInstrumentos();
             return View(lista);
         }*/
 
-        public ActionResult AltaArticulo()
+        /*public ActionResult AltaArticulo()
         {
-            List<TipoRoles> listaTipos = AD_Articulos.ListarTipos();
+            List<TipoItemVM> listaTipos = AD_Instrumentos.ListarTipos();
             List<SelectListItem> items = listaTipos.ConvertAll(t => {
                 return new SelectListItem()
                 {
@@ -33,70 +38,20 @@ namespace Inventario.Controllers
 
             ViewBag.items = items;
             return View();
-        }
+        }*/
 
-       /* [HttpPost]
-        public ActionResult AltaInstrumento(Instrumento instrumento)
+        [HttpPost]
+        public ActionResult AltaArticulo(Articulo articulo)
         {
             if (ModelState.IsValid)
             {
-                AD_Instrumentos.InsertarInstrumento(instrumento);
-                return RedirectToAction("ListadoInstrumentos", "Negocio");
+                AD_Articulos.InsertarArticulo(articulo);
+                return RedirectToAction("AltaArticulo", "Articulo");
             }
             else
             {
-                return View(instrumento);
+                return View(articulo);
             }
         }
-
-        public ActionResult EliminarInstrumento(int idInstrumento)
-        {
-            List<TipoItemVM> listaTipos = AD_Instrumentos.ListarTipos();
-            List<SelectListItem> itemsCombo = listaTipos.ConvertAll(t => {
-                return new SelectListItem()
-                {
-                    Text = t.Nombre,
-                    Value = t.IdTipo.ToString(),
-                    Selected = false
-                };
-            });
-
-            Instrumento resultado = AD_Instrumentos.ObtenerDatosInstrumento(idInstrumento);
-
-            foreach (var item in itemsCombo)
-            {
-                if (item.Value.Equals(resultado.IdTipo.ToString()))
-                {
-                    item.Selected = true;
-                    break;
-                }
-            }
-
-            ViewBag.items = itemsCombo;
-            return View(resultado);
-        }
-
-        [HttpPost]
-        public ActionResult EliminarInstrumento(Instrumento intrumento)
-        {
-            bool resultado = AD_Instrumentos.EliminarInstrumento(intrumento);
-            if (resultado)
-            {
-                return RedirectToAction("ListadoInstrumentos", "Negocio");
-            }
-            return View(intrumento);
-        }*/
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

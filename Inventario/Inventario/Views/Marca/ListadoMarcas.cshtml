@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Inventario.Models.Marca>
+
+@{
+    ViewBag.Title = "ListadoMarcas";
+}
+<br />
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <h3>Listado de Marcas</h3>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-9">
+        <table class="table table-bordered table-striped bg-light">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        ID
+                    </th>
+                    <th class="text-center">
+                        Nombre
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var marca in Model)
+                {
+                    <tr class="text-center">
+                        <td>
+                            @marca.Id_marca
+                        </td>
+                        <td>
+                            @marca.Descripcion_marca
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+    <div class="col-lg-9">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-success">Inicio</a>
+    </div>
+</div>

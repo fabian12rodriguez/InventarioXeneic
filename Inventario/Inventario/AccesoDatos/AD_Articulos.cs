@@ -194,8 +194,56 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
-        /*
-        public static bool InsertarInstrumento(Instrumento instrumento)
+        public static List<Marca> ListarMarcas()
+        {
+            List<Marca> resultado = new List<Marca>();
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                string consultaSql =
+                    @"SELECT Id_marca, Descripcion_marca FROM Marcas;";
+
+                cmd.Parameters.Clear();
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = consultaSql;
+
+                cn.Open();
+                cmd.Connection = cn;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr != null)
+                {
+                    while (dr.Read())
+                    {
+                        Marca aux = new Marca();
+                        aux.Id_marca = int.Parse(dr["Id_marca"].ToString());
+                        aux.Descripcion_marca = dr["Descripcion_marca"].ToString();
+
+                        resultado.Add(aux);
+
+
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+            return resultado;
+        }
+        public static bool InsertarMarca(Marca marca)
         {
             bool resultado = false;
             string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
@@ -205,13 +253,9 @@ namespace Inventario.AccesoDatos
             try
             {
                 SqlCommand cmd = new SqlCommand();
-                string consultaSql = "INSERT INTO Instrumentos VALUES(@instrumento, @descripcion, @stock, @precio, @tipo)";
+                string consultaSql = "INSERT INTO Marcas VALUES(@DESCRIPCION_MARCA)";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@instrumento", instrumento.Nombre);
-                cmd.Parameters.AddWithValue("@descripcion", instrumento.Descripcion);
-                cmd.Parameters.AddWithValue("@stock", instrumento.Stock);
-                cmd.Parameters.AddWithValue("@precio", instrumento.Precio);
-                cmd.Parameters.AddWithValue("@tipo", instrumento.IdTipo);
+                cmd.Parameters.AddWithValue("@DESCRIPCION_MARCA", marca.Descripcion_marca);
 
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = consultaSql;
@@ -232,8 +276,7 @@ namespace Inventario.AccesoDatos
             }
 
             return resultado;
-        }*/
-
+        }
 
 
 

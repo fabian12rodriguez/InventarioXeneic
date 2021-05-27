@@ -14,11 +14,11 @@
 
 <div class="row">
     <div class="col-lg-9">
-        <table class="table table-bordered table-striped bg-light">
+        <table class="table table-bordered table-striped">
             <thead>
                 <tr>
                     <th class="text-center">
-                       ID
+                        ID
                     </th>
                     <th class="text-center">
                         Nombre
@@ -32,30 +32,36 @@
                     <th class="text-center">
                         Tipo
                     </th>
-                   
+                    <th class="text-center">
+                        Accion
+                    </th>
+
                 </tr>
             </thead>
             <tbody>
                 @foreach (var articulo in Model)
                 {
-                    <tr class="text-center">
-                        <td>
-                            @articulo.Id_articulo
-                        </td>
-                        <td>
-                            @articulo.Nombre_articulo
-                        </td>
-                        <td>
-                            @articulo.Modelo_articulo
-                        </td>
-                        <td>
-                            @articulo.Desc_marca_articulo
-                        </td>
-                        <td>
-                            @articulo.Desc_tipo_articulo
-                        </td>
-                     
-                    </tr>
+                <tr class="text-center">
+                    <td>
+                        @articulo.Id_articulo
+                    </td>
+                    <td>
+                        @articulo.Nombre_articulo
+                    </td>
+                    <td>
+                        @articulo.Modelo_articulo
+                    </td>
+                    <td>
+                        @articulo.Desc_marca_articulo
+                    </td>
+                    <td>
+                        @articulo.Desc_tipo_articulo
+                    </td>
+                    <td>
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-warning">Editar</a>
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-danger">Eliminar</a>
+                    </td>
+                        </tr>
                 }
             </tbody>
 

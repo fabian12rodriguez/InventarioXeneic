@@ -1,0 +1,42 @@
+﻿@model Inventario.Models.Marca
+
+@{
+    ViewBag.Title = "AltaMarca";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <br />
+        <h4>Nueva Marca</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <div class="form-group">
+            <label class="col-sm-6" control-label>Marca</label>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(model => model.Descripcion_marca, htmlAttributes: new { @class = "form-control", @id = "txtMarca" })
+            </div>
+        </div>
+
+
+     </div>
+
+
+    <div class="form-group" text-right>
+        <div class="col-sm-6">
+            <button class="btn btn-primary" type="submit">Alta</button>
+        </div>
+        <br />
+        <br />
+        <div class="col-sm-6">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-info">Volver a inicio</a>
+        </div>
+    </div>
+}
+

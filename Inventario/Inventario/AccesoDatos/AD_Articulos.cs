@@ -43,8 +43,8 @@ namespace Inventario.AccesoDatos
                         aux.Id_articulo = int.Parse(dr["Id_articulo"].ToString());
                         aux.Nombre_articulo = dr["Nombre_articulo"].ToString();
                         aux.Modelo_articulo = dr["Modelo_articulo"].ToString();
-                        aux.Id_marca = int.Parse(dr["Id_marca"].ToString());
-                        aux.Id_tipo_articulo = int.Parse(dr["Id_tipo_articulo"].ToString());
+                        aux.Desc_marca_articulo = dr["DESCRIPCION_MARCA"].ToString();
+                        aux.Desc_tipo_articulo = dr["DESCRIPCION_TIPO_ARTICULO"].ToString();
                         aux.Imagen_articulo = dr["Imagen_articulo"].ToString();
 
 
@@ -105,15 +105,10 @@ namespace Inventario.AccesoDatos
             return resultado;
         }
 
-
-
-
-
-
-        /*
-        public static List<TipoItemVM> ListarTipos()
+          
+        public static List<TipoMarca> ListarTipoMarcas()
         {
-            List<TipoItemVM> resultado = new List<TipoItemVM>();
+            List<TipoMarca> resultado = new List<TipoMarca>();
             string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
 
             SqlConnection cn = new SqlConnection(cadenaConexion);
@@ -121,7 +116,7 @@ namespace Inventario.AccesoDatos
             try
             {
                 SqlCommand cmd = new SqlCommand();
-                string consultaSql = "SELECT IdTipo, Nombre FROM Tipos";
+                string consultaSql = "SELECT Id_marca, Descripcion_marca FROM Marcas";
                 cmd.Parameters.Clear();
 
                 cmd.CommandType = System.Data.CommandType.Text;
@@ -136,9 +131,9 @@ namespace Inventario.AccesoDatos
                 {
                     while (dr.Read())
                     {
-                        TipoItemVM aux = new TipoItemVM();
-                        aux.IdTipo = int.Parse(dr["IdTipo"].ToString());
-                        aux.Nombre = dr["Nombre"].ToString();
+                        TipoMarca aux = new TipoMarca();
+                        aux.Id_marca = int.Parse(dr["Id_marca"].ToString());
+                        aux.Descripcion_marca = dr["Descripcion_marca"].ToString();
                         resultado.Add(aux);
                     }
                 }
@@ -155,7 +150,51 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
+        public static List<TipoArticulo> ListarTipoArticulos()
+        {
+            List<TipoArticulo> resultado = new List<TipoArticulo>();
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
 
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                string consultaSql = "SELECT Id_tipo_articulo, Descripcion_tipo_articulo FROM tipos_articulos";
+                cmd.Parameters.Clear();
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = consultaSql;
+
+                cn.Open();
+                cmd.Connection = cn;
+
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr != null)
+                {
+                    while (dr.Read())
+                    {
+                        TipoArticulo aux = new TipoArticulo();
+                        aux.Id_tipo_articulo = int.Parse(dr["Id_tipo_articulo"].ToString());
+                        aux.Descripcion_tipo_articulo = dr["Descripcion_tipo_articulo"].ToString();
+                        resultado.Add(aux);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+            return resultado;
+        }
+        /*
         public static bool InsertarInstrumento(Instrumento instrumento)
         {
             bool resultado = false;
@@ -194,7 +233,7 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }*/
-       
+
 
 
 

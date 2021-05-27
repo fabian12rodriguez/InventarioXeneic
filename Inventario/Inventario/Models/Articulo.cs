@@ -17,6 +17,8 @@ namespace Inventario.Models
         private int id_marca;
         private int id_tipo_articulo;
         private string imagen_articulo ;
+        private string desc_marca_articulo;
+        private string desc_tipo_articulo;
 
         public int Id_articulo { get => id_articulo; set => id_articulo = value; }
         public string Nombre_articulo { get => nombre_articulo; set => nombre_articulo = value; }
@@ -25,8 +27,10 @@ namespace Inventario.Models
         public int Id_tipo_articulo { get => id_tipo_articulo; set => id_tipo_articulo = value; }
 
         public string Imagen_articulo { get => imagen_articulo; set => imagen_articulo = value; }
+        public string Desc_marca_articulo { get => desc_marca_articulo; set => desc_marca_articulo = value; }
+        public string Desc_tipo_articulo { get => desc_tipo_articulo; set => desc_tipo_articulo = value; }
 
-        
+
 
     }
 }

@@ -13,32 +13,41 @@ namespace Inventario.Controllers
     public class ArticuloController : Controller
     {
         // GET: Articulo
-       public ActionResult AltaArticulo()
+
+        public ActionResult ListadoArticulos()
         {
-            return View();
+            List<Articulo> lista = AD_Articulos.ListarArticulos();
+            return View(lista);
         }
 
-        /*public ActionResult ListadoInstrumentos()
+        public ActionResult AltaArticulo()
         {
-            List<Instrumento> lista = AD_Instrumentos.ListarInstrumentos();
-            return View(lista);
-        }*/
-
-        /*public ActionResult AltaArticulo()
-        {
-            List<TipoItemVM> listaTipos = AD_Instrumentos.ListarTipos();
-            List<SelectListItem> items = listaTipos.ConvertAll(t => {
+            List<TipoMarca> listaTiposMarcas = AD_Articulos.ListarTipoMarcas();
+            List<SelectListItem> itemsMarcas = listaTiposMarcas.ConvertAll(t => {
                 return new SelectListItem()
                 {
-                    Text = t.Nombre,
-                    Value = t.IdTipo.ToString(),
+                    Text = t.Descripcion_marca,
+                    Value = t.Id_marca.ToString(),
                     Selected = false
                 };
             });
 
-            ViewBag.items = items;
+            ViewBag.itemsMarcas = itemsMarcas;
+
+
+            List<TipoArticulo> listaTiposArticulos = AD_Articulos.ListarTipoArticulos();
+            List<SelectListItem> itemsTipoArticulos = listaTiposArticulos.ConvertAll(t => {
+                return new SelectListItem()
+                {
+                    Text = t.Descripcion_tipo_articulo,
+                    Value = t.Id_tipo_articulo.ToString(),
+                    Selected = false
+                };
+            });
+
+            ViewBag.itemsTipoArticulos = itemsTipoArticulos;
             return View();
-        }*/
+        }
 
         [HttpPost]
         public ActionResult AltaArticulo(Articulo articulo)
@@ -46,7 +55,7 @@ namespace Inventario.Controllers
             if (ModelState.IsValid)
             {
                 AD_Articulos.InsertarArticulo(articulo);
-                return RedirectToAction("AltaArticulo", "Articulo");
+                return RedirectToAction("ListadoArticulos", "Articulo");
             }
             else
             {

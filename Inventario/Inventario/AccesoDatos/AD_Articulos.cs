@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using Inventario.Models;
 using Inventario.ViewModels;
+
 namespace Inventario.AccesoDatos
 {
     public class AD_Articulos
@@ -277,7 +278,181 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
+        public static Articulo ObtenerArticulo(int id_articulo)
+        {
+            Articulo resultado = new Articulo();
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString(); 
 
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+            try 
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = "SELECT * FROM Articulos WHERE id_articulo =@id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id_articulo); 
+
+                cmd.CommandType = System.Data.CommandType.Text; 
+                cmd.CommandText = consulta; 
+
+
+                cn.Open(); 
+                cmd.Connection = cn;
+                SqlDataReader dr = cmd.ExecuteReader(); 
+
+                if (dr != null)
+                {
+                    while (dr.Read())
+                    {
+
+                        resultado.Id_articulo = int.Parse(dr["Id_articulo"].ToString());
+                        resultado.Nombre_articulo = dr["Nombre_articulo"].ToString();
+                        resultado.Modelo_articulo = dr["Modelo_articulo"].ToString();
+                        resultado.Id_marca = int.Parse(dr["Id_marca"].ToString());
+                        resultado.Id_tipo_articulo = int.Parse(dr["Id_tipo_articulo"].ToString());
+                        resultado.Imagen_articulo = dr["Imagen_articulo"].ToString();
+
+
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            finally 
+            {
+                cn.Close();
+            }
+
+            return resultado;
+        }
+        public static bool ActualizarDatosArticulos(Articulo articulo)
+        {
+            bool resultado = false;
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString(); 
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+            try 
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = "UPDATE articulos SET Nombre_articulo = @Nombre_articulo, Modelo_articulo = @Modelo_articulo, Id_marca = @Id_marca, Id_tipo_articulo = @Id_tipo_articulo, Imagen_articulo = @Imagen_articulo where Id_articulo = @Id_articulo";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@Id_articulo", articulo.Id_articulo);
+                cmd.Parameters.AddWithValue("@Nombre_articulo", articulo.Nombre_articulo);
+                cmd.Parameters.AddWithValue("@Modelo_articulo", articulo.Modelo_articulo);
+                cmd.Parameters.AddWithValue("@Id_marca", articulo.Id_marca);
+                cmd.Parameters.AddWithValue("@Id_tipo_articulo", articulo.Id_tipo_articulo);
+                cmd.Parameters.AddWithValue("@Imagen_articulo", articulo.Imagen_articulo);
+
+                cmd.CommandType = System.Data.CommandType.Text; 
+                cmd.CommandText = consulta; 
+                cn.Open
+                ();
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+                resultado = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            finally 
+            {
+                cn.Close();
+            }
+
+            return resultado;
+        }
+        public static Marca ObtenerMarca(int id_marca)
+        {
+            Marca resultado = new Marca();
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = "SELECT * FROM marcas WHERE id_marca =@id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id_marca);
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = consulta;
+
+
+                cn.Open();
+                cmd.Connection = cn;
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr != null)
+                {
+                    while (dr.Read())
+                    {
+
+                        resultado.Id_marca = int.Parse(dr["Id_marca"].ToString());
+                        resultado.Descripcion_marca = dr["Descripcion_marca"].ToString();
+                   }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            finally
+            {
+                cn.Close();
+            }
+
+            return resultado;
+        }
+        public static bool ActualizarDatosMarcas(Marca marca)
+        {
+            bool resultado = false;
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = "UPDATE marcas SET Descripcion_marca = @Descripcion_marca where Id_marca = @Id_marca";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@Id_marca", marca.Id_marca);
+                cmd.Parameters.AddWithValue("@Descripcion_marca", marca.Descripcion_marca);
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = consulta;
+                cn.Open
+                ();
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+                resultado = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            finally
+            {
+                cn.Close();
+            }
+
+            return resultado;
+        }
 
 
 

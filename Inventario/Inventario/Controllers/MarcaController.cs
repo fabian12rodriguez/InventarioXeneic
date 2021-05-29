@@ -39,6 +39,30 @@ namespace Inventario.Controllers
             }
         }
 
+        public ActionResult ObtenerMarca(int id_marca)
+        {
+            Marca resultado = AD_Articulos.ObtenerMarca(id_marca);
+           
+            return View(resultado);
+        }
+        [HttpPost]
+        public ActionResult ObtenerMarca(Marca model)
+        {
+            if (ModelState.IsValid)
+            {
+                bool resultado = AD_Articulos.ActualizarDatosMarcas(model);
+                if (resultado)
+                {
+                    return RedirectToAction("ListadoMarcas", "Marca");
+                }
+                else
+                {
+                    return View(model);
+                }
+            }
+            return View();
+        }
+
 
 
 

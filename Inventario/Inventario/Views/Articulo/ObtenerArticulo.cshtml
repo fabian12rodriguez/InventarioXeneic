@@ -1,73 +1,76 @@
-﻿@model IEnumerable<Inventario.Models.Articulo>
+﻿@model Inventario.Models.Articulo
 
 @{
-    ViewBag.Title = "Listado de Articulos";
+    ViewBag.Title = "ObtenerArticulo";
+    List<SelectListItem> itemsMarca = (List<SelectListItem>)ViewBag.itemsMarca;
+    List<SelectListItem> itemsTipoArticulo = (List<SelectListItem>)ViewBag.itemsTipoArticulo;
+
 }
-<br />
+
+
+
 <div class="row">
     <div class="col-sm-12">
         <div>
-            <h3>Listado de Articulos</h3>
+            <br />
+            <h4>Datos de los articulos</h4>
+            <br />
         </div>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-lg-9">
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th class="text-center">
-                        ID
-                    </th>
-                    <th class="text-center">
-                        Nombre
-                    </th>
-                    <th class="text-center">
-                        Modelo
-                    </th>
-                    <th class="text-center">
-                        Marca
-                    </th>
-                    <th class="text-center">
-                        Tipo
-                    </th>
-                    <th class="text-center">
-                        Accion
-                    </th>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(Model => Model.Id_articulo)
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">Nombre</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.Nombre_articulo, htmlAttributes: new { @class = "form-control", @id = "txtNombre" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">Nombre</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.Modelo_articulo, htmlAttributes: new { @class = "form-control", @id = "txtModelo" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">Marca</label>
+                    <div class="col-sm-6">
+                        @Html.DropDownList("Id_marca", itemsMarca, "Seleccione Marca", htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">Tipo articulo</label>
+                    <div class="col-sm-6">
+                        @Html.DropDownList("Id_tipo_articulo", itemsTipoArticulo, "Seleccione Tipo", htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">Imagen</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.Imagen_articulo, htmlAttributes: new { @class = "form-control", @id = "txtImagen" })
+                    </div>
+                </div>
 
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var articulo in Model)
-                {
-                <tr class="text-center">
-                    <td>
-                        @articulo.Id_articulo
-                    </td>
-                    <td>
-                        @articulo.Nombre_articulo
-                    </td>
-                    <td>
-                        @articulo.Modelo_articulo
-                    </td>
-                    <td>
-                        @articulo.Desc_marca_articulo
-                    </td>
-                    <td>
-                        @articulo.Desc_tipo_articulo
-                    </td>
-                    <td>
-                        <a href="@Url.Action("Index", "Home")" class="btn btn-warning">Editar</a>
-                        <a href="@Url.Action("Index", "Home")" class="btn btn-danger">Eliminar</a>
-                    </td>
-                        </tr>
-                }
-            </tbody>
+                <div class="form-group text-right">
+                    <div class="col-xs-12">
+                        <button class="btn btn-warning" type="submit">
+                            Actualizar
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group text-right">
+                    <div class="col-xs-12">
+                        <a href="@Url.Action("ListadoArticulos", "Articulo", new { })" class="btn btn-primary"> Volver</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
 
-        </table>
-    </div>
-    <div class="col-lg-9">
-        <a href="@Url.Action("Index", "Home")" class="btn btn-success">Inicio</a>
-    </div>
-</div>
+

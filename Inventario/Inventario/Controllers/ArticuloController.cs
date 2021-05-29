@@ -19,6 +19,7 @@ namespace Inventario.Controllers
             List<Articulo> lista = AD_Articulos.ListarArticulos();
             return View(lista);
         }
+
    
         public ActionResult AltaArticulo()
         {
@@ -50,11 +51,14 @@ namespace Inventario.Controllers
         }
 
         [HttpPost]
-        public ActionResult AltaArticulo(Articulo articulo)
+        public ActionResult AltaArticulo(ArticuloStock articulo)
         {
             if (ModelState.IsValid)
             {
-                AD_Articulos.InsertarArticulo(articulo);
+
+                AD_ArtStock.InsertarArticulo(articulo);
+                int id_articulo = AD_ArtStock.ObtenerArticulo();
+                AD_ArtStock.InsertarStock(articulo, id_articulo);
                 return RedirectToAction("ListadoArticulos", "Articulo");
             }
             else
@@ -63,58 +67,72 @@ namespace Inventario.Controllers
             }
         }
 
-       /* public ActionResult ObtenerArticulo(int id_articulo)
+   
+        public ActionResult ObtenerArticulo(int id_articulo)
         {
-            List<TipoMarca> listaMarca = AD_Concesionaria.ObtenerListadoDeMarcas();
-            List<SelectListItem> comboMarca = listaMarca.ConvertAll(i => //convertimos la listaMarca en un SelectedListItem  para que cada item (i) nos muestre el id y el Nombre
+            Articulo resultado = AD_Articulos.ObtenerArticulo(id_articulo);
+            List<TipoMarca> listaMarca = AD_Articulos.ListarTipoMarcas();
+            List<SelectListItem> comboMarca = listaMarca.ConvertAll(i => 
             {
                 return new SelectListItem()
                 {
-                    Text = i.Nombre, //significa que el texto va a ser el campo de mi item (i) que se llame nombre
-                    Value = i.IdMarca.ToString(), //significa que el texto va a ser el campo de mi item (i) que se llame nombre
-                    //es toString porque tomamos un INT del IDMARCA
-                    Selected = false //no va a haber ningun ITEM seleccionado
+                    Text = i.Descripcion_marca, 
+                    Value = i.Id_marca.ToString(), 
+                    Selected = false
                 };
             });
-            Auto resultado = AD_Concesionaria.ObtenerAuto(idAuto);
-            foreach (var item in comboMarca) // para cada item del combo vamos a consultar lo siguiente
+
+            foreach (var item in comboMarca) 
             {
-                if (item.Value.Equals(resultado.IdMarca.ToString())) // SI el item Value (propiedad del SelectedListItem) es igual a la instancia del auto IDMarca ToString(porque compara String con String)
+                if (item.Value.Equals(resultado.Id_marca.ToString()))
                 {
-                    item.Selected = true; //
-                    break; // si es verdadero que corte el for
+                    item.Selected = true; 
+                    break; 
                 }
             }
 
-            ViewBag.items = comboMarca;//agrega el itemCombo al viewBag
+            ViewBag.itemsMarca = comboMarca;
 
-            //------------------------------------
-            List<TipoArticulo> listaMarca = AD_Concesionaria.ObtenerListadoDeMarcas();
-            List<SelectListItem> comboMarca = listaMarca.ConvertAll(i => //convertimos la listaMarca en un SelectedListItem  para que cada item (i) nos muestre el id y el Nombre
+            List<TipoArticulo> listaTipoArticulo = AD_Articulos.ListarTipoArticulos();
+            List<SelectListItem> comboTipoArticulo = listaTipoArticulo.ConvertAll(i => 
             {
                 return new SelectListItem()
                 {
-                    Text = i.Nombre, //significa que el texto va a ser el campo de mi item (i) que se llame nombre
-                    Value = i.IdMarca.ToString(), //significa que el texto va a ser el campo de mi item (i) que se llame nombre
-                    //es toString porque tomamos un INT del IDMARCA
-                    Selected = false //no va a haber ningun ITEM seleccionado
+                    Text = i.Descripcion_tipo_articulo, 
+                    Value = i.Id_tipo_articulo.ToString(),
+                   
+                    Selected = false 
                 };
             });
-            Auto resultado = AD_Concesionaria.ObtenerAuto(idAuto);
-            foreach (var item in comboMarca) // para cada item del combo vamos a consultar lo siguiente
+            foreach (var item in comboTipoArticulo) 
             {
-                if (item.Value.Equals(resultado.IdMarca.ToString())) // SI el item Value (propiedad del SelectedListItem) es igual a la instancia del auto IDMarca ToString(porque compara String con String)
+                if (item.Value.Equals(resultado.Id_tipo_articulo.ToString())) 
                 {
-                    item.Selected = true; //
-                    break; // si es verdadero que corte el for
-                }
+                    item.Selected = true; 
+                    break;                 }
             }
 
-            ViewBag.items = comboMarca;//agrega el itemCombo al viewBag
+            ViewBag.itemsTipoArticulo = comboTipoArticulo;
 
             return View(resultado);
-        }*/
-
+        }
+        [HttpPost]
+        public ActionResult ObtenerArticulo(Articulo model)
+        {
+            if (ModelState.IsValid)
+            {
+                bool resultado = AD_Articulos.ActualizarDatosArticulos(model);
+                if (resultado)
+                {
+                    return RedirectToAction("ListadoArticulos", "Articulo");
+                }
+                else
+                {
+                    return View(model);
+                }
+            }
+            return View();
+        }
 
 
 

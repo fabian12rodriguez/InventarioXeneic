@@ -1,0 +1,45 @@
+﻿@model Inventario.Models.Marca
+
+@{
+    ViewBag.Title = "ObtenerMarca";
+}
+
+<
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <br />
+            <h4>Datos de las marcas</h4>
+            <br />
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(Model => Model.Id_marca)
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="col-sm-6 control-label">Nombre</label>
+                    <div class="col-sm-6">
+                        @Html.TextBoxFor(model => model.Descripcion_marca, htmlAttributes: new { @class = "form-control", @id = "txtNombre" })
+                    </div>
+                </div>
+                <div class="form-group text-right">
+                    <div class="col-xs-12">
+                        <button class="btn btn-warning" type="submit">
+                            Actualizar
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group text-right">
+                    <div class="col-xs-12">
+                        <a href="@Url.Action("ListadoMarcas", "Marca", new { })" class="btn btn-primary"> Volver</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

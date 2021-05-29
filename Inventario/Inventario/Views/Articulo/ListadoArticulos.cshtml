@@ -18,7 +18,7 @@
             <thead>
                 <tr>
                     <th class="text-center">
-                       ID
+                        ID
                     </th>
                     <th class="text-center">
                         Nombre
@@ -32,30 +32,37 @@
                     <th class="text-center">
                         Tipo
                     </th>
-                   
+                    <th class="text-left">
+
+                        Acciones
+                    </th>
+
                 </tr>
             </thead>
             <tbody>
                 @foreach (var articulo in Model)
                 {
-                    <tr class="text-center">
-                        <td>
-                            @articulo.Id_articulo
-                        </td>
-                        <td>
-                            @articulo.Nombre_articulo
-                        </td>
-                        <td>
-                            @articulo.Modelo_articulo
-                        </td>
-                        <td>
-                            @articulo.Desc_marca_articulo
-                        </td>
-                        <td>
-                            @articulo.Desc_tipo_articulo
-                        </td>
-                     
-                    </tr>
+                <tr class="text-center">
+                    <td>
+                        @articulo.Id_articulo
+                    </td>
+                    <td>
+                        @articulo.Nombre_articulo
+                    </td>
+                    <td>
+                        @articulo.Modelo_articulo
+                    </td>
+                    <td>
+                        @articulo.Desc_marca_articulo
+                    </td>
+                    <td>
+                        @articulo.Desc_tipo_articulo
+                    </td>
+                    <td>
+                        <a href="@Url.Action("ObtenerArticulo", "Articulo", new { @id_articulo=articulo.Id_articulo})" class="btn btn-warning">Editar</a>
+                        @* <a href="@Url.Action("ObtenerArticulo", "Articulo", new { @id_articulo=articulo.Id_articulo})" class="btn btn-danger">Deshabilitar</a>*@
+                    </td>
+                </tr>
                 }
             </tbody>
 

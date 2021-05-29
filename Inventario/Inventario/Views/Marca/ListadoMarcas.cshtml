@@ -23,19 +23,26 @@
                     <th class="text-center">
                         Nombre
                     </th>
+                    <th class="text-center">
+                        Acciones
+                    </th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var marca in Model)
                 {
-                    <tr class="text-center">
-                        <td>
-                            @marca.Id_marca
-                        </td>
-                        <td>
-                            @marca.Descripcion_marca
-                        </td>
-                    </tr>
+                <tr class="text-center">
+                    <td>
+                        @marca.Id_marca
+                    </td>
+                    <td>
+                        @marca.Descripcion_marca
+                    </td>
+                    <td>
+                        <a href="@Url.Action("ObtenerMarca", "Marca", new { @id_marca=marca.Id_marca})" class="btn btn-warning">Editar</a>
+                        @* <a href="@Url.Action("ObtenerArticulo", "Articulo", new { @id_articulo=articulo.Id_articulo})" class="btn btn-danger">Deshabilitar</a>*@
+                    </td>
+                </tr>
                 }
             </tbody>
 

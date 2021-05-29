@@ -46,18 +46,28 @@
                 <div class="sb-sidenav-menu">
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Stock</div>
-                        <a class="nav-link collapsed" href="@Url.Action("ListadoArticulos", "Articulo",new {})">
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts3">
+                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            Inventario
+                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                        </a>
+                        <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                            <nav class="sb-sidenav-menu-nested nav">
+                                <a class="nav-link" href="@Url.Action("ListadoInventario", "Inventario",new {})">Stock</a>
+                                <a class="nav-link" href="@Url.Action("ListadoAsignarUsr", "Inventario",new {})"> Asignar articulo</a>
+                            </nav>
+                        </div>
+                        @*<a class="nav-link collapsed" href="@Url.Action("ListadoInventario", "Inventario",new {})">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Inventario
                             <div class="sb-sidenav-collapse-arrow"></div>
-                        </a>
+                        </a>*@
 
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             ABM
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
@@ -86,8 +96,8 @@
                                 </a>
                                 <div class="collapse" id="pagesCollapsetipo" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
-                                        <a class="nav-link" href="@Url.Action("AltaMarca", "Marca",new {})">Alta</a>
-                                        <a class="nav-link" href="@Url.Action("ListadoMarcas", "Marca",new {})">Listado</a>
+                                        <a class="nav-link" href="@Url.Action("AltaTipoArt", "TipoArticulos",new {})">Alta</a>
+                                        <a class="nav-link" href="@Url.Action("ListadoTipoArt", "TipoArticulos",new {})">Listado</a>
                                     </nav>
                                 </div>
                             </nav>

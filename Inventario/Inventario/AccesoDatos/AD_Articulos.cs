@@ -244,40 +244,7 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
-        public static bool InsertarMarca(Marca marca)
-        {
-            bool resultado = false;
-            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
-
-            SqlConnection cn = new SqlConnection(cadenaConexion);
-
-            try
-            {
-                SqlCommand cmd = new SqlCommand();
-                string consultaSql = "INSERT INTO Marcas VALUES(@DESCRIPCION_MARCA)";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@DESCRIPCION_MARCA", marca.Descripcion_marca);
-
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = consultaSql;
-
-                cn.Open();
-                cmd.Connection = cn;
-                cmd.ExecuteNonQuery();
-                resultado = true;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-            finally
-            {
-                cn.Close();
-            }
-
-            return resultado;
-        }
+       
         public static Articulo ObtenerArticulo(int id_articulo)
         {
             Articulo resultado = new Articulo();
@@ -371,6 +338,40 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
+        public static bool InsertarMarca(Marca marca)
+        {
+            bool resultado = false;
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                string consultaSql = "INSERT INTO Marcas VALUES(@DESCRIPCION_MARCA)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@DESCRIPCION_MARCA", marca.Descripcion_marca);
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = consultaSql;
+
+                cn.Open();
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+                resultado = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+            return resultado;
+        }
         public static Marca ObtenerMarca(int id_marca)
         {
             Marca resultado = new Marca();
@@ -432,6 +433,122 @@ namespace Inventario.AccesoDatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@Id_marca", marca.Id_marca);
                 cmd.Parameters.AddWithValue("@Descripcion_marca", marca.Descripcion_marca);
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = consulta;
+                cn.Open
+                ();
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+                resultado = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            finally
+            {
+                cn.Close();
+            }
+
+            return resultado;
+        }
+        public static bool InsertarTipoArt(TipoArticulo tipo_articulo)
+        {
+            bool resultado = false;
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+                string consultaSql = "INSERT INTO tipos_articulos VALUES(@Descripcion_tipo_articulo)";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@Descripcion_tipo_articulo", tipo_articulo.Descripcion_tipo_articulo);
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = consultaSql;
+
+                cn.Open();
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+                resultado = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+            return resultado;
+        }
+        public static TipoArticulo ObtenerTipoArt(int id_tipo_articulo)
+        {
+            TipoArticulo resultado = new TipoArticulo();
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = "SELECT * FROM tipos_articulos WHERE id_tipo_articulo =@id";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id", id_tipo_articulo);
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = consulta;
+
+
+                cn.Open();
+                cmd.Connection = cn;
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr != null)
+                {
+                    while (dr.Read())
+                    {
+
+                        resultado.Id_tipo_articulo = int.Parse(dr["Id_tipo_articulo"].ToString());
+                        resultado.Descripcion_tipo_articulo = dr["Descripcion_tipo_articulo"].ToString();
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            finally
+            {
+                cn.Close();
+            }
+
+            return resultado;
+        }
+        public static bool ActualizarDatosTipoArt(TipoArticulo tipo_articulo)
+        {
+            bool resultado = false;
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = "UPDATE tipos_articulos SET Descripcion_tipo_articulo = @Descripcion_tipo_articulo where Id_tipo_articulo = @Id_tipo_articulo";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@Id_tipo_articulo", tipo_articulo.Id_tipo_articulo);
+                cmd.Parameters.AddWithValue("@Descripcion_tipo_articulo", tipo_articulo.Descripcion_tipo_articulo);
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = consulta;
                 cn.Open

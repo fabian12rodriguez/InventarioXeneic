@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Inventario.ViewModels.TipoArticulo>
+
+@{
+    ViewBag.Title = "ListadoMarcas";
+}
+<br />
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <h3>Listado de tipos de articulos</h3>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-9">
+        <table class="table table-bordered table-striped bg-light">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        ID
+                    </th>
+                    <th class="text-center">
+                        Nombre
+                    </th>
+                    <th class="text-center">
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tipo_articulo in Model)
+                {
+                    <tr class="text-center">
+                        <td>
+                            @tipo_articulo.Id_tipo_articulo
+                        </td>
+                        <td>
+                            @tipo_articulo.Descripcion_tipo_articulo
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ObtenerTipoArt", "TipoArticulos", new { @id_tipo_articulo=tipo_articulo.Id_tipo_articulo})" class="btn btn-warning">Editar</a>
+                            @* <a href="@Url.Action("ObtenerArticulo", "Articulo", new { @id_articulo=articulo.Id_articulo})" class="btn btn-danger">Deshabilitar</a>*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+    <div class="col-lg-9">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-success">Inicio</a>
+    </div>
+</div>

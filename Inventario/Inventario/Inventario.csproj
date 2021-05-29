@@ -121,21 +121,24 @@
   <ItemGroup>
     <Compile Include="AccesoDatos\AD_Articulos.cs" />
     <Compile Include="AccesoDatos\AD_ArtStock.cs" />
+    <Compile Include="AccesoDatos\AD_Inventario.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArticuloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
+    <Compile Include="Controllers\TipoArticulosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Articulo.cs" />
     <Compile Include="Models\Marca.cs" />
-    <Compile Include="Models\Usuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ArticuloStock.cs" />
+    <Compile Include="ViewModels\VMInventario.cs" />
     <Compile Include="ViewModels\TipoArticulo.cs" />
     <Compile Include="ViewModels\TipoMarca.cs" />
     <Compile Include="ViewModels\TipoRoles.cs" />
@@ -292,6 +295,11 @@
     <Content Include="Views\Marca\AltaMarca.cshtml" />
     <Content Include="Views\Marca\ListadoMarcas.cshtml" />
     <Content Include="Views\Marca\ObtenerMarca.cshtml" />
+    <Content Include="Views\TipoArticulos\AltaTipoArt.cshtml" />
+    <Content Include="Views\TipoArticulos\ListadoTipoArt.cshtml" />
+    <Content Include="Views\TipoArticulos\ObtenerTipoArt.cshtml" />
+    <Content Include="Views\Inventario\ListadoInventario.cshtml" />
+    <Content Include="Views\Inventario\ListadoAsignarUsr.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

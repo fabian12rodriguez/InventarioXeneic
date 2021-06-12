@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using Inventario.Models;
 using Inventario.ViewModels;
+using System.Data.SqlClient;
 
 namespace Inventario.AccesoDatos
 {

@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Inventario.ViewModels.VMInventario>
+
+@*@model Concesionario_236.ViewModels.Reportes.InfoGralVM*@
+
+@{
+    ViewBag.Title = "ListadoReportes";
+}
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<h2>Listado de Reportes</h2>
+<br />
+@using (Html.BeginForm())
+{
+
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Reportes
+
+    </button>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Artículos por tipo</a>
+        <a class="dropdown-item" href="#">Usuarios por área</a>
+        <a class="dropdown-item" href="#">Artículos sin usuarios asignados.</a>
+        <a class="dropdown-item" href="#">Cantidad de artículos tipo notebook</a>
+    </div>
+</div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Desc_tipo_articulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Desc_tipo_articulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+}

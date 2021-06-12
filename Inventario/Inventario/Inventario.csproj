@@ -122,26 +122,51 @@
     <Compile Include="AccesoDatos\AD_Articulos.cs" />
     <Compile Include="AccesoDatos\AD_ArtStock.cs" />
     <Compile Include="AccesoDatos\AD_Inventario.cs" />
+    <Compile Include="AccesoDatos\AD_Reportes.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArticuloController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
+    <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\TipoArticulosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Grafica3.aspx.cs">
+      <DependentUpon>Grafica3.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Grafica3.aspx.designer.cs">
+      <DependentUpon>Grafica3.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Articulo.cs" />
     <Compile Include="Models\Marca.cs" />
+    <Compile Include="Models\SeriePastel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ArticuloStock.cs" />
     <Compile Include="ViewModels\VMInventario.cs" />
     <Compile Include="ViewModels\TipoArticulo.cs" />
     <Compile Include="ViewModels\TipoMarca.cs" />
     <Compile Include="ViewModels\TipoRoles.cs" />
+    <Compile Include="Grafica1.aspx.cs">
+      <DependentUpon>Grafica1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Grafica1.aspx.designer.cs">
+      <DependentUpon>Grafica1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Grafica2.aspx.cs">
+      <DependentUpon>Grafica2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Grafica2.aspx.designer.cs">
+      <DependentUpon>Grafica2.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -156,6 +181,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Grafica3.aspx" />
     <Content Include="Images\1.png" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
@@ -181,6 +207,9 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Scripts\pastel.js" />
+    <Content Include="Grafica1.aspx" />
+    <Content Include="Grafica2.aspx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -300,6 +329,11 @@
     <Content Include="Views\TipoArticulos\ObtenerTipoArt.cshtml" />
     <Content Include="Views\Inventario\ListadoInventario.cshtml" />
     <Content Include="Views\Inventario\ListadoAsignarUsr.cshtml" />
+    <Content Include="Views\Reporte\ListadoReportes1.cshtml" />
+    <Content Include="Views\Reporte\ListadoReportes2.cshtml" />
+    <Content Include="Views\Reporte\ListadoReportes4.cshtml" />
+    <Content Include="Views\Reporte\ListadoReportes3.cshtml" />
+    <Content Include="Views\Dashboard\Graficos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

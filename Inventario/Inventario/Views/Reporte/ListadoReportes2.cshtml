@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Inventario.ViewModels.VMInventario>
+
+@*@model Concesionario_236.ViewModels.Reportes.InfoGralVM*@
+
+@{
+    ViewBag.Title = "ListadoReportes";
+}
+
+
+
+<h2>Listado de Reportes</h2>
+<br />
+@using (Html.BeginForm())
+{
+
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Area)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+
+            </tr>
+        }
+
+    </table>
+}

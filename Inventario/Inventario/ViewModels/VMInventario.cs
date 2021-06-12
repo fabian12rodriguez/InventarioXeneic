@@ -33,6 +33,10 @@ namespace Inventario.ViewModels
         private bool habilitado_usuario;
         private int id_rol;
 
+        /*Reportes*/
+        private int cantidad;
+        private string area;
+
         /*Articulos*/
         public int Id_articulo { get => id_articulo; set => id_articulo = value; }
         public string Nombre_articulo { get => nombre_articulo; set => nombre_articulo = value; }
@@ -58,5 +62,9 @@ namespace Inventario.ViewModels
         public string Mail_usuario { get => mail_usuario; set => mail_usuario = value; }
         public bool Habilitado_usuario { get => habilitado_usuario; set => habilitado_usuario = value; }
         public int Id_rol { get => id_rol; set => id_rol = value; }
+
+        /*Reportes*/
+        public int Cantidad { get => cantidad; set => cantidad = value; }
+        public string Area { get => area; set => area = value; }
     }
 }

@@ -36,7 +36,9 @@
     <form id="form1" runat="server">
         <div>
                <div id="barchart_material" style="width: 500px; height: 200px;"></div>
+            <div id="piechart" style="width: 900px; height: 500px;"></div>
         </div>
     </form>
+
 </body>
 </html>

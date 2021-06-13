@@ -138,12 +138,16 @@ namespace Inventario.AccesoDatos
 
                 //listado de artículos sin usuarios asignados.
 
-                string consulta = @"SELECT t.DESCRIPCION_TIPO_ARTICULO Tipo, count(*) cantidad
-                                    FROM ARTICULOS A, TIPOS_ARTICULOS T
-                                    WHERE A.ID_TIPO_ARTICULO = T.ID_TIPO_ARTICULO
-                                    group by t.DESCRIPCION_TIPO_ARTICULO
-                                    ORDER BY 1;
-                                     ";
+                string consulta = @"select A.NOMBRE_ARTICULO, 
+                                    A.MODELO_ARTICULO, 
+                                    M.DESCRIPCION_MARCA, 
+                                    T.DESCRIPCION_TIPO_ARTICULO
+                                    from articulos a left join ARTICULOS_USUARIOS au on a.ID_ARTICULO = au.ID_ARTICULO
+                                    join MARCAS M on A.ID_MARCA = M.ID_MARCA
+                                    join TIPOS_ARTICULOS T on A.ID_TIPO_ARTICULO  = T.ID_TIPO_ARTICULO
+                                    LEFT join USUARIOS U on au.ID_USUARIO = U.ID_USUARIO
+                                    where a.HABILITADO_ARTICULO = 1
+                                    and u.CODIGO_USUARIO is null;";
                 cmd.Parameters.Clear();
 
 
@@ -161,8 +165,10 @@ namespace Inventario.AccesoDatos
                     while (dr.Read())
                     {
                         VMInventario nuevoReporte = new VMInventario();
-                        nuevoReporte.Desc_tipo_articulo = dr["Tipo"].ToString();
-                        nuevoReporte.Cantidad = int.Parse(dr["Cantidad"].ToString());
+                        nuevoReporte.Nombre_articulo = dr["NOMBRE_ARTICULO"].ToString();
+                        nuevoReporte.Modelo_articulo = dr["MODELO_ARTICULO"].ToString();
+                        nuevoReporte.Desc_marca_articulo = dr["DESCRIPCION_MARCA"].ToString();
+                        nuevoReporte.Desc_tipo_articulo = dr["DESCRIPCION_TIPO_ARTICULO"].ToString();
                         resultado.Add(nuevoReporte);
 
                     }
@@ -195,12 +201,12 @@ namespace Inventario.AccesoDatos
 
                 //listado de cantidad de artículos tipo notebook
 
-                string consulta = @"SELECT t.DESCRIPCION_TIPO_ARTICULO Tipo, count(*) cantidad
+                string consulta = @"SELECT t.DESCRIPCION_TIPO_ARTICULO tipo, count(*) cantidad
                                     FROM ARTICULOS A, TIPOS_ARTICULOS T
                                     WHERE A.ID_TIPO_ARTICULO = T.ID_TIPO_ARTICULO
+                                    and t.DESCRIPCION_TIPO_ARTICULO like '%NOTEBOOK%'
                                     group by t.DESCRIPCION_TIPO_ARTICULO
-                                    ORDER BY 1;
-                                     ";
+                                    ORDER BY 1;";
                 cmd.Parameters.Clear();
 
 
@@ -218,7 +224,7 @@ namespace Inventario.AccesoDatos
                     while (dr.Read())
                     {
                         VMInventario nuevoReporte = new VMInventario();
-                        nuevoReporte.Desc_tipo_articulo = dr["Tipo"].ToString();
+                        nuevoReporte.Desc_tipo_articulo = dr["tipo"].ToString();
                         nuevoReporte.Cantidad = int.Parse(dr["Cantidad"].ToString());
                         resultado.Add(nuevoReporte);
 

@@ -12,6 +12,12 @@ namespace Inventario.Controllers
     {
         // GET: Reporte
 
+        public ActionResult Index()
+        {
+            ReporteGral resultado = new ReporteGral();
+            return View(resultado);
+        }
+
         public ActionResult ListadoReportes1()
         {
             List<VMInventario> lista = AD_Reportes.ListadoArtPorTipo();

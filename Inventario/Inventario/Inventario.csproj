@@ -149,6 +149,7 @@
     <Compile Include="Models\SeriePastel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ArticuloStock.cs" />
+    <Compile Include="ViewModels\ReporteGral.cs" />
     <Compile Include="ViewModels\VMInventario.cs" />
     <Compile Include="ViewModels\TipoArticulo.cs" />
     <Compile Include="ViewModels\TipoMarca.cs" />
@@ -334,9 +335,11 @@
     <Content Include="Views\Reporte\ListadoReportes4.cshtml" />
     <Content Include="Views\Reporte\ListadoReportes3.cshtml" />
     <Content Include="Views\Dashboard\Graficos.cshtml" />
+    <Content Include="Views\Reporte\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Rotativa\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

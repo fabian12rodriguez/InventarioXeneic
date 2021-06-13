@@ -11,51 +11,46 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-<h2>Listado de Reportes</h2>
+<br /><br />
+<h2>Artículos sin usuarios asignados</h2>
 <br />
 @using (Html.BeginForm())
 {
 
-<div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Reportes
 
-    </button>
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <br />
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Artículos por tipo</a>
-        <a class="dropdown-item" href="#">Usuarios por área</a>
-        <a class="dropdown-item" href="#">Artículos sin usuarios asignados.</a>
-        <a class="dropdown-item" href="#">Cantidad de artículos tipo notebook</a>
-    </div>
-</div>
     <table class="table">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Desc_tipo_articulo)
+                @Html.DisplayNameFor(model => model.Nombre_articulo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cantidad)
+                @Html.DisplayNameFor(model => model.Modelo_articulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Desc_marca_articulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Desc_tipo_articulo)
             </th>
         </tr>
 
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Desc_tipo_articulo)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cantidad)
-                </td>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre_articulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modelo_articulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Desc_marca_articulo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Desc_tipo_articulo)
+        </td>
 
-            </tr>
+    </tr>
         }
 
     </table>

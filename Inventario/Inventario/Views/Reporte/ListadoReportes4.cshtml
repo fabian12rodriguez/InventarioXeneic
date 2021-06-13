@@ -13,47 +13,47 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <br />
 <br />
-
+<h2>Artículos segun su tipo</h2>
 <br />
 @using (Html.BeginForm())
 {
 
-  <div class="row">
-        <div class="col-lg-6">
-            <div class="col-sm-12">
-                <div>
-                    <h4>Listado de articulos tipo notebook</h4>
-                </div>
-            </div>
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th class="text-center">
-                            @Html.DisplayNameFor(model => model.Desc_tipo_articulo)
-                        </th>
-                        <th class="text-center">
-                            @Html.DisplayNameFor(model => model.Cantidad)
-                        </th>
+<div class="row">
+    <div class="col-lg-6">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        Tipo
+                    </th>
+                    <th class="text-center">
+                        Cantidad
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="text-center">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Desc_tipo_articulo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Cantidad)
+                        </td>
+
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr class="text-center">
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Desc_tipo_articulo)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Cantidad)
-                            </td>
+                }
+            </tbody>
+        </table>
 
-                        </tr>
-                    }
-                </tbody>
-            </table>
-
+    </div>
+    <div class="form-group" text-right>
+        <div class="col-sm-6">
+            <a href="@Url.Action("Print4", "Reporte")" class="btn btn-info" target="_blank">Imprimir PDF</a>
         </div>
     </div>
+</div>
 
 
 }

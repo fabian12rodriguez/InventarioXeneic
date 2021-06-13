@@ -48,6 +48,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Rotativa, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rotativa.1.7.3\lib\net461\Rotativa.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -184,6 +187,8 @@
     <Content Include="Content\Site.css" />
     <Content Include="Grafica3.aspx" />
     <Content Include="Images\1.png" />
+    <Content Include="Rotativa\help-wkhtmltoimage.txt" />
+    <Content Include="Rotativa\help-wkhtmltopdf.txt" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -211,6 +216,7 @@
     <Content Include="Scripts\pastel.js" />
     <Content Include="Grafica1.aspx" />
     <Content Include="Grafica2.aspx" />
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -336,10 +342,14 @@
     <Content Include="Views\Reporte\ListadoReportes3.cshtml" />
     <Content Include="Views\Dashboard\Graficos.cshtml" />
     <Content Include="Views\Reporte\Index.cshtml" />
+    <Content Include="Views\Reporte\PDFIndex.cshtml" />
+    <Content Include="Views\Reporte\PDFListadoReportes1.cshtml" />
+    <Content Include="Views\Reporte\PDFListadoReportes2.cshtml" />
+    <Content Include="Views\Reporte\PDFListadoReportes3.cshtml" />
+    <Content Include="Views\Reporte\PDFListadoReportes4.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Rotativa\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

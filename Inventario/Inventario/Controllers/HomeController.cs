@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rotativa;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -26,5 +27,12 @@ namespace Inventario.Controllers
 
             return View();
         }
+
+        public ActionResult Print()
+        {
+            return new ActionAsPdf("Index", new { nombre = "Pedrito" }) {FileName = "test.pdf"} ;
+        }
+
+
     }
 }

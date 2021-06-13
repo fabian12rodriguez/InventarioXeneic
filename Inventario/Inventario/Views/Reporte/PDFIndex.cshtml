@@ -1,0 +1,186 @@
+﻿
+@model Inventario.ViewModels.ReporteGral
+
+
+
+@{
+    ViewBag.Title = "ListadoReportes";
+    Layout = null;
+
+}
+
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<br />
+<br />
+
+<br />
+@using (Html.BeginForm())
+{
+    <div class="row">
+        @*<div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                    Cargar Rubrica
+                </button>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Link 1</a>
+                    <a class="dropdown-item" href="#">Link 2</a>
+                    <a class="dropdown-item" href="#">Link 3</a>
+
+                </div>
+            </div>*@
+        <div class="col-lg-6">
+            <div class="col-sm-12">
+                <div>
+                    <h4>Listado de artículos por tipo</h4>
+                </div>
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            Tipo
+                        </th>
+                        <th class="text-center">
+                            Cantidad
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ListadoArtPorTipo)
+                    {
+                        <tr class="text-center">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Desc_tipo_articulo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cantidad)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-lg-6">
+            <div class="col-sm-12">
+                <div>
+                    <h4>Listado de usuarios por área</h4>
+                </div>
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            Area
+                        </th>
+                        <th class="text-center">
+                            Cantidad
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ListadoUsrPorArea)
+                    {
+                        <tr class="text-center">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Area)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cantidad)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-lg-6">
+            <div class="col-sm-12">
+                <div>
+                    <h4>Listado de artículos sin usuarios asignados.</h4>
+                </div>
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            Nombre
+                        </th>
+                        <th class="text-center">
+                            Modelo
+                        </th>
+                        <th class="text-center">
+                            Marca
+                        </th>
+                        <th class="text-center">
+                            Tipo
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ListadoSinUsrAsignado)
+                    {
+                        <tr class="text-center">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre_articulo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Modelo_articulo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Desc_marca_articulo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Desc_tipo_articulo)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-lg-6">
+            <div class="col-sm-12">
+                <div>
+                    <h4>Listado de articulos tipo notebook</h4>
+                </div>
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            Tipo
+                        </th>
+                        <th class="text-center">
+                            Cantidad
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.ListadoCantTipoNBK)
+                    {
+                        <tr class="text-center">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Desc_tipo_articulo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Cantidad)
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </div>
+}

@@ -11,47 +11,60 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<br /><br />
+<br />
+<br />
 <h2>Artículos sin usuarios asignados</h2>
 <br />
 @using (Html.BeginForm())
 {
+<div class="row">
+    <div class="col-lg-6">
+        <div class="col-sm-12">
+        </div>
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        Nombre
+                    </th>
+                    <th class="text-center">
+                        Modelo
+                    </th>
+                    <th class="text-center">
+                        Marca
+                    </th>
+                    <th class="text-center">
+                        Tipo
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="text-center">
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre_articulo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Modelo_articulo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Desc_marca_articulo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Desc_tipo_articulo)
+                        </td>
 
+                    </tr>
+                }
+            </tbody>
+        </table>
 
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre_articulo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Modelo_articulo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Desc_marca_articulo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Desc_tipo_articulo)
-            </th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Nombre_articulo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Modelo_articulo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Desc_marca_articulo)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Desc_tipo_articulo)
-        </td>
-
-    </tr>
+    </div>
+    <div class="form-group" text-right>
+        <div class="col-sm-6">
+            <a href="@Url.Action("Print3", "Reporte")" class="btn btn-info" target="_blank">Imprimir PDF</a>
+        </div>
+    </div>
+</div>
         }
-
-    </table>
-}

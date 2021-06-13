@@ -84,3 +84,4 @@ C:\Users\fabianr\Documents\GITHUB\InventarioXeneic\Inventario\Inventario\obj\Deb
 C:\Users\fabianr\Documents\GITHUB\InventarioXeneic\Inventario\Inventario\obj\Debug\Inventario.csproj.CopyComplete
 C:\Users\fabianr\Documents\GITHUB\InventarioXeneic\Inventario\Inventario\obj\Debug\Inventario.dll
 C:\Users\fabianr\Documents\GITHUB\InventarioXeneic\Inventario\Inventario\obj\Debug\Inventario.pdb
+C:\Users\fabianr\Documents\GITHUB\InventarioXeneic\Inventario\Inventario\bin\Rotativa.dll

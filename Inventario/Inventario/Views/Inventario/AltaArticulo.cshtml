@@ -1,0 +1,78 @@
+﻿@model Inventario.ViewModels.ArticuloStock
+
+@{
+    ViewBag.Title = "AltaArticulo";
+    List<SelectListItem> itemsMarcas = (List<SelectListItem>)ViewBag.itemsMarcas;
+    List<SelectListItem> itemsTipoArticulos = (List<SelectListItem>)ViewBag.itemsTipoArticulos;
+
+}
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <br />
+    <h4>Nuevo articulo</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+    <div class="form-group">
+        <label class="col-sm-6" control-label>Nombre</label>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(model => model.Nombre_articulo, htmlAttributes: new { @class = "form-control", @id = "txtNombre", required = "required" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-sm-6" control-label>Modelo</label>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(model => model.Modelo_articulo, htmlAttributes: new { @class = "form-control", @id = "txtModelo", required = "required" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label class="col-sm-6" control-label>Marcas</label>
+        <div class="col-sm-6">
+            @Html.DropDownList("ID_MARCA", itemsMarcas, "Seleccione un tipo", htmlAttributes: new { @class = "form-control", required = "required" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-6" control-label>Tipos Articulos</label>
+        <div class="col-sm-6">
+            @Html.DropDownList("ID_TIPO_ARTICULO", itemsTipoArticulos, "Seleccione un tipo", htmlAttributes: new { @class = "form-control", required = "required" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Imagen_articulo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Imagen_articulo, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.ValidationMessageFor(model => model.Imagen_articulo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6" control-label>Cantidad</label>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(model => model.Cantidad_mvt, htmlAttributes: new { @class = "form-control", @id = "txtCantidad", required = "required" })
+        </div>
+    </div>
+    <div class="form-group" text-right>
+        <div class="col-sm-6">
+            <button class="btn btn-primary" type="submit">Alta</button>
+        </div>
+        <br />
+        <br />
+        <div class="col-sm-6">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-info">Volver a inicio</a>
+        </div>
+    </div>
+</div>
+}
+

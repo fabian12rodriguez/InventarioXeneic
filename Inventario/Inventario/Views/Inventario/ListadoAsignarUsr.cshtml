@@ -48,18 +48,8 @@
                             Usuario
                         </th>
                         <th class="text-center">
-                            1
+                            Acciones
                         </th>
-                        <th class="text-center">
-                            2
-                        </th>
-                        <th class="text-center">
-                            3
-                        </th>
-                        <th class="text-center">
-                            4
-                        </th>
-
 
 
                     </tr>
@@ -87,27 +77,13 @@
                                 @VMInventario.Codigo_usuario
                             </td>
                             <td>
-                                <a href="@Url.Action("AsignarUsr", "Inventario", new { @VMInventario=VMInventario.Id_articulo})" class="btn btn-warning">Asignar</a>
-                            </td>
-                            <td>
-                                <a href="@Url.Action("AsignarUsr", "Inventario", new { @VMInventario=VMInventario.Id_articulo})" class="btn btn-danger">DesAsignar</a>
-                            </td>
-                            <td>
-                                <a href="@Url.Action("AsignarUsr", "Inventario", new { @VMInventario=VMInventario.Id_articulo})" class="btn btn-info">Editar</a>
-                            </td>
-                            <td>
-                                <a href="@Url.Action("AsignarUsr", "Inventario", new { @VMInventario=VMInventario.Id_articulo})" class="btn btn-success">Historial</a>
-                            </td>
-                            <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                        Cargar Rubrica
+                                        Acciones
                                     </button>
                                     <div class="dropdown-menu">
-                                        @*  <a class="dropdown-item" href="@Url.Action("CargaTemas", "Rubrica", new {  @idDocente = Model.IdDocente,@idMateria = item.idMateria, @idCurso = item.idCurso})">Crear Tema</a>*@
-                                        <a class="dropdown-item" href="#">Link 2</a>
-                                        <a class="dropdown-item" href="#">Link 3</a>
-
+                                        <a class="dropdown-item"  href="@Url.Action("AsignarUsr", "Inventario", new { @VMInventario=VMInventario.Id_articulo})" >Asignar/Desasignar</a>
+                                        <a class="dropdown-item"  href="@Url.Action("AsignarUsr", "Inventario", new { @VMInventario=VMInventario.Id_articulo})">Historial</a>
                                     </div>
                                 </div>
                             </td>

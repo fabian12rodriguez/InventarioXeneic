@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Inventario.ViewModels.VMInventario>
+
+@{
+    ViewBag.Title = "Listado de Articulos";
+}
+<br />
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <h3>Listado de Articulos</h3>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-9">
+        <table class="table table-bordered table-striped bg-light">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        ID
+                    </th>
+                    <th class="text-center">
+                        Nombre
+                    </th>
+                    <th class="text-center">
+                        Modelo
+                    </th>
+                    <th class="text-center">
+                        Marca
+                    </th>
+                    <th class="text-center">
+                        Tipo
+                    </th>
+                    <th class="text-left">
+
+                        Acciones
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var VMInventario in Model)
+                {
+                <tr class="text-center">
+                    <td>
+                        @VMInventario.Id_articulo
+                    </td>
+                    <td>
+                        @VMInventario.Nombre_articulo
+                    </td>
+                    <td>
+                        @VMInventario.Modelo_articulo
+                    </td>
+                    <td>
+                        @VMInventario.Desc_marca_articulo
+                    </td>
+                    <td>
+                        @VMInventario.Desc_tipo_articulo
+                    </td>
+                    <td>
+                        <a href="@Url.Action("ObtenerArticulo", "Inventario", new { @id_articulo=VMInventario.Id_articulo})" class="btn btn-warning">Editar</a>
+                        @* <a href="@Url.Action("ObtenerArticulo", "Articulo", new { @id_articulo=articulo.Id_articulo})" class="btn btn-danger">Deshabilitar</a>*@
+                    </td>
+                </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+    <div class="col-lg-9">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-success">Inicio</a>
+    </div>
+</div>

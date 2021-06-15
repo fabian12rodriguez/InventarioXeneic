@@ -1,0 +1,88 @@
+﻿@model IEnumerable<Inventario.ViewModels.VMInventario>
+
+@{
+    ViewBag.Title = "Listado de Usuarios";
+}
+<br />
+<div class="row">
+    <div class="col-sm-12">
+        <div>
+            <h3>Listado de Usuarios</h3>
+        </div>
+    </div>
+</div>
+<br />
+
+<div class="row">
+    <div class="col-lg-9">
+        <table class="table table-bordered table-striped bg-light">
+            <thead>
+                <tr>
+                    <th class="text-center">
+                        Usuario
+                    </th>
+                    <th class="text-center">
+                        Nombre
+                    </th>
+                    <th class="text-center">
+                        Mail
+                    </th>
+                    <th class="text-center">
+                        Habilitado
+                    </th>
+                    <th class="text-center">
+                        Rol
+                    </th>
+                    <th class="text-center">
+                        Acciones
+                    </th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var usuario in Model)
+                {
+                    <tr class="text-center">
+                        <td>
+                            @usuario.Codigo_usuario
+                        </td>
+                        <td>
+                            @usuario.Nombre_usuario
+                        </td>
+                        <td>
+                            @usuario.Mail_usuario
+                        </td>
+                        @if (@usuario.Habilitado_usuario)
+                        {
+                            <td>
+                                S
+                            </td>
+
+                        }
+                        else
+                        {
+                            <td>
+                                N
+                            </td>
+
+                        }
+                        <td>
+                            @usuario.Descripcion_rol
+                        </td>
+                        <td>
+                            <a href="@Url.Action("ObtenerUsuario", "Usuario", new { @id_usuario=usuario.Id_usuario})" class="btn btn-warning">Editar</a>
+                            @* <a href="@Url.Action("ObtenerArticulo", "Articulo", new { @id_articulo=articulo.Id_articulo})" class="btn btn-danger">Deshabilitar</a>*@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </div>
+    <div class="col-lg-9">
+        <a href="@Url.Action("AltaUsuario", "Usuario")" class="btn btn-success">Alta</a>
+    </div>
+    <div class="col-lg-9">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-success">Inicio</a>
+    </div>
+</div>

@@ -126,6 +126,7 @@
     <Compile Include="AccesoDatos\AD_ArtStock.cs" />
     <Compile Include="AccesoDatos\AD_Inventario.cs" />
     <Compile Include="AccesoDatos\AD_Reportes.cs" />
+    <Compile Include="AccesoDatos\AD_Usuario.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Controllers\TipoArticulosController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -213,6 +215,7 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Scripts\circular.js" />
     <Content Include="Scripts\pastel.js" />
     <Content Include="Grafica1.aspx" />
     <Content Include="Grafica2.aspx" />
@@ -347,6 +350,12 @@
     <Content Include="Views\Reporte\PDFListadoReportes2.cshtml" />
     <Content Include="Views\Reporte\PDFListadoReportes3.cshtml" />
     <Content Include="Views\Reporte\PDFListadoReportes4.cshtml" />
+    <Content Include="Views\Reporte\Ayuda.cshtml" />
+    <Content Include="Views\Reporte\Terminosycondiciones.cshtml" />
+    <Content Include="Views\Usuario\ListadoUsuarios.cshtml" />
+    <Content Include="Views\Usuario\ObtenerUsuario.cshtml" />
+    <Content Include="Views\Usuario\AltaUsuario.cshtml" />
+    <Content Include="Views\Inventario\ListadoInventarioFiltrado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

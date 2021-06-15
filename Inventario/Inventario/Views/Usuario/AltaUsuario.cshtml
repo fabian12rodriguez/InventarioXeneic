@@ -1,0 +1,75 @@
+﻿@model Inventario.ViewModels.VMInventario
+
+@{
+    ViewBag.Title = "AltaUsuario";
+    List<SelectListItem> itemsRoles = (List<SelectListItem>)ViewBag.itemsRoles;
+
+}
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <br />
+    <h4>Nuevo Usuario</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+    <div class="form-group">
+        <label class="col-sm-6 control-label">Codigo</label>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(model => model.Codigo_usuario, htmlAttributes: new { @class = "form-control", @id = "txtCodigo" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6 control-label">Contraseña</label>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(model => model.Password_usuario, htmlAttributes: new { @class = "form-control", @id = "txtPassword" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6 control-label">Nombre</label>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(model => model.Nombre_usuario, htmlAttributes: new { @class = "form-control", @id = "txtNombre_usuario" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6 control-label">Apellido</label>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(model => model.Apellido_usuario, htmlAttributes: new { @class = "form-control", @id = "txtApellido_usuario" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6 control-label">Mail</label>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(model => model.Mail_usuario, htmlAttributes: new { @class = "form-control", @id = "txtMail_usuario" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6 control-label">Habilitado</label>
+        <div class="col-sm-6">
+            @Html.CheckBoxFor(model => model.Habilitado_usuario, htmlAttributes: new { @class = "checkbox", @id = "chkHabilitado_usuario" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6 control-label">Rol</label>
+        <div class="col-sm-6">
+            @Html.DropDownList("Id_rol", itemsRoles, "Seleccione Rol", htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group" text-right>
+        <div class="col-sm-6">
+            <button class="btn btn-primary" type="submit">Alta</button>
+        </div>
+        <br />
+        <br />
+        <div class="col-sm-6">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-info">Volver a inicio</a>
+        </div>
+    </div>
+</div>
+}
+

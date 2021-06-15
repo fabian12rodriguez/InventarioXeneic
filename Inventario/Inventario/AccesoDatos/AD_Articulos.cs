@@ -151,7 +151,7 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
-        public static List<TipoArticulo> ListarTipoArticulos()
+             public static List<TipoArticulo> ListarTipoArticulos()
         {
             List<TipoArticulo> resultado = new List<TipoArticulo>();
             string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();

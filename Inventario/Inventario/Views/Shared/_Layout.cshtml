@@ -54,7 +54,7 @@
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Stock</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts3">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-people-carry"></i></i></div>
                             Inventario
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -71,7 +71,7 @@
         </a>*@
 
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                            <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                            <div class="sb-nav-link-icon"><i class="fas fa-laptop-medical"></i></div>
                             ABM
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
@@ -110,12 +110,12 @@
                             </nav>
                         </div>
                         <div class="sb-sidenav-menu-heading">Estadisticas</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts3">
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsReporte" aria-expanded="false" aria-controls="collapseLayoutsReporte">
                             <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
                             Reportes
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <div class="collapse" id="collapseLayoutsReporte" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
                                 @*<a class="nav-link" href="@Url.Action("Index", "Reporte",new {})">General</a>*@
                                 <a class="nav-link" href="@Url.Action("ListadoReportes1", "Reporte",new {})">Artículos por tipo</a>
@@ -124,27 +124,27 @@
                                 <a class="nav-link" href="@Url.Action("ListadoReportes4", "Reporte",new {})">Cantidad de artículos tipo notebook</a>
                             </nav>
                         </div>
-                        <a class="nav-link"  href="@Url.Action("Graficos","Dashboard",new {})">
+                        <a class="nav-link" href="@Url.Action("Graficos","Dashboard",new {})">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Dashboard
                         </a>
                         <div class="sb-sidenav-menu-heading">Administracion</div>
-                        <a class="nav-link" href="charts.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
+                        <a class="nav-link" href="@Url.Action("ListadoUsuarios","Usuario",new {})">
+                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                             Usuarios
                         </a>
-                        <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Roles
-                        </a>
-                        <a class="nav-link" href="charts.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Ayuda
-                        </a>
-                        <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Terminos y condiciones
-                        </a>
+                        @*@<a class="nav-link" href="tables.html">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Roles
+                            </a>*@
+                    <a class="nav-link" href="@Url.Action("Ayuda","Reporte",new {})">
+                        <div class="sb-nav-link-icon"><i class="far fa-question-circle"></i></div>
+                    Ayuda
+                    </a>
+                    <a class="nav-link" href="@Url.Action("Terminosycondiciones","Reporte",new {})">
+                            <div class="sb-nav-link-icon"><i class="fas fa-file-signature"></i></div>
+                     Terminos y condiciones
+                    </a>
                     </div>
                     @*<div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

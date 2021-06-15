@@ -1,4 +1,6 @@
-﻿using Rotativa;
+﻿using Inventario.AccesoDatos;
+using Inventario.ViewModels;
+using Rotativa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +15,11 @@ namespace Inventario.Controllers
         {
             return View();
         }
-
+        //public ActionResult Index()
+        //{
+        //    string lista = AD_Reportes.obtenerDatosGrafico();
+        //    return View(lista);
+        //}
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -26,11 +32,6 @@ namespace Inventario.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
-        }
-
-        public ActionResult Print()
-        {
-            return new ActionAsPdf("Index", new { nombre = "Pedrito" }) {FileName = "test.pdf"} ;
         }
 
 

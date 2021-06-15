@@ -31,6 +31,7 @@
                     @*@Html.DropDownListFor(Id_tipo_articulo => items, new SelectList(items.Id_tipo_articulo, "Value", "Text"), "Seleccione un tipo", htmlAttributes: new { @class = "form-control", @id = "Id_tipo_articulo" })*@
 
 
+                    @*@Html.DropDownList("Id_tipo_articulo", itemsTipoArticulos, "Seleccione un tipo", htmlAttributes: new { @class = "form-control", @onchange = "refresh()" })*@
                     @Html.DropDownList("Id_tipo_articulo", itemsTipoArticulos, htmlAttributes: new { @class = "form-control", @onchange = "refresh()" })
 
                 </div>
@@ -100,6 +101,7 @@
     </div>
 
 }
+
 <script>
 
     function refresh() {
@@ -120,4 +122,3 @@
         console.log("fuera if");
     }
 </script>
-

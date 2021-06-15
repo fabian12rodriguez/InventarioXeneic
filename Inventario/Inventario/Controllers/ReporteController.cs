@@ -39,7 +39,16 @@ namespace Inventario.Controllers
             List<VMInventario> lista = AD_Reportes.ListadoCantTipoNBK();
             return View(lista);
         }
-        //--------------PDF----------------
+        public ActionResult Ayuda()
+        {
+          return View();
+        }
+        public ActionResult Terminosycondiciones()
+        {
+            return View();
+        }
+
+        //--------------PDF---------------------------------
 
         //------------General
         public ActionResult PDFIndex()

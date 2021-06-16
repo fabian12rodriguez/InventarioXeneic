@@ -1,11 +1,11 @@
-﻿@model Inventario.ViewModels.VMInventario
-
+﻿@*@model Inventario.ViewModels.VMInventario*@
+@model Inventario.ViewModels.ArticuloStock
 @{
     ViewBag.Title = "ObtenerArticulo";
     List<SelectListItem> itemsUsuarios = (List<SelectListItem>)ViewBag.itemsUsuarios;
     string listado = ViewBag.listado;
 
-   // List<Inventario.ViewModels.VMInventario> itemsUsuariosArt = (List<Inventario.ViewModels.VMInventario>)ViewBag.itemsUsuariosArt;
+    // List<Inventario.ViewModels.VMInventario> itemsUsuariosArt = (List<Inventario.ViewModels.VMInventario>)ViewBag.itemsUsuariosArt;
 
 }
 
@@ -17,54 +17,60 @@
 {
     @Html.AntiForgeryToken()
 
-<div class="form-horizontal">
-    <br />
-    <h4>Agregar Stock</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-
-
-    <div class="form-group">
-        <label class="col-sm-6" control-label>Nombre</label>
-        <div class="col-sm-6">
-            @Html.TextBoxFor(model => model.Nombre_articulo, htmlAttributes: new { @class = "form-control", @id = "txtNombre", @disabled = "disabled" })
-        </div>
-    </div>
-
-
-    <div class="form-group">
-        <label class="col-sm-6" control-label>Modelo</label>
-        <div class="col-sm-6">
-            @Html.TextBoxFor(model => model.Modelo_articulo, htmlAttributes: new { @class = "form-control", @id = "txtModelo", @disabled = "disabled" })
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-6" control-label>Usuario</label>
-        <div class="col-sm-6">
-            @Html.DropDownList("id_usuario", itemsUsuarios, htmlAttributes: new { @class = "form-control", required = "required" })
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-6">Lista de usuarios asignados al articulo</label>
-        <div class="col-sm-6">
-            @*@Html.TextAreaFor("id_usuario", itemsUsuariosArt, htmlAttributes: new { @class = "form-control", @id = "txtModelo", @disabled = "disabled" })*@
-            @*@Html.TextBox(listado, listado, htmlAttributes: new { @class = "form-control", @id = "txtListaUsr" })*@
-            @Html.TextArea("a", listado, htmlAttributes: new { @class = "form-control", @id = "txtListaUsr", @disabled = "disabled" , @resize = "none" })
-        </div>
-    </div>
-
-    <div class="form-group" text-right>
-        <div class="col-sm-6">
-            <button class="btn btn-primary" type="submit">Alta</button>
-        </div>
+    <div class="form-horizontal">
         <br />
-        <br />
-        <div class="col-sm-6">
-            <a href="@Url.Action("ListadoAsignarUsr", "Inventario")" class="btn btn-info">Volver</a>
+        <h4>Agregar Stock</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <div class="form-group">
+            <label class="col-sm-6" control-label>Nombre</label>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(model => model.Nombre_articulo, htmlAttributes: new { @class = "form-control", @id = "txtNombre", @disabled = "disabled" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-6" control-label>Modelo</label>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(model => model.Modelo_articulo, htmlAttributes: new { @class = "form-control", @id = "txtModelo", @disabled = "disabled" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-6" control-label>Usuario</label>
+            <div class="col-sm-6">
+                @Html.DropDownList("id_usuario", itemsUsuarios, htmlAttributes: new { @class = "form-control", required = "required" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-6">Lista de usuarios asignados al articulo</label>
+            <div class="col-sm-6">
+                @*@Html.TextAreaFor("id_usuario", itemsUsuariosArt, htmlAttributes: new { @class = "form-control", @id = "txtModelo", @disabled = "disabled" })*@
+                @*@Html.TextBox(listado, listado, htmlAttributes: new { @class = "form-control", @id = "txtListaUsr" })*@
+                @Html.TextArea("a", listado, htmlAttributes: new { @class = "form-control", @id = "txtListaUsr", @disabled = "disabled", @resize = "none" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-6 control-label">Asignar usuario?</label>
+            <div class="col-sm-6">
+                @Html.CheckBoxFor(model => model.Chk_asignado, htmlAttributes: new { @class = "checkbox", @id = "chkAsignado" })
+            </div>
+        </div>
+
+        <div class="form-group" text-right>
+            <div class="col-sm-6">
+                <button class="btn btn-primary" type="submit">Alta</button>
+            </div>
+            <br />
+            <br />
+            <div class="col-sm-6">
+                <a href="@Url.Action("ListadoAsignarUsr", "Inventario")" class="btn btn-info">Volver</a>
+            </div>
         </div>
     </div>
-</div>
 }
 
 

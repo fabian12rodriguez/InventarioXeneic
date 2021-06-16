@@ -257,7 +257,7 @@ namespace Inventario.Controllers
          */
         public ActionResult ObtenerArtAsignado(int id_articulo)
         {
-            VMInventario resultado = AD_Inventario.ObtenerArtAsignado(id_articulo);
+            ArticuloStock resultado = AD_ArtStock.ObtenerArtAsignadoUsr(id_articulo);
             List<TipoUsuarios> listaTipoUsuario = AD_Inventario.ListarTipoUsuarios();
             List<SelectListItem> comboTipoUsuario = listaTipoUsuario.ConvertAll(i =>
             {
@@ -301,7 +301,7 @@ namespace Inventario.Controllers
         }
         public ActionResult AsignarStock(int id_articulo)
         {
-            VMInventario resultado = AD_Inventario.ObtenerArticulo(id_articulo);
+            ArticuloStock resultado = AD_ArtStock.ObtenerArtAsignadoUsr(id_articulo);
 
             List<VMInventario> ListarTipoUsuariosArt = AD_Inventario.ListarTipoUsuariosArt(id_articulo);
             string listado = "";

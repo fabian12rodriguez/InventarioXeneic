@@ -173,13 +173,14 @@ namespace Inventario.AccesoDatos
             try
             {
                 SqlCommand cmd = cn.CreateCommand();
-                cmd.CommandText = "p_actualizar_stock";
+                cmd.CommandText = "p_asignar_articulo";
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@id_usuario", articulo.Id_usuario));
                 cmd.Parameters.Add(new SqlParameter("@id_articulo", articulo.Id_articulo));
-                cmd.Parameters.Add(new SqlParameter("@cantidad_ingresada", articulo.Cantidad_mvt));
+                cmd.Parameters.Add(new SqlParameter("@asignar", articulo.Chk_asignado));
 
- 
+
                 cn.Open();
                 cmd.Connection = cn;
                 cmd.ExecuteNonQuery();
@@ -197,9 +198,9 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
-        /*public static int ObtenerArticuloParaStock()
+        public static ArticuloStock ObtenerArtAsignadoUsr(int id_articulo)
         {
-            int resultado = 0;
+            ArticuloStock resultado = new ArticuloStock();
             string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
 
             SqlConnection cn = new SqlConnection(cadenaConexion);
@@ -208,7 +209,19 @@ namespace Inventario.AccesoDatos
             {
                 SqlCommand cmd = new SqlCommand();
 
-                string consulta = @"SELECT MAX(A.ID_ARTICULO ) ID FROM ARTICULOS A";
+                string consulta = @"select A.ID_ARTICULO, 
+                                            a.Nombre_articulo,
+                                            a.Modelo_articulo,
+                                            u.CODIGO_USUARIO
+                                            from articulos a 
+                                            left join ARTICULOS_USUARIOS au on a.ID_ARTICULO = au.ID_ARTICULO
+                                            join MARCAS M on A.ID_MARCA = M.ID_MARCA
+                                            join TIPOS_ARTICULOS T on A.ID_TIPO_ARTICULO = T.ID_TIPO_ARTICULO
+                                            LEFT join USUARIOS U on au.ID_USUARIO = U.ID_USUARIO
+                                            where a.HABILITADO_ARTICULO = 1 
+                                            and a.id_articulo =@id_articulo";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id_articulo", id_articulo);
 
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = consulta;
@@ -223,7 +236,12 @@ namespace Inventario.AccesoDatos
                     while (dr.Read())
                     {
 
-                        resultado = int.Parse(dr["ID"].ToString());
+                        resultado.Id_articulo = int.Parse(dr["Id_articulo"].ToString());
+                        resultado.Nombre_articulo = dr["Nombre_articulo"].ToString();
+                        resultado.Modelo_articulo = dr["Modelo_articulo"].ToString();
+                        resultado.Codigo_usuario = dr["Codigo_usuario"].ToString();
+
+
                     }
                 }
 
@@ -241,7 +259,6 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
-        */
 
     }
 }

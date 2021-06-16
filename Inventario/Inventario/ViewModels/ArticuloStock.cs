@@ -20,6 +20,9 @@ namespace Inventario.ViewModels
         private string fecha_mvt;
         private int cantidad_mvt;
         private string observaciones_mvt;
+        private int id_usuario;
+        private string codigo_usuario;
+        private bool chk_asignado;
 
         public int Id_articulo { get => id_articulo; set => id_articulo = value; }
         public string Nombre_articulo { get => nombre_articulo; set => nombre_articulo = value; }
@@ -34,5 +37,8 @@ namespace Inventario.ViewModels
         public string Fecha_mvt { get => fecha_mvt; set => fecha_mvt = value; }
         public int Cantidad_mvt { get => cantidad_mvt; set => cantidad_mvt = value; }
         public string Observaciones_mvt { get => observaciones_mvt; set => observaciones_mvt = value; }
+        public int Id_usuario { get => id_usuario; set => id_usuario = value; }
+        public string Codigo_usuario { get => codigo_usuario; set => codigo_usuario = value; }
+        public bool Chk_asignado { get => chk_asignado; set => chk_asignado = value; }
     }
 }

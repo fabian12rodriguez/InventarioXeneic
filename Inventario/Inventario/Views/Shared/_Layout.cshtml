@@ -54,14 +54,14 @@
                     <div class="nav">
                         <div class="sb-sidenav-menu-heading">Stock</div>
                         <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts3" aria-expanded="false" aria-controls="collapseLayouts3">
-                            <div class="sb-nav-link-icon"><i class="fas fa-people-carry"></i></i></div>
+                            <div class="sb-nav-link-icon" ><i class="fas fa-people-carry"></i></i></div>
                             Inventario
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
                         <div class="collapse" id="collapseLayouts3" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="@Url.Action("ListadoInventario", "Inventario",new {})">Stock</a>
-                                <a class="nav-link" href="@Url.Action("ListadoAsignarUsr", "Inventario",new {})"> Asignar articulo</a>
+                                <a class="nav-link" href="@Url.Action("ListadoInventario", "Inventario",new {})">Consultar Stock</a>
+                                <a class="nav-link" href="@Url.Action("ListadoAsignarUsr", "Inventario",new {})"> Asignar Stock</a>
                             </nav>
                         </div>
                         @*<a class="nav-link collapsed" href="@Url.Action("ListadoInventario", "Inventario",new {})">
@@ -84,7 +84,7 @@
                                 <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="@Url.Action("AltaArticulo", "Inventario",new {})">Alta</a>
-                                        <a class="nav-link" href="@Url.Action("ListadoArticulos", "Inventario",new {})">Listado</a>
+                                        <a class="nav-link" href="@Url.Action("ListadoAsignarUsr", "Inventario",new {})">Listado</a>
                                     </nav>
                                 </div>
                                 <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">

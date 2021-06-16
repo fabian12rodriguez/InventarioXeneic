@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<Inventario.ViewModels.VMInventario>
-@*@model List<Inventario.ViewModels.VMInventario>*@
-@*@model List<RubricaWeb.ViewModels.VM_Rubrica>
-    @model IEnumerable<Inventario.ViewModels.VMInventario>*@
+
 
 @{
     ViewBag.Title = "ListadoInventario";
     List<SelectListItem> itemsTipoArticulos = (List<SelectListItem>)ViewBag.itemsTipoArticulos;
-    //Inventario.ViewModels.VMInventario items = ViewBag.itemsTipoArticulos;
 }
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <br />
 <div class="row">
@@ -26,12 +26,9 @@
         <div class="col-lg-9">
             <div class="form-group">
                 <label class="col-sm-6" control-label>Buscar por tipo de articulos</label>
-                @*@Html.HiddenFor(Id_tipo_articulo => items.Id_tipo_articulo)*@
+
                 <div class="col-sm-6">
-                    @*@Html.DropDownListFor(Id_tipo_articulo => items, new SelectList(items.Id_tipo_articulo, "Value", "Text"), "Seleccione un tipo", htmlAttributes: new { @class = "form-control", @id = "Id_tipo_articulo" })*@
 
-
-                    @*@Html.DropDownList("Id_tipo_articulo", itemsTipoArticulos, "Seleccione un tipo", htmlAttributes: new { @class = "form-control", @onchange = "refresh()" })*@
                     @Html.DropDownList("Id_tipo_articulo", itemsTipoArticulos, htmlAttributes: new { @class = "form-control", @onchange = "refresh()" })
 
                 </div>
@@ -65,6 +62,9 @@
                         <th class="text-center">
                             Cantidad total
                         </th>
+                        @*<th class="text-center">
+                            Acciones
+                        </th>*@
 
 
                     </tr>
@@ -88,6 +88,18 @@
                             <td>
                                 @VMInventario.Stock
                             </td>
+                            @*<td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                        Acciones
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="@Url.Action("ObtenerArticulo", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Editar</a>
+                                        <a class="dropdown-item" href="@Url.Action("ObtenerArtAsignado", "Inventario", new { @VMInventario=VMInventario.Id_articulo})">Asignar/Desasignar</a>
+                                        <a class="dropdown-item" href="@Url.Action("AsignarUsr", "Inventario", new { @VMInventario=VMInventario.Id_articulo})">Historial</a>
+                                    </div>
+                                </div>
+                            </td>*@
                         </tr>
                     }
                 </tbody>

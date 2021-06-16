@@ -45,9 +45,6 @@
                             Tipo
                         </th>
                         <th class="text-center">
-                            Usuario
-                        </th>
-                        <th class="text-center">
                             Acciones
                         </th>
 
@@ -74,16 +71,15 @@
                                 @VMInventario.Desc_tipo_articulo
                             </td>
                             <td>
-                                @VMInventario.Codigo_usuario
-                            </td>
-                            <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
                                         Acciones
                                     </button>
                                     <div class="dropdown-menu">
-                                        <a class="dropdown-item"  href="@Url.Action("AsignarUsr", "Inventario", new { @VMInventario=VMInventario.Id_articulo})" >Asignar/Desasignar</a>
-                                        <a class="dropdown-item"  href="@Url.Action("AsignarUsr", "Inventario", new { @VMInventario=VMInventario.Id_articulo})">Historial</a>
+                                        <a class="dropdown-item" href="@Url.Action("AgregarStock", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Agregar/Quitar Stock</a>
+                                        <a class="dropdown-item" href="@Url.Action("AsignarStock", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Asignar/Desasignar Usuario</a>
+                                        <a class="dropdown-item" href="@Url.Action("ObtenerArticulo", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Editar</a>
+                                        <a class="dropdown-item" href="@Url.Action("AsignarUsr", "Inventario", new { @VMInventario=VMInventario.Id_articulo})">Historial</a>
                                     </div>
                                 </div>
                             </td>
@@ -95,17 +91,7 @@
             </table>
         </div>
         <div class="col-lg-9">
-            <a href="@Url.Action("Index", "Home")" class="btn btn-success">Inicio</a>
-        </div>
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button class="dropdown-item" type="button">Action</button>
-                <button class="dropdown-item" type="button">Another action</button>
-                <button class="dropdown-item" type="button">Something else here</button>
-            </div>
+            <a href="@Url.Action("ListadoAsignarUsr", "Inventario")" class="btn btn-success">Volver</a>
         </div>
 
     </div>

@@ -155,6 +155,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\ArticuloStock.cs" />
     <Compile Include="ViewModels\ReporteGral.cs" />
+    <Compile Include="ViewModels\TipoUsuarios.cs" />
     <Compile Include="ViewModels\VMInventario.cs" />
     <Compile Include="ViewModels\TipoArticulo.cs" />
     <Compile Include="ViewModels\TipoMarca.cs" />
@@ -356,10 +357,12 @@
     <Content Include="Views\Usuario\ObtenerUsuario.cshtml" />
     <Content Include="Views\Usuario\AltaUsuario.cshtml" />
     <Content Include="Views\Inventario\ListadoInventarioFiltrado.cshtml" />
-    <Content Include="Views\Inventario\ObtenerArtAsignado.cshtml" />
     <Content Include="Views\Inventario\AltaArticulo.cshtml" />
     <Content Include="Views\Inventario\ListadoArticulos.cshtml" />
     <Content Include="Views\Inventario\ObtenerArticulo.cshtml" />
+    <Content Include="Views\Inventario\ObtenerArtAsignado.cshtml" />
+    <Content Include="Views\Inventario\AgregarStock.cshtml" />
+    <Content Include="Views\Inventario\AsignarStock.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -179,7 +179,7 @@ namespace Inventario.Controllers
                 bool resultado = AD_Inventario.ActualizarDatosArticulos(model);
                 if (resultado)
                 {
-                    return RedirectToAction("ListadoArticulos", "Inventario");
+                    return RedirectToAction("ListadoAsignarUsr", "Inventario");
                 }
                 else
                 {
@@ -188,6 +188,190 @@ namespace Inventario.Controllers
             }
             return View();
         }
+        public ActionResult AgregarStock(int id_articulo)
+        {
+            VMInventario resultado = AD_Inventario.ObtenerArticulo(id_articulo);
+            List<TipoMarca> listaMarca = AD_Articulos.ListarTipoMarcas();
+            List<SelectListItem> comboMarca = listaMarca.ConvertAll(i =>
+            {
+                return new SelectListItem()
+                {
+                    Text = i.Descripcion_marca,
+                    Value = i.Id_marca.ToString(),
+                    Selected = false
+                };
+            });
+
+            foreach (var item in comboMarca)
+            {
+                if (item.Value.Equals(resultado.Id_marca.ToString()))
+                {
+                    item.Selected = true;
+                    break;
+                }
+            }
+
+            ViewBag.itemsMarca = comboMarca;
+
+            List<TipoArticulo> listaTipoArticulo = AD_Articulos.ListarTipoArticulos();
+            List<SelectListItem> comboTipoArticulo = listaTipoArticulo.ConvertAll(i =>
+            {
+                return new SelectListItem()
+                {
+                    Text = i.Descripcion_tipo_articulo,
+                    Value = i.Id_tipo_articulo.ToString(),
+
+                    Selected = false
+                };
+            });
+            foreach (var item in comboTipoArticulo)
+            {
+                if (item.Value.Equals(resultado.Id_tipo_articulo.ToString()))
+                {
+                    item.Selected = true;
+                    break;
+                }
+            }
+
+            ViewBag.itemsTipoArticulo = comboTipoArticulo;
+
+            return View(resultado);
+        }
+        [HttpPost]
+        public ActionResult AgregarStock(ArticuloStock articulo)
+        {
+            if (ModelState.IsValid)
+            {
+                AD_ArtStock.AgregarStock(articulo);
+                return RedirectToAction("ListadoInventario", "Inventario");
+            }
+            else
+            {
+                return View(articulo);
+            }
+        }
+
+        /******************
+         * **
+         * 
+         */
+        public ActionResult ObtenerArtAsignado(int id_articulo)
+        {
+            VMInventario resultado = AD_Inventario.ObtenerArtAsignado(id_articulo);
+            List<TipoUsuarios> listaTipoUsuario = AD_Inventario.ListarTipoUsuarios();
+            List<SelectListItem> comboTipoUsuario = listaTipoUsuario.ConvertAll(i =>
+            {
+                return new SelectListItem()
+                {
+                    Text = i.Codigo_usuario,
+                    Value = i.Id_usuario.ToString(),
+
+                    Selected = false
+                };
+            });
+            foreach (var item in comboTipoUsuario)
+            {
+                if (item.Value.Equals(resultado.Id_usuario.ToString()))
+                {
+                    item.Selected = true;
+                    break;
+                }
+            }
+
+            ViewBag.itemsUsuarios = comboTipoUsuario;
+
+            return View(resultado);
+        }
+        [HttpPost]
+        public ActionResult ObtenerArtAsignado(VMInventario model)
+        {
+            if (ModelState.IsValid)
+            {
+                bool resultado = AD_Inventario.ActualizarArticuloAsignado(model);
+                if (resultado)
+                {
+                    return RedirectToAction("ListadoAsignarUsr", "Inventario");
+                }
+                else
+                {
+                    return View(model);
+                }
+            }
+            return View();
+        }
+        public ActionResult AsignarStock(int id_articulo)
+        {
+            VMInventario resultado = AD_Inventario.ObtenerArticulo(id_articulo);
+
+            List<VMInventario> ListarTipoUsuariosArt = AD_Inventario.ListarTipoUsuariosArt(id_articulo);
+            string listado = "";
+            foreach (var item in ListarTipoUsuariosArt) {
+
+                listado += "-"+item.Codigo_usuario +  "\n";
+
+            }
+
+            //List<SelectListItem> comboTipoUsuarioArt = ListarTipoUsuariosArt.ConvertAll(i =>
+            //{
+            //    return new SelectListItem()
+            //    {
+            //        Text = i.Codigo_usuario,
+            //        Value = i.Id_usuario.ToString(),
+
+            //        Selected = false
+            //    };
+            //});
+            //foreach (var item in comboTipoUsuarioArt)
+            //{
+            //    if (item.Value.Equals(resultado.Id_usuario.ToString()))
+            //    {
+            //        item.Selected = true;
+            //        break;
+            //    }
+            //}
+
+           // ViewBag.itemsUsuariosArt = listado;
+            ViewBag.listado = listado;
+            /***********************************************************************/
+            List<TipoUsuarios> listaTipoUsuario = AD_Inventario.ListarTipoUsuarios();
+            List<SelectListItem> comboTipoUsuario = listaTipoUsuario.ConvertAll(i =>
+            {
+                return new SelectListItem()
+                {
+                    Text = i.Codigo_usuario,
+                    Value = i.Id_usuario.ToString(),
+
+                    Selected = false
+                };
+            });
+            foreach (var item in comboTipoUsuario)
+            {
+                if (item.Value.Equals(resultado.Id_usuario.ToString()))
+                {
+                    item.Selected = true;
+                    break;
+                }
+            }
+
+            ViewBag.itemsUsuarios = comboTipoUsuario;
+
+            return View(resultado);
+
+        }
+        [HttpPost]
+        public ActionResult AsignarStock(ArticuloStock articulo)
+        {
+            if (ModelState.IsValid)
+            {
+                AD_ArtStock.AsignarStock(articulo);
+                return RedirectToAction("ListadoInventario", "Inventario");
+            }
+            else
+            {
+                return View(articulo);
+            }
+        }
+
 
 
 

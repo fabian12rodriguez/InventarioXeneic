@@ -148,7 +148,7 @@ namespace Inventario.AccesoDatos
                                     join TIPOS_ARTICULOS T on A.ID_TIPO_ARTICULO  = T.ID_TIPO_ARTICULO
                                     LEFT join USUARIOS U on au.ID_USUARIO = U.ID_USUARIO
                                     where a.HABILITADO_ARTICULO = 1
-                                    and u.CODIGO_USUARIO is null;";
+                                    and u.ID_USUARIO = 13;";
                 cmd.Parameters.Clear();
 
 

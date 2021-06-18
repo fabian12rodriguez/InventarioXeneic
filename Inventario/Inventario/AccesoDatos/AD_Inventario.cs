@@ -218,41 +218,41 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
-        public static bool InsertarArticulosUsuarios(VMInventario art_usr)
-        {
-            bool resultado = false;
-            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+        //public static bool InsertarArticulosUsuarios(VMInventario art_usr)
+        //{
+        //    bool resultado = false;
+        //    string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
 
-            SqlConnection cn = new SqlConnection(cadenaConexion);
+        //    SqlConnection cn = new SqlConnection(cadenaConexion);
 
-            try
-            {
-                SqlCommand cmd = new SqlCommand();
-                string consultaSql = "INSERT INTO Articulos VALUES(@NOMBRE_ARTICULO, @MODELO_ARTICULO, @ID_MARCA, @ID_TIPO_ARTICULO, 1, @IMAGEN_ARTICULO)";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@Id_articulo", art_usr.Id_articulo);
-                cmd.Parameters.AddWithValue("@id_usuario", art_usr.Id_usuario);
+        //    try
+        //    {
+        //        SqlCommand cmd = new SqlCommand();
+        //        string consultaSql = "INSERT INTO Articulos VALUES(@NOMBRE_ARTICULO, @MODELO_ARTICULO, @ID_MARCA, @ID_TIPO_ARTICULO, 1, @IMAGEN_ARTICULO)";
+        //        cmd.Parameters.Clear();
+        //        cmd.Parameters.AddWithValue("@Id_articulo", art_usr.Id_articulo);
+        //        cmd.Parameters.AddWithValue("@id_usuario", art_usr.Id_usuario);
 
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = consultaSql;
+        //        cmd.CommandType = System.Data.CommandType.Text;
+        //        cmd.CommandText = consultaSql;
 
-                cn.Open();
-                cmd.Connection = cn;
-                cmd.ExecuteNonQuery();
-                resultado = true;
-            }
-            catch (Exception)
-            {
+        //        cn.Open();
+        //        cmd.Connection = cn;
+        //        cmd.ExecuteNonQuery();
+        //        resultado = true;
+        //    }
+        //    catch (Exception)
+        //    {
 
-                throw;
-            }
-            finally
-            {
-                cn.Close();
-            }
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        cn.Close();
+        //    }
 
-            return resultado;
-        }
+        //    return resultado;
+        //}
         public static VMInventario ObtenerArtAsignado(int id_articulo)
         {
             VMInventario resultado = new VMInventario();

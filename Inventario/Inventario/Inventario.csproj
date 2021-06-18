@@ -221,6 +221,7 @@
     <Content Include="Grafica1.aspx" />
     <Content Include="Grafica2.aspx" />
     <Content Include="App_Browsers\qt.browser" />
+    <Content Include="Archivos\Terminos y condiciones XENEIC INVENTORY.docx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -352,7 +353,6 @@
     <Content Include="Views\Reporte\PDFListadoReportes3.cshtml" />
     <Content Include="Views\Reporte\PDFListadoReportes4.cshtml" />
     <Content Include="Views\Reporte\Ayuda.cshtml" />
-    <Content Include="Views\Reporte\Terminosycondiciones.cshtml" />
     <Content Include="Views\Usuario\ListadoUsuarios.cshtml" />
     <Content Include="Views\Usuario\ObtenerUsuario.cshtml" />
     <Content Include="Views\Usuario\AltaUsuario.cshtml" />

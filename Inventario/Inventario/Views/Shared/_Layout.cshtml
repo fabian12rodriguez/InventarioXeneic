@@ -124,10 +124,10 @@
                                 <a class="nav-link" href="@Url.Action("ListadoReportes4", "Reporte",new {})">Cantidad de artículos tipo notebook</a>
                             </nav>
                         </div>
-                        <a class="nav-link" href="@Url.Action("Graficos","Dashboard",new {})">
+                        @*<a class="nav-link" href="@Url.Action("Graficos","Dashboard",new {})">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
                             Dashboard
-                        </a>
+                        </a>*@
                         <div class="sb-sidenav-menu-heading">Administracion</div>
                         <a class="nav-link" href="@Url.Action("ListadoUsuarios","Usuario",new {})">
                             <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
@@ -141,7 +141,8 @@
                         <div class="sb-nav-link-icon"><i class="far fa-question-circle"></i></div>
                     Ayuda
                     </a>
-                    <a class="nav-link" href="@Url.Action("Terminosycondiciones","Reporte",new {})">
+                        @*<a href="laruta/archivo.pdf">Enlace</a>*@
+                    <a class="nav-link" href="~/Archivos/Terminos y condiciones XENEIC INVENTORY.docx">
                             <div class="sb-nav-link-icon"><i class="fas fa-file-signature"></i></div>
                      Terminos y condiciones
                     </a>

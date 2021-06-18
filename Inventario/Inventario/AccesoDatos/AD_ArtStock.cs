@@ -11,6 +11,44 @@ namespace Inventario.AccesoDatos
 {
     public class AD_ArtStock
     {
+        //public static bool InsertarArticulo(ArticuloStock articulo)
+        //{
+        //    bool resultado = false;
+        //    string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+        //    SqlConnection cn = new SqlConnection(cadenaConexion);
+
+        //    try
+        //    {
+        //        SqlCommand cmd = new SqlCommand();
+        //        string consultaSql = "INSERT INTO Articulos VALUES(@NOMBRE_ARTICULO, @MODELO_ARTICULO, @ID_MARCA, @ID_TIPO_ARTICULO, 1, @IMAGEN_ARTICULO)";
+        //        cmd.Parameters.Clear();
+        //        cmd.Parameters.AddWithValue("@NOMBRE_ARTICULO", articulo.Nombre_articulo);
+        //        cmd.Parameters.AddWithValue("@MODELO_ARTICULO", articulo.Modelo_articulo);
+        //        cmd.Parameters.AddWithValue("@ID_MARCA", articulo.Id_marca);
+        //        cmd.Parameters.AddWithValue("@ID_TIPO_ARTICULO", articulo.Id_tipo_articulo);
+        //        cmd.Parameters.AddWithValue("@IMAGEN_ARTICULO", articulo.Imagen_articulo);
+
+        //        cmd.CommandType = System.Data.CommandType.Text;
+        //        cmd.CommandText = consultaSql;
+
+        //        cn.Open();
+        //        cmd.Connection = cn;
+        //        cmd.ExecuteNonQuery();
+        //        resultado = true;
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        cn.Close();
+        //    }
+
+        //    return resultado;
+        //}
         public static bool InsertarArticulo(ArticuloStock articulo)
         {
             bool resultado = false;
@@ -20,17 +58,16 @@ namespace Inventario.AccesoDatos
 
             try
             {
-                SqlCommand cmd = new SqlCommand();
-                string consultaSql = "INSERT INTO Articulos VALUES(@NOMBRE_ARTICULO, @MODELO_ARTICULO, @ID_MARCA, @ID_TIPO_ARTICULO, 1, @IMAGEN_ARTICULO)";
+                SqlCommand cmd = cn.CreateCommand();
+                cmd.CommandText = "p_InsertarArticulo";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@NOMBRE_ARTICULO", articulo.Nombre_articulo);
-                cmd.Parameters.AddWithValue("@MODELO_ARTICULO", articulo.Modelo_articulo);
-                cmd.Parameters.AddWithValue("@ID_MARCA", articulo.Id_marca);
-                cmd.Parameters.AddWithValue("@ID_TIPO_ARTICULO", articulo.Id_tipo_articulo);
-                cmd.Parameters.AddWithValue("@IMAGEN_ARTICULO", articulo.Imagen_articulo);
+                cmd.Parameters.Add(new SqlParameter("@NOMBRE_ARTICULO", articulo.Nombre_articulo));
+                cmd.Parameters.Add(new SqlParameter("@MODELO_ARTICULO", articulo.Modelo_articulo));
+                cmd.Parameters.Add(new SqlParameter("@ID_MARCA", articulo.Id_marca));
+                cmd.Parameters.Add(new SqlParameter("@ID_TIPO_ARTICULO", articulo.Id_tipo_articulo));
+                cmd.Parameters.Add(new SqlParameter("@IMAGEN_ARTICULO", articulo.Imagen_articulo));
 
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = consultaSql;
 
                 cn.Open();
                 cmd.Connection = cn;
@@ -94,6 +131,42 @@ namespace Inventario.AccesoDatos
             return resultado;
         }
 
+        //public static bool InsertarStock(ArticuloStock articulo, int id_articulo)
+        //{
+        //    bool resultado = false;
+        //    string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+        //    SqlConnection cn = new SqlConnection(cadenaConexion);
+
+
+        //    try
+        //    {
+        //        SqlCommand cmd = new SqlCommand();
+        //        string consultaSql = "INSERT INTO MOVIMIENTOS_STOCK VALUES(GETDATE(), @cantidad_mvt,@id_articulo,13,'alta de articulo')";
+        //        cmd.Parameters.Clear();
+        //        cmd.Parameters.AddWithValue("@cantidad_mvt", articulo.Cantidad_mvt);
+        //        cmd.Parameters.AddWithValue("@id_articulo", id_articulo);
+        //      // cmd.Parameters.AddWithValue("@observaciones_mvt", articulo.Observaciones_mvt);
+        //        cmd.CommandType = System.Data.CommandType.Text;
+        //        cmd.CommandText = consultaSql;
+
+        //        cn.Open();
+        //        cmd.Connection = cn;
+        //        cmd.ExecuteNonQuery();
+        //        resultado = true;
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        cn.Close();
+        //    }
+
+        //    return resultado;
+        //}
         public static bool InsertarStock(ArticuloStock articulo, int id_articulo)
         {
             bool resultado = false;
@@ -104,14 +177,13 @@ namespace Inventario.AccesoDatos
 
             try
             {
-                SqlCommand cmd = new SqlCommand();
-                string consultaSql = "INSERT INTO MOVIMIENTOS_STOCK VALUES(GETDATE(), @cantidad_mvt,@id_articulo,13,'alta de articulo')";
+
+                SqlCommand cmd = cn.CreateCommand();
+                cmd.CommandText = "p_InsertarStock";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@cantidad_mvt", articulo.Cantidad_mvt);
-                cmd.Parameters.AddWithValue("@id_articulo", id_articulo);
-              // cmd.Parameters.AddWithValue("@observaciones_mvt", articulo.Observaciones_mvt);
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = consultaSql;
+                cmd.Parameters.Add(new SqlParameter("@cantidad_mvt", articulo.Cantidad_mvt));
+                cmd.Parameters.Add(new SqlParameter("@id_articulo", id_articulo));
 
                 cn.Open();
                 cmd.Connection = cn;
@@ -130,6 +202,7 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
+
         public static bool AgregarStock(ArticuloStock articulo)
         {
             bool resultado = false;

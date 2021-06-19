@@ -1,7 +1,7 @@
 ﻿@model Inventario.ViewModels.ArticuloStock
 
 @{
-    ViewBag.Title = "AltaArticulo";
+    ViewBag.Title = "Alta de Articulo";
     List<SelectListItem> itemsMarcas = (List<SelectListItem>)ViewBag.itemsMarcas;
     List<SelectListItem> itemsTipoArticulos = (List<SelectListItem>)ViewBag.itemsTipoArticulos;
 
@@ -70,7 +70,7 @@
         <br />
         <br />
         <div class="col-sm-6">
-            <a href="@Url.Action("Index", "Home")" class="btn btn-info">Volver a inicio</a>
+            <a href="@Url.Action("ListadoAsignarUsr", "Inventario")" class="btn btn-info">Ir al listado</a>
         </div>
     </div>
 </div>

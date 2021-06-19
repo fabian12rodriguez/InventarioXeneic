@@ -1,9 +1,8 @@
 ﻿@model IEnumerable<Inventario.ViewModels.VMInventario>
 
-@*@model Concesionario_236.ViewModels.Reportes.InfoGralVM*@
 
 @{
-    ViewBag.Title = "ListadoReportes";
+    ViewBag.Title = "Reporte";
 }
 
 
@@ -13,7 +12,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <br />
 <br />
-<h2>Artículos sin usuarios asignados</h2>
+<h2>Usuarios con articulos asignados</h2>
 <br />
 @using (Html.BeginForm())
 {
@@ -25,7 +24,16 @@
             <thead>
                 <tr>
                     <th class="text-center">
-                        Nombre
+                        Area
+                    </th>
+                    <th class="text-center">
+                        Codigo Usuario
+                    </th>
+                    <th class="text-center">
+                        Nombre Usuario
+                    </th>
+                    <th class="text-center">
+                        Articulo
                     </th>
                     <th class="text-center">
                         Modelo
@@ -41,21 +49,30 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr class="text-center">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nombre_articulo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Modelo_articulo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Desc_marca_articulo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Desc_tipo_articulo)
-                        </td>
+                <tr class="text-center">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Area)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Codigo_usuario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre_usuario)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre_articulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Modelo_articulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Desc_marca_articulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Desc_tipo_articulo)
+                    </td>
 
-                    </tr>
+                </tr>
                 }
             </tbody>
         </table>

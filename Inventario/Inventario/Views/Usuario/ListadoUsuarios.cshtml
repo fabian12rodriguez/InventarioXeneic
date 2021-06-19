@@ -13,35 +13,44 @@
 </div>
 <br />
 
-<div class="row">
-    <div class="col-lg-9">
-        <table class="table table-bordered table-striped bg-light">
-            <thead>
-                <tr>
-                    <th class="text-center">
-                        Usuario
-                    </th>
-                    <th class="text-center">
-                        Nombre
-                    </th>
-                    <th class="text-center">
-                        Mail
-                    </th>
-                    <th class="text-center">
-                        Habilitado
-                    </th>
-                    <th class="text-center">
-                        Rol
-                    </th>
-                    <th class="text-center">
-                        Acciones
-                    </th>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var usuario in Model)
-                {
+@using (Html.BeginForm())
+{
+
+
+    <div class="row">
+        <div class="col-lg-9">
+            <table class="table table-bordered table-striped bg-light">
+                <thead>
+                    <tr>
+                        <th class="text-center">
+                            Usuario
+                        </th>
+                        <th class="text-center">
+                            Nombre
+                        </th>
+                        <th class="text-center">
+                            Mail
+                        </th>
+                        <th class="text-center">
+                            Habilitado
+                        </th>
+                        <th class="text-center">
+                            Rol
+                        </th>
+                        <th class="text-center">
+                            Acciones
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var usuario in Model)
+                    {
                     <tr class="text-center">
                         <td>
                             @usuario.Codigo_usuario
@@ -70,19 +79,24 @@
                             @usuario.Descripcion_rol
                         </td>
                         <td>
-                            <a href="@Url.Action("ObtenerUsuario", "Usuario", new { @id_usuario=usuario.Id_usuario})" class="btn btn-warning">Editar</a>
-                            @* <a href="@Url.Action("ObtenerArticulo", "Articulo", new { @id_articulo=articulo.Id_articulo})" class="btn btn-danger">Deshabilitar</a>*@
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    Acciones
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="@Url.Action("AltaUsuario", "Usuario")">Alta</a>
+                                    <a class="dropdown-item" href="@Url.Action("ObtenerUsuario", "Usuario", new { @id_usuario = usuario.Id_usuario })">Editar</a>
+                                </div>
+                            </div>
                         </td>
                     </tr>
-                }
-            </tbody>
+                    }
+                </tbody>
 
-        </table>
+            </table>
+        </div>
+        <div class="col-lg-9">
+            <a href="@Url.Action("Index", "Home")" class="btn btn-success">Inicio</a>
+        </div>
     </div>
-    <div class="col-lg-9">
-        <a href="@Url.Action("AltaUsuario", "Usuario")" class="btn btn-success">Alta</a>
-    </div>
-    <div class="col-lg-9">
-        <a href="@Url.Action("Index", "Home")" class="btn btn-success">Inicio</a>
-    </div>
-</div>
+}

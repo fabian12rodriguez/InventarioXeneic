@@ -1,7 +1,7 @@
 ﻿@model Inventario.ViewModels.VMInventario
 
 @{
-    ViewBag.Title = "AltaUsuario";
+    ViewBag.Title = "Alta de usuario";
     List<SelectListItem> itemsRoles = (List<SelectListItem>)ViewBag.itemsRoles;
 
 }
@@ -67,7 +67,7 @@
         <br />
         <br />
         <div class="col-sm-6">
-            <a href="@Url.Action("Index", "Home")" class="btn btn-info">Volver a inicio</a>
+            <a href="@Url.Action("ListadoUsuarios", "Usuario")" class="btn btn-info">Ir al listado</a>
         </div>
     </div>
 </div>

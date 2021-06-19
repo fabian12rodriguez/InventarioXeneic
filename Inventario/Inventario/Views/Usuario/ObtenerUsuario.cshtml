@@ -1,7 +1,7 @@
 ﻿@model Inventario.ViewModels.VMInventario
 
 @{
-    ViewBag.Title = "ObtenerUsuario";
+    ViewBag.Title = "Modificar usuario";
     List<SelectListItem> itemsRoles = (List<SelectListItem>)ViewBag.itemsRoles;
 
 }
@@ -12,7 +12,7 @@
     <div class="col-sm-12">
         <div>
             <br />
-            <h4>Datos de los articulos</h4>
+            <h4>Datos de los usuarios</h4>
             <br />
         </div>
     </div>
@@ -67,7 +67,7 @@
                     </div>
                 </div>
 
-                <div class="form-group text-right">
+                <div class="form-group text-left">
                     <div class="col-xs-12">
                         <button class="btn btn-warning" type="submit">
                             Actualizar
@@ -76,7 +76,7 @@
                 </div>
                 <div class="form-group text-right">
                     <div class="col-xs-12">
-                        <a href="@Url.Action("ListadoUsuarios", "Usuario", new { })" class="btn btn-primary"> Volver</a>
+                        <a href="@Url.Action("ListadoUsuarios", "Usuario")" class="btn btn-info">Ir al listado</a>
                     </div>
                 </div>
             </div>

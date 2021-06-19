@@ -41,7 +41,7 @@ namespace Inventario.AccesoDatos
                             A.ID_TIPO_ARTICULO,
                             T.DESCRIPCION_TIPO_ARTICULO, 
                             A.IMAGEN_ARTICULO
-                            order by 5, 2 desc;";
+                            order by 5, 2 ;";
 
                 cmd.Parameters.Clear();
 
@@ -116,7 +116,7 @@ namespace Inventario.AccesoDatos
                             A.ID_TIPO_ARTICULO,
                             T.DESCRIPCION_TIPO_ARTICULO, 
                             A.IMAGEN_ARTICULO
-                            order by 5, 2 desc;";
+                            order by 5, 2;";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@id_tipo_articulo", id_tipo_articulo);
 

@@ -3,7 +3,7 @@
 @*@model Concesionario_236.ViewModels.Reportes.InfoGralVM*@
 
 @{
-    ViewBag.Title = "ListadoReportes";
+    ViewBag.Title = "Reporte";
 }
 
 
@@ -13,16 +13,25 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <br />
 <br />
-<h2>Artículos segun su tipo</h2>
+<h2>Stock de articulos con cantidades menores a 5 unidades</h2>
 <br />
 @using (Html.BeginForm())
 {
 
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-12">
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
+                    <th class="text-center">
+                        Articulo
+                    </th>
+                    <th class="text-center">
+                        Modelo
+                    </th>
+                    <th class="text-center">
+                        Marca
+                    </th>
                     <th class="text-center">
                         Tipo
                     </th>
@@ -34,15 +43,25 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr class="text-center">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Desc_tipo_articulo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Cantidad)
-                        </td>
+                <tr class="text-center">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre_articulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Modelo_articulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Desc_marca_articulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Desc_tipo_articulo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Stock)
+                    </td>
 
-                    </tr>
+                </tr>
+
                 }
             </tbody>
         </table>

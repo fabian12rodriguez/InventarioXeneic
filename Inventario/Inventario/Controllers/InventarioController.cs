@@ -371,7 +371,11 @@ namespace Inventario.Controllers
                 return View(articulo);
             }
         }
-
+        public ActionResult ListadoHistorialArt(int id_articulo)
+        {
+            List<VMInventario> lista = AD_Inventario.ListarHistorialArt(id_articulo);
+            return View(lista);
+        }
 
 
 

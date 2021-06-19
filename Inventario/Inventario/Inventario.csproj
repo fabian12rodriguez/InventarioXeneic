@@ -363,6 +363,7 @@
     <Content Include="Views\Inventario\ObtenerArtAsignado.cshtml" />
     <Content Include="Views\Inventario\AgregarStock.cshtml" />
     <Content Include="Views\Inventario\AsignarStock.cshtml" />
+    <Content Include="Views\Inventario\ListadoHistorialArt.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

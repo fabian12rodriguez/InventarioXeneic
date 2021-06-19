@@ -34,12 +34,23 @@ namespace Inventario.ViewModels
         private bool habilitado_usuario;
         private int id_rol;
 
+        /*Articulos_usuarios*/
+        private string nro_ticket;
+
         /*Roles*/
         private string descripcion_rol;
 
         /*Reportes*/
         private int cantidad;
         private string area;
+
+        /*Historial articulos*/
+
+        private int id_historial;
+        private string fecha_historial;
+        private string observaciones_historial;
+
+
 
         /*Articulos*/
         public int Id_articulo { get => id_articulo; set => id_articulo = value; }
@@ -67,11 +78,19 @@ namespace Inventario.ViewModels
         public string Mail_usuario { get => mail_usuario; set => mail_usuario = value; }
         public bool Habilitado_usuario { get => habilitado_usuario; set => habilitado_usuario = value; }
         public int Id_rol { get => id_rol; set => id_rol = value; }
+
+        /*Articulos_usuarios*/
+        public string Nro_ticket { get => nro_ticket; set => nro_ticket = value; }
         /*Roles*/
         public string Descripcion_rol { get => descripcion_rol; set => descripcion_rol = value; }
 
         /*Reportes*/
         public int Cantidad { get => cantidad; set => cantidad = value; }
         public string Area { get => area; set => area = value; }
+
+        /*Historial articulos*/
+        public int Id_historial { get => id_historial; set => id_historial = value; }
+        public string Fecha_historial { get => fecha_historial; set => fecha_historial = value; }
+        public string Observaciones_historial { get => observaciones_historial; set => observaciones_historial = value; }
     }
 }

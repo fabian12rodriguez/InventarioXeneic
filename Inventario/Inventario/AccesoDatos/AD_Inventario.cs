@@ -41,7 +41,7 @@ namespace Inventario.AccesoDatos
                             A.ID_TIPO_ARTICULO,
                             T.DESCRIPCION_TIPO_ARTICULO, 
                             A.IMAGEN_ARTICULO
-                            order by 5, 7 desc;";
+                            order by 5, 2 desc;";
 
                 cmd.Parameters.Clear();
 
@@ -116,7 +116,7 @@ namespace Inventario.AccesoDatos
                             A.ID_TIPO_ARTICULO,
                             T.DESCRIPCION_TIPO_ARTICULO, 
                             A.IMAGEN_ARTICULO
-                            order by 5, 7 desc;";
+                            order by 5, 2 desc;";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@id_tipo_articulo", id_tipo_articulo);
 
@@ -169,7 +169,25 @@ namespace Inventario.AccesoDatos
             {
                 SqlCommand cmd = new SqlCommand();
                 string consultaSql =
-                   @"select A.ID_ARTICULO, 
+                   @"select A.Id_articulo,
+                            A.NOMBRE_ARTICULO, 
+                            A.MODELO_ARTICULO, 
+                            M.DESCRIPCION_MARCA, 
+                            T.DESCRIPCION_TIPO_ARTICULO, 
+                            SUM(mvt.CANTIDAD_MVT)stock
+                            from articulos a join MOVIMIENTOS_STOCK mvt on a.ID_ARTICULO = mvt.ID_ARTICULO
+                            join MARCAS M on A.ID_MARCA = M.ID_MARCA
+                            join TIPOS_ARTICULOS T on A.ID_TIPO_ARTICULO  = T.ID_TIPO_ARTICULO
+                            where a.HABILITADO_ARTICULO = 1
+                            GROUP BY
+							A.Id_articulo,
+                            A.NOMBRE_ARTICULO, 
+                            A.MODELO_ARTICULO, 
+                            M.DESCRIPCION_MARCA, 
+                            T.DESCRIPCION_TIPO_ARTICULO
+                            order by 5,2;";
+
+ /*               @"select A.ID_ARTICULO, 
                     A.NOMBRE_ARTICULO, 
                     A.MODELO_ARTICULO, 
                     M.DESCRIPCION_MARCA, 
@@ -179,6 +197,7 @@ namespace Inventario.AccesoDatos
                     join TIPOS_ARTICULOS T on A.ID_TIPO_ARTICULO  = T.ID_TIPO_ARTICULO
                     where a.HABILITADO_ARTICULO = 1;
                     ";
+*/
 
                 cmd.Parameters.Clear();
 
@@ -200,6 +219,7 @@ namespace Inventario.AccesoDatos
                         aux.Modelo_articulo = dr["Modelo_articulo"].ToString();
                         aux.Desc_marca_articulo = dr["DESCRIPCION_MARCA"].ToString();
                         aux.Desc_tipo_articulo = dr["DESCRIPCION_TIPO_ARTICULO"].ToString();
+                        aux.Stock = int.Parse(dr["Stock"].ToString());
                         resultado.Add(aux);
 
 
@@ -603,32 +623,138 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
+        //public static bool ActualizarDatosArticulos(VMInventario articulo)
+        //{
+        //    bool resultado = false;
+        //    string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+        //    SqlConnection cn = new SqlConnection(cadenaConexion);
+
+        //    try
+        //    {
+        //        SqlCommand cmd = new SqlCommand();
+
+        //        string consulta = "UPDATE articulos SET Nombre_articulo = @Nombre_articulo, Modelo_articulo = @Modelo_articulo, Id_marca = @Id_marca, Id_tipo_articulo = @Id_tipo_articulo, Imagen_articulo = @Imagen_articulo where Id_articulo = @Id_articulo";
+        //        cmd.Parameters.Clear();
+        //        cmd.Parameters.AddWithValue("@Id_articulo", articulo.Id_articulo);
+        //        cmd.Parameters.AddWithValue("@Nombre_articulo", articulo.Nombre_articulo);
+        //        cmd.Parameters.AddWithValue("@Modelo_articulo", articulo.Modelo_articulo);
+        //        cmd.Parameters.AddWithValue("@Id_marca", articulo.Id_marca);
+        //        cmd.Parameters.AddWithValue("@Id_tipo_articulo", articulo.Id_tipo_articulo);
+        //        cmd.Parameters.AddWithValue("@Imagen_articulo", articulo.Imagen_articulo);
+
+        //        cmd.CommandType = System.Data.CommandType.Text;
+        //        cmd.CommandText = consulta;
+        //        cn.Open
+        //        ();
+        //        cmd.Connection = cn;
+        //        cmd.ExecuteNonQuery();
+        //        resultado = true;
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+
+        //    finally
+        //    {
+        //        cn.Close();
+        //    }
+
+        //    return resultado;
+        //}
         public static bool ActualizarDatosArticulos(VMInventario articulo)
         {
             bool resultado = false;
             string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+
+            try
+            {
+
+                SqlCommand cmd = cn.CreateCommand();
+                cmd.CommandText = "p_ActualizarArticulo";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@Id_articulo", articulo.Id_articulo));
+                cmd.Parameters.Add(new SqlParameter("@Nombre_articulo", articulo.Nombre_articulo));
+                cmd.Parameters.Add(new SqlParameter("@Modelo_articulo", articulo.Modelo_articulo));
+                cmd.Parameters.Add(new SqlParameter("@Id_marca", articulo.Id_marca));
+                cmd.Parameters.Add(new SqlParameter("@Id_tipo_articulo", articulo.Id_tipo_articulo));
+                cmd.Parameters.Add(new SqlParameter("@Imagen_articulo", articulo.Imagen_articulo));
+
+                cn.Open();
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+                resultado = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+            return resultado;
+        }
+        public static List<VMInventario> ListarHistorialArt(int id_articulo)
+        {
+            List<VMInventario> resultado = new List<VMInventario>();
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
             SqlConnection cn = new SqlConnection(cadenaConexion);
 
             try
             {
                 SqlCommand cmd = new SqlCommand();
 
-                string consulta = "UPDATE articulos SET Nombre_articulo = @Nombre_articulo, Modelo_articulo = @Modelo_articulo, Id_marca = @Id_marca, Id_tipo_articulo = @Id_tipo_articulo, Imagen_articulo = @Imagen_articulo where Id_articulo = @Id_articulo";
+                string consulta = @" select distinct H.FECHA_HISTORIAL,
+		                                    A.NOMBRE_ARTICULO,
+		                                    a.MODELO_ARTICULO,
+		                                    m.CANTIDAD_MVT Stock,
+		                                    u.CODIGO_USUARIO, 
+		                                    au.nro_ticket, 
+		                                    h.OBSERVACIONES_HISTORIAL
+                                    from HISTORIAL_ARTICULOS h 
+                                    JOIN MOVIMIENTOS_STOCK M on m.ID_MVT = h.ID_MVT
+                                    LEFT JOIN ARTICULOS_USUARIOS au on m.ID_ARTICULO = au.ID_ARTICULO
+                                    JOIN USUARIOS u on u.ID_USUARIO = m.id_usuario
+                                    LEFT JOIN ARTICULOS a on a.ID_ARTICULO = m.ID_ARTICULO
+                                    where H.ID_ARTICULO = @id_articulo
+                                    order by h.FECHA_HISTORIAL;";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@Id_articulo", articulo.Id_articulo);
-                cmd.Parameters.AddWithValue("@Nombre_articulo", articulo.Nombre_articulo);
-                cmd.Parameters.AddWithValue("@Modelo_articulo", articulo.Modelo_articulo);
-                cmd.Parameters.AddWithValue("@Id_marca", articulo.Id_marca);
-                cmd.Parameters.AddWithValue("@Id_tipo_articulo", articulo.Id_tipo_articulo);
-                cmd.Parameters.AddWithValue("@Imagen_articulo", articulo.Imagen_articulo);
+                cmd.Parameters.AddWithValue("@id_articulo", id_articulo);
 
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = consulta;
-                cn.Open
-                ();
+
+
+                cn.Open();
                 cmd.Connection = cn;
-                cmd.ExecuteNonQuery();
-                resultado = true;
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr != null)
+                {
+                    while (dr.Read())
+                    {
+                        VMInventario aux = new VMInventario();
+                        aux.Fecha_historial= dr["Fecha_historial"].ToString();
+                        aux.Nombre_articulo = dr["Nombre_articulo"].ToString();
+                        aux.Modelo_articulo = dr["Modelo_articulo"].ToString();
+                        aux.Cantidad_mvt = int.Parse(dr["Stock"].ToString());
+                        aux.Codigo_usuario = dr["Codigo_usuario"].ToString();
+                        aux.Nro_ticket = dr["Nro_ticket"].ToString();
+                        aux.Observaciones_historial = dr["Observaciones_historial"].ToString();
+                        resultado.Add(aux);
+
+                    }
+                }
+
             }
             catch (Exception)
             {

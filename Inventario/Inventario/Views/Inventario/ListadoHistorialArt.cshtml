@@ -1,36 +1,33 @@
 ﻿@model IEnumerable<Inventario.ViewModels.VMInventario>
 
+@{
+    ViewBag.Title = "ListadoInventario";
 
-
-
-
-
+}
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-@using (Html.BeginForm())
-{
-
-
-    <br />
-
-    <div class="row">
+<br />
+<div class="row">
     <div class="col-sm-12">
         <div>
-            <h3>Listado de Inventario</h3>
+            <h3>Inventario</h3>
         </div>
     </div>
-    </div>
-
+</div>
+<br />
+@*[ ]*@
+@using (Html.BeginForm())
+{
     <div class="row">
         <div class="col-lg-9">
             <table class="table table-bordered table-striped bg-light">
                 <thead>
                     <tr>
                         <th class="text-center">
-                            ID
+                            Fecha
                         </th>
                         <th class="text-center">
                             Nombre
@@ -39,18 +36,17 @@
                             Modelo
                         </th>
                         <th class="text-center">
-                            Marca
-                        </th>
-                        <th class="text-center">
-                            Tipo
-                        </th>
-                        <th class="text-center">
                             Cantidad
                         </th>
                         <th class="text-center">
-                            Acciones
+                            Usuario
                         </th>
-
+                        <th class="text-center">
+                            Ticket
+                        </th>
+                        <th class="text-center">
+                            Observaciones
+                        </th>
 
                     </tr>
                 </thead>
@@ -59,7 +55,7 @@
                     {
                     <tr class="text-center">
                         <td>
-                            @VMInventario.Id_articulo
+                            @VMInventario.Fecha_historial
                         </td>
                         <td>
                             @VMInventario.Nombre_articulo
@@ -68,37 +64,28 @@
                             @VMInventario.Modelo_articulo
                         </td>
                         <td>
-                            @VMInventario.Desc_marca_articulo
+                            @VMInventario.Cantidad_mvt
                         </td>
                         <td>
-                            @VMInventario.Desc_tipo_articulo
+                            @VMInventario.Codigo_usuario
                         </td>
                         <td>
-                            @VMInventario.Stock
+                            @VMInventario.Nro_ticket
                         </td>
                         <td>
-                            <div class="dropdown">
-                                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                    Acciones
-                                </button>
-                                <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="@Url.Action("AgregarStock", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Agregar/Quitar Stock</a>
-                                    <a class="dropdown-item" href="@Url.Action("AsignarStock", "Inventario", new { @id_articulo = VMInventario.Id_articulo })">Asignar/Desasignar Usuario</a>
-                                    <a class="dropdown-item" href="@Url.Action("ObtenerArticulo", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Editar</a>
-                                    <a class="dropdown-item" href="@Url.Action("ListadoHistorialArt", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Historial</a>
-                                </div>
-                            </div>
+                            @VMInventario.Observaciones_historial
                         </td>
-
                     </tr>
                     }
                 </tbody>
 
             </table>
+
         </div>
         <div class="col-lg-9">
-            <a href="@Url.Action("ListadoAsignarUsr", "Inventario")" class="btn btn-success">Volver</a>
+            <a href="@Url.Action("Index", "Home")" class="btn btn-success">Inicio</a>
         </div>
-
     </div>
+
 }
+

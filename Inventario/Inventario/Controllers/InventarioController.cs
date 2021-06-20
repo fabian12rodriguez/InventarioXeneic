@@ -179,7 +179,7 @@ namespace Inventario.Controllers
                 bool resultado = AD_Inventario.ActualizarDatosArticulos(model);
                 if (resultado)
                 {
-                    return RedirectToAction("ListadoAsignarUsr", "Inventario");
+                    return RedirectToAction("ListadoArticulos", "Inventario");
                 }
                 else
                 {
@@ -243,7 +243,7 @@ namespace Inventario.Controllers
             if (ModelState.IsValid)
             {
                 AD_ArtStock.AgregarStock(articulo);
-                return RedirectToAction("ListadoInventario", "Inventario");
+                return RedirectToAction("ListadoAsignarUsr", "Inventario");
             }
             else
             {
@@ -364,7 +364,7 @@ namespace Inventario.Controllers
             if (ModelState.IsValid)
             {
                 AD_ArtStock.AsignarStock(articulo);
-                return RedirectToAction("ListadoInventario", "Inventario");
+                return RedirectToAction("ListadoAsignarUsr", "Inventario");
             }
             else
             {
@@ -375,6 +375,25 @@ namespace Inventario.Controllers
         {
             List<VMInventario> lista = AD_Inventario.ListarHistorialArt(id_articulo);
             return View(lista);
+        }
+        public ActionResult BajaStock(int id_articulo)
+        {
+            VMInventario resultado = AD_Inventario.ObtenerArticulo(id_articulo);
+
+            return View(resultado);
+        }
+        [HttpPost]
+        public ActionResult BajaStock(ArticuloStock articulo)
+        {
+            if (ModelState.IsValid)
+            {
+                AD_ArtStock.BajaStock(articulo);
+                return RedirectToAction("ListadoAsignarUsr", "Inventario");
+            }
+            else
+            {
+                return View(articulo);
+            }
         }
 
 

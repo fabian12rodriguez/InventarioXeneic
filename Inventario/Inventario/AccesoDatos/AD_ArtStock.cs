@@ -66,6 +66,7 @@ namespace Inventario.AccesoDatos
                 cmd.Parameters.Add(new SqlParameter("@MODELO_ARTICULO", articulo.Modelo_articulo));
                 cmd.Parameters.Add(new SqlParameter("@ID_MARCA", articulo.Id_marca));
                 cmd.Parameters.Add(new SqlParameter("@ID_TIPO_ARTICULO", articulo.Id_tipo_articulo));
+                cmd.Parameters.Add(new SqlParameter("@HABILITADO_ARTICULO", articulo.Habilitado_articulo));
                 cmd.Parameters.Add(new SqlParameter("@IMAGEN_ARTICULO", articulo.Imagen_articulo));
 
 
@@ -271,6 +272,100 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
+        public static bool BajaStock(ArticuloStock articulo)
+        {
+            bool resultado = false;
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+            try
+            {
+                SqlCommand cmd = cn.CreateCommand();
+                cmd.CommandText = "p_BajaStock";
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Clear();
+                cmd.Parameters.Add(new SqlParameter("@id_articulo", articulo.Id_articulo));
+
+
+                cn.Open();
+                cmd.Connection = cn;
+                cmd.ExecuteNonQuery();
+                resultado = true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                cn.Close();
+            }
+
+            return resultado;
+        }
+        //public static ArticuloStock ObtenerArtAsignadoUsr(int id_articulo)
+        //{
+        //    ArticuloStock resultado = new ArticuloStock();
+        //    string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+        //    SqlConnection cn = new SqlConnection(cadenaConexion);
+
+        //    try
+        //    {
+        //        SqlCommand cmd = new SqlCommand();
+
+        //        string consulta = @"select A.ID_ARTICULO, 
+        //                                    a.Nombre_articulo,
+        //                                    a.Modelo_articulo,
+        //                                    u.CODIGO_USUARIO
+        //                                    from articulos a 
+        //                                    left join ARTICULOS_USUARIOS au on a.ID_ARTICULO = au.ID_ARTICULO
+        //                                    join MARCAS M on A.ID_MARCA = M.ID_MARCA
+        //                                    join TIPOS_ARTICULOS T on A.ID_TIPO_ARTICULO = T.ID_TIPO_ARTICULO
+        //                                    LEFT join USUARIOS U on au.ID_USUARIO = U.ID_USUARIO
+        //                                    where a.HABILITADO_ARTICULO = 1 
+        //                                    and a.id_articulo =@id_articulo";
+        //        cmd.Parameters.Clear();
+        //        cmd.Parameters.AddWithValue("@id_articulo", id_articulo);
+
+        //        cmd.CommandType = System.Data.CommandType.Text;
+        //        cmd.CommandText = consulta;
+
+
+        //        cn.Open();
+        //        cmd.Connection = cn;
+        //        SqlDataReader dr = cmd.ExecuteReader();
+
+        //        if (dr != null)
+        //        {
+        //            while (dr.Read())
+        //            {
+
+        //                resultado.Id_articulo = int.Parse(dr["Id_articulo"].ToString());
+        //                resultado.Nombre_articulo = dr["Nombre_articulo"].ToString();
+        //                resultado.Modelo_articulo = dr["Modelo_articulo"].ToString();
+        //                resultado.Codigo_usuario = dr["Codigo_usuario"].ToString();
+
+
+        //            }
+        //        }
+
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+
+        //    finally
+        //    {
+        //        cn.Close();
+        //    }
+
+        //    return resultado;
+        //}
         public static ArticuloStock ObtenerArtAsignadoUsr(int id_articulo)
         {
             ArticuloStock resultado = new ArticuloStock();
@@ -282,17 +377,23 @@ namespace Inventario.AccesoDatos
             {
                 SqlCommand cmd = new SqlCommand();
 
-                string consulta = @"select A.ID_ARTICULO, 
+                string consulta =          @"select A.ID_ARTICULO, 
                                             a.Nombre_articulo,
                                             a.Modelo_articulo,
-                                            u.CODIGO_USUARIO
+                                            u.CODIGO_USUARIO,
+											SUM(mvt.CANTIDAD_MVT)stock
                                             from articulos a 
                                             left join ARTICULOS_USUARIOS au on a.ID_ARTICULO = au.ID_ARTICULO
                                             join MARCAS M on A.ID_MARCA = M.ID_MARCA
                                             join TIPOS_ARTICULOS T on A.ID_TIPO_ARTICULO = T.ID_TIPO_ARTICULO
                                             LEFT join USUARIOS U on au.ID_USUARIO = U.ID_USUARIO
+											join MOVIMIENTOS_STOCK mvt on a.ID_ARTICULO = mvt.ID_ARTICULO
                                             where a.HABILITADO_ARTICULO = 1 
-                                            and a.id_articulo =@id_articulo";
+                                            and a.id_articulo = @id_articulo
+											GROUP BY A.Id_articulo,
+										   A.NOMBRE_ARTICULO,
+										   A.MODELO_ARTICULO, 
+										   u.CODIGO_USUARIO";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@id_articulo", id_articulo);
 
@@ -313,6 +414,7 @@ namespace Inventario.AccesoDatos
                         resultado.Nombre_articulo = dr["Nombre_articulo"].ToString();
                         resultado.Modelo_articulo = dr["Modelo_articulo"].ToString();
                         resultado.Codigo_usuario = dr["Codigo_usuario"].ToString();
+                        resultado.Artstock = int.Parse(dr["Stock"].ToString());
 
 
                     }

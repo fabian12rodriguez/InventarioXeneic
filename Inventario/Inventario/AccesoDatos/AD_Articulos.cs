@@ -21,7 +21,7 @@ namespace Inventario.AccesoDatos
             {
                 SqlCommand cmd = new SqlCommand();
                 string consultaSql =
-                    @"select A.ID_ARTICULO, A.NOMBRE_ARTICULO, A.MODELO_ARTICULO, A.ID_MARCA,M.DESCRIPCION_MARCA, T.ID_TIPO_ARTICULO,T.DESCRIPCION_TIPO_ARTICULO, A.IMAGEN_ARTICULO
+                    @"select A.ID_ARTICULO, A.NOMBRE_ARTICULO, A.MODELO_ARTICULO, A.ID_MARCA,M.DESCRIPCION_MARCA, T.ID_TIPO_ARTICULO,T.DESCRIPCION_TIPO_ARTICULO, A.Habilitado_articulo,A.IMAGEN_ARTICULO
                         from ARTICULOS A, MARCAS M , TIPOS_ARTICULOS T
                         WHERE A.ID_MARCA = M.ID_MARCA
                         AND A.ID_TIPO_ARTICULO  = T.ID_TIPO_ARTICULO";
@@ -46,6 +46,7 @@ namespace Inventario.AccesoDatos
                         aux.Modelo_articulo = dr["Modelo_articulo"].ToString();
                         aux.Desc_marca_articulo = dr["DESCRIPCION_MARCA"].ToString();
                         aux.Desc_tipo_articulo = dr["DESCRIPCION_TIPO_ARTICULO"].ToString();
+                        aux.Habilitado_articulo = bool.Parse(dr["Habilitado_articulo"].ToString());
                         aux.Imagen_articulo = dr["Imagen_articulo"].ToString();
 
 

@@ -32,6 +32,9 @@
                     <th class="text-center">
                         Tipo
                     </th>
+                    <th class="text-center">
+                        Habilitado
+                    </th>
                     <th class="text-left">
 
                         Acciones
@@ -58,7 +61,23 @@
                     <td>
                         @articulo.Desc_tipo_articulo
                     </td>
+                    @if (@articulo.Habilitado_articulo)
+                    {
+                        <td>
+                            S
+                        </td>
+
+                    }
+                    else
+                    {
+                        <td>
+                            N
+                        </td>
+
+                    }
                     <td>
+                        <a href="@Url.Action("ObtenerArticulo", "Articulo", new { @id_articulo=articulo.Id_articulo})" class="btn btn-warning">asa</a>
+
                         <a href="@Url.Action("ObtenerArticulo", "Articulo", new { @id_articulo=articulo.Id_articulo})" class="btn btn-warning">Editar</a>
                         @* <a href="@Url.Action("ObtenerArticulo", "Articulo", new { @id_articulo=articulo.Id_articulo})" class="btn btn-danger">Deshabilitar</a>*@
                     </td>

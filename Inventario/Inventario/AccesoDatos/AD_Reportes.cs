@@ -11,6 +11,122 @@ namespace Inventario.AccesoDatos
 {
     public class AD_Reportes
     {
+        public static string obtenerDatos()
+        {
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+
+            SqlCommand cmd = new SqlCommand();
+
+            //Emitir listado de artículos por tipo.
+
+            string consulta = @"SELECT A.DESCRIPCION_AREA AREA, COUNT (*) CANTIDAD
+                                    FROM USUARIOS U, AREAS A, AREAS_USUARIOS AU
+                                    WHERE U.ID_USUARIO = AU.ID_USUARIO
+                                    AND A.ID_AREA = AU.ID_AREA
+                                    GROUP BY A.DESCRIPCION_AREA
+                                    ORDER BY 2 DESC,1 ;
+                                     ";
+            cmd.Parameters.Clear();
+
+
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = consulta;
+            cn.Open();
+            cmd.Connection = cn;
+
+
+            DataTable Datos = new DataTable();
+            Datos.Load(cmd.ExecuteReader());
+            cn.Close();
+
+            string strDatos;
+
+            strDatos = "[['Area', 'Cantidad'],";
+
+            foreach (DataRow dr in Datos.Rows)
+            {
+                //strDatos = strDatos + "[";
+                //strDatos = strDatos + dr[0] + "," + dr[1];
+                //strDatos = strDatos + "],";
+                strDatos = strDatos + "[";
+                strDatos = strDatos + "'" + dr[0] + "'" + "," + dr[1];
+                strDatos = strDatos + "],";
+
+
+            }
+
+            strDatos = strDatos + "]";
+
+            return strDatos;
+        }
+        //public static List<grafico> obtenerGrafico() {
+
+        //    List<grafico> resultado = new List<grafico>();
+        //    grafico headear = new grafico();
+        //    headear.area = "Area";
+        //    headear.cantidad = "Cantidad";
+
+        //    resultado.Add(headear);
+        //    string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+        //    SqlConnection cn = new SqlConnection(cadenaConexion);
+
+        //    try
+        //    {
+        //        SqlCommand cmd = new SqlCommand();
+
+
+
+        //        string consulta = @"SELECT A.DESCRIPCION_AREA AREA, COUNT (*) CANTIDAD
+        //                            FROM USUARIOS U, AREAS A, AREAS_USUARIOS AU
+        //                            WHERE U.ID_USUARIO = AU.ID_USUARIO
+        //                            AND A.ID_AREA = AU.ID_AREA
+        //                            GROUP BY A.DESCRIPCION_AREA
+        //                            ORDER BY 2 DESC,1 ;
+        //                             ";
+        //        cmd.Parameters.Clear();
+
+
+        //        cmd.CommandType = System.Data.CommandType.Text;
+        //        cmd.CommandText = consulta;
+
+
+
+        //        cn.Open();
+        //        cmd.Connection = cn;
+        //        SqlDataReader dr = cmd.ExecuteReader();
+
+        //        if (dr != null)
+        //        {
+        //            while (dr.Read())
+        //            {
+        //                grafico nuevoGrafico = new grafico();
+        //                nuevoGrafico.area = dr["area"].ToString();
+        //                nuevoGrafico.cantidad = dr["cantidad"].ToString();
+        //                resultado.Add(nuevoGrafico);
+
+        //            }
+        //        }
+
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+
+        //    finally
+        //    {
+        //        cn.Close();
+        //    }
+
+        //    return resultado;
+
+
+        //}
 
         public static List<VMInventario> ListadoArtPorTipo()
         {
@@ -273,55 +389,55 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
-        public static string obtenerDatosGrafico()
-        {
-            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+        //public static string obtenerDatosGrafico()
+        //{
+        //    string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
 
-            SqlConnection cn = new SqlConnection(cadenaConexion);
-
-
-            SqlCommand cmd = new SqlCommand();
-
-            //Emitir listado de artículos por tipo.
-
-            string consulta = @"SELECT A.DESCRIPCION_AREA AREA, COUNT (*) CANTIDAD
-                                    FROM USUARIOS U, AREAS A, AREAS_USUARIOS AU
-                                    WHERE U.ID_USUARIO = AU.ID_USUARIO
-                                    AND A.ID_AREA = AU.ID_AREA
-                                    GROUP BY A.DESCRIPCION_AREA
-                                    ORDER BY 2 DESC,1 ;
-                                     ";
-            cmd.Parameters.Clear();
+        //    SqlConnection cn = new SqlConnection(cadenaConexion);
 
 
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = consulta;
-            cn.Open();
-            cmd.Connection = cn;
+        //    SqlCommand cmd = new SqlCommand();
+
+        //    //Emitir listado de artículos por tipo.
+
+        //    string consulta = @"SELECT A.DESCRIPCION_AREA AREA, COUNT (*) CANTIDAD
+        //                            FROM USUARIOS U, AREAS A, AREAS_USUARIOS AU
+        //                            WHERE U.ID_USUARIO = AU.ID_USUARIO
+        //                            AND A.ID_AREA = AU.ID_AREA
+        //                            GROUP BY A.DESCRIPCION_AREA
+        //                            ORDER BY 2 DESC,1 ;
+        //                             ";
+        //    cmd.Parameters.Clear();
 
 
-            DataTable Datos = new DataTable();
-            Datos.Load(cmd.ExecuteReader());
-            cn.Close();
-
-            string strDatos;
-
-            strDatos = "[['Area', 'Cantidad'],";
-
-            foreach (DataRow dr in Datos.Rows)
-            {
-
-                strDatos = strDatos + "[";
-                strDatos = strDatos + "'" + dr[0] + "'" + "," + dr[1];
-                strDatos = strDatos + "],";
+        //    cmd.CommandType = System.Data.CommandType.Text;
+        //    cmd.CommandText = consulta;
+        //    cn.Open();
+        //    cmd.Connection = cn;
 
 
-            }
+        //    DataTable Datos = new DataTable();
+        //    Datos.Load(cmd.ExecuteReader());
+        //    cn.Close();
 
-            strDatos = strDatos + "]";
+        //    string strDatos;
 
-            return strDatos;
-        }
+        //    strDatos = "[['Area', 'Cantidad'],";
+
+        //    foreach (DataRow dr in Datos.Rows)
+        //    {
+
+        //        strDatos = strDatos + "[";
+        //        strDatos = strDatos + "'" + dr[0] + "'" + "," + dr[1];
+        //        strDatos = strDatos + "],";
+
+
+        //    }
+
+        //    strDatos = strDatos + "]";
+
+        //    return strDatos;
+        //}
 
 
 

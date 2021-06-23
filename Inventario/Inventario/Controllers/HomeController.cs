@@ -13,13 +13,11 @@ namespace Inventario.Controllers
     {
         public ActionResult Index()
         {
+            string tabla = AD_Reportes.obtenerDatos();
+            ViewBag.grafico = tabla;
             return View();
         }
-        //public ActionResult Index()
-        //{
-        //    string lista = AD_Reportes.obtenerDatosGrafico();
-        //    return View(lista);
-        //}
+ 
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

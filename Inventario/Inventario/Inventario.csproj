@@ -150,6 +150,7 @@
       <DependentUpon>Grafica3.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\Articulo.cs" />
+    <Compile Include="Models\grafico.cs" />
     <Compile Include="Models\Marca.cs" />
     <Compile Include="Models\SeriePastel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -176,6 +177,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Archivos\grafica1.jpg" />
+    <Content Include="Archivos\grafica2.jpg" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
@@ -184,12 +187,15 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\img.css" />
     <Content Include="Content\login.css" />
+    <Content Include="Content\Login2.css" />
     <Content Include="Content\styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Grafica3.aspx" />
     <Content Include="Images\1.png" />
+    <Content Include="Images\inventario.png" />
+    <Content Include="Images\inventario2.png" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -222,6 +228,7 @@
     <Content Include="Grafica2.aspx" />
     <Content Include="App_Browsers\qt.browser" />
     <Content Include="Archivos\Terminos y condiciones XENEIC INVENTORY.docx" />
+    <Content Include="Archivos\TerminosYCondiciones_XeneicInventory.pdf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -330,7 +337,6 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Articulo\AltaArticulo.cshtml" />
-    <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Articulo\ListadoArticulos.cshtml" />
     <Content Include="Views\Articulo\ObtenerArticulo.cshtml" />
     <Content Include="Views\Marca\AltaMarca.cshtml" />
@@ -365,6 +371,8 @@
     <Content Include="Views\Inventario\AsignarStock.cshtml" />
     <Content Include="Views\Inventario\ListadoHistorialArt.cshtml" />
     <Content Include="Views\Inventario\BajaStock.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\Shared\_LayoutTecnico.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

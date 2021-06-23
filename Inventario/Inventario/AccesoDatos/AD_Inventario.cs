@@ -903,6 +903,61 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
+       /* public static bool ActualizarDatosArticulos(VMInventario articulo)*/
+        public static VMInventario ValidarUsuario(VMInventario usuario)
+        {
+            VMInventario resultado = new VMInventario();
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = @"select u.CODIGO_USUARIO, u.PASSWORD_USUARIO
+                                    from usuarios u
+                                    where u.CODIGO_USUARIO = @Codigo_usuario--'FABIANR'
+                                    and u.PASSWORD_USUARIO = @Password_usuario--'123'
+                                    ;";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@Codigo_usuario", usuario.Codigo_usuario);
+                cmd.Parameters.AddWithValue("@Password_usuario", usuario.Password_usuario);
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = consulta;
+
+
+                cn.Open();
+                cmd.Connection = cn;
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr != null)
+                {
+                    while (dr.Read())
+                    {
+
+                        resultado.Codigo_usuario = dr["Codigo_usuario"].ToString();
+                        resultado.Password_usuario = dr["Password_usuario"].ToString();
+
+
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            finally
+            {
+                cn.Close();
+            }
+
+            return resultado;
+        }
 
 
 

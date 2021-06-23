@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Inventario.AccesoDatos;
 using Inventario.ViewModels;
+using Inventario.Models;
 using Rotativa;
 
 namespace Inventario.Controllers
@@ -46,6 +47,18 @@ namespace Inventario.Controllers
         public ActionResult Terminosycondiciones()
         {
             return View();
+        }
+        //public JsonResult obtenerDatos()
+        //{
+        //    List<grafico> resultado = AD_Reportes.obtenerGrafico();
+
+        //    return Json(resultado,JsonRequestBehavior.AllowGet);
+        //}
+        public JsonResult obtenerDatos()
+        {
+            List<grafico> resultado = AD_Reportes.obtenerGrafico();
+
+            return Json(resultado, JsonRequestBehavior.AllowGet);
         }
 
         //--------------PDF---------------------------------

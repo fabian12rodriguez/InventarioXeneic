@@ -4,14 +4,13 @@
 
 @{
     ViewBag.Title = "Reporte";
-    Layout = null;
 }
 
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+@*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>*@
 <br />
 <br />
 <h2>Stock de articulos con cantidades menores a 5 unidades</h2>
@@ -20,14 +19,12 @@
 {
     <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
         <div class="input-group">
-            @*<input class="form-control" type="search" placeholder="Buscar por..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>*@
+            <input class="form-control" type="text" placeholder="Buscar por..." aria-label="Search for..." aria-describedby="btnNavbarSearch" id="nombre_articulo"/>
+                <button class="btn btn-primary"  type="button" onclick = "refresh()"><i class="fas fa-search"></i></button>
 
+            @*//REUTILIZAR
             <input type="search" class="form-control rounded col-lg-4" placeholder="Filtrar resultados" aria-label="Search"
-                   aria-describedby="search-addon" id="txtFiltro" />
-
-
-
+                   aria-describedby="search-addon" id="txtFiltro" />*@
         </div>
     </form>
     <br />
@@ -83,10 +80,43 @@
         </div>
         <div class="form-group" text-right>
             <div class="col-sm-6">
-                <a href="@Url.Action("Print4", "Reporte")" class="btn btn-info" target="_blank">Imprimir PDF</a>
+                <a href="@Url.Action("Print5", "Reporte")" class="btn btn-info" target="_blank">Imprimir PDF</a>
             </div>
         </div>
     </div>
 
+    }
 
-}
+<script>
+
+    function refresh() {
+        var cboTipoArt = document.getElementById("nombre_articulo").value;
+        console.log(cboTipoArt);
+        if (cboTipoArt.value === null /*|| cboTipoArt.value === undefined */)
+        {
+            cboTipoArt.value == "";
+          /*  cboTipoArt.addEventListener("change", refresh);*/
+            window.location.href = "@Url.Content("~/Reporte/ListadoReportes4")";
+            console.log("Entra if");
+        }
+        else {
+            /*cboTipoArt.addEventListener("change", refresh);*/
+            window.location.href = "@Url.Content("~/Reporte/ListadoReportes4Filtrado")" + "?nombre_articulo=" + cboTipoArt;
+
+        }
+        console.log(cboTipoArt);
+        console.log("fuera if");
+    }
+</script>
+
+@*<script src="~/lib/jquery/dist/jquery-ui-1.12.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#txtFiltro").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#listado tr").not(':first').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>*@

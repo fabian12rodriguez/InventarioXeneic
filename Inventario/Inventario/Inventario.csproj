@@ -223,6 +223,7 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Scripts\circular.js" />
+    <Content Include="Scripts\circular3D.js" />
     <Content Include="Scripts\pastel.js" />
     <Content Include="Grafica1.aspx" />
     <Content Include="Grafica2.aspx" />
@@ -373,6 +374,7 @@
     <Content Include="Views\Inventario\BajaStock.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutTecnico.cshtml" />
+    <Content Include="Views\Reporte\ListadoReportes4Filtrado.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

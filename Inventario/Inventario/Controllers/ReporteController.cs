@@ -40,6 +40,22 @@ namespace Inventario.Controllers
             List<VMInventario> lista = AD_Reportes.ListadoCantTipoNBK();
             return View(lista);
         }
+      
+        public ActionResult ListadoReportes4Filtrado(string nombre_articulo)
+        {
+            if (nombre_articulo == "")
+            {
+                return RedirectToAction("ListadoReportes4", "Reporte");
+            }
+            else
+            {
+                List<VMInventario> resultado = AD_Reportes.ListadoStockFiltrado(nombre_articulo);
+
+
+                return View(resultado);
+            }
+        }
+
         public ActionResult Ayuda()
         {
           return View();
@@ -48,23 +64,11 @@ namespace Inventario.Controllers
         {
             return View();
         }
-        //public JsonResult obtenerDatos()
-        //{
-        //    List<grafico> resultado = AD_Reportes.obtenerGrafico();
 
-        //    return Json(resultado,JsonRequestBehavior.AllowGet);
-        //}
-        public JsonResult obtenerDatos()
-        {
-            List<grafico> resultado = AD_Reportes.obtenerGrafico();
+            //--------------PDF---------------------------------
 
-            return Json(resultado, JsonRequestBehavior.AllowGet);
-        }
-
-        //--------------PDF---------------------------------
-
-        //------------General
-        public ActionResult PDFIndex()
+            //------------General
+            public ActionResult PDFIndex()
         {
             ReporteGral resultado = new ReporteGral();
             return View(resultado);
@@ -111,7 +115,14 @@ namespace Inventario.Controllers
         }
         public ActionResult Print4()
         {
-            return new ActionAsPdf("PDFListadoReportes4", new { nombre = "Xeneic" }) { FileName = "reporte.pdf" };
+            return new ActionAsPdf("ListadoReportes4", new { nombre = "Xeneic" }) { FileName = "reporte.pdf" };
         }
+        public ActionResult Print5()
+        {
+            return new ActionAsPdf("ListadoReportes4Filtrado", new { nombre = "Xeneic" }) { FileName = "reporte.pdf" };
+        }
+
+
+
     }
 }

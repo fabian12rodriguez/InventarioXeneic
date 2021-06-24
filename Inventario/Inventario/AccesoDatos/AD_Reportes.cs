@@ -389,55 +389,79 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
-        //public static string obtenerDatosGrafico()
-        //{
-        //    string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+        public static List<VMInventario> ListadoStockFiltrado(string nombre_articulo)
+        {
+            List<VMInventario> resultado = new List<VMInventario>();
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
 
-        //    SqlConnection cn = new SqlConnection(cadenaConexion);
+            SqlConnection cn = new SqlConnection(cadenaConexion);
 
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
 
-        //    SqlCommand cmd = new SqlCommand();
+                string consulta = @"select A.Id_articulo,
+                                    A.NOMBRE_ARTICULO, 
+                                    A.MODELO_ARTICULO, 
+                                    M.DESCRIPCION_MARCA, 
+                                    T.DESCRIPCION_TIPO_ARTICULO, 
+                                    SUM(mvt.CANTIDAD_MVT)stock
+                                    from articulos a join MOVIMIENTOS_STOCK mvt on a.ID_ARTICULO = mvt.ID_ARTICULO
+                                    join MARCAS M on A.ID_MARCA = M.ID_MARCA
+                                    join TIPOS_ARTICULOS T on A.ID_TIPO_ARTICULO  = T.ID_TIPO_ARTICULO
+                                    where a.HABILITADO_ARTICULO = 1
+									and a.NOMBRE_ARTICULO LIKE '%'+@nombre_articulo+'%'
+                                    GROUP BY
+							        A.Id_articulo,
+                                    A.NOMBRE_ARTICULO, 
+                                    A.MODELO_ARTICULO, 
+                                    A.ID_MARCA,
+                                    M.DESCRIPCION_MARCA, 
+                                    A.ID_TIPO_ARTICULO,
+                                    T.DESCRIPCION_TIPO_ARTICULO
+							        HAVING SUM(mvt.CANTIDAD_MVT) < 5
+                                    order by 6,5,2 ;";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@nombre_articulo", nombre_articulo);
 
-        //    //Emitir listado de artículos por tipo.
-
-        //    string consulta = @"SELECT A.DESCRIPCION_AREA AREA, COUNT (*) CANTIDAD
-        //                            FROM USUARIOS U, AREAS A, AREAS_USUARIOS AU
-        //                            WHERE U.ID_USUARIO = AU.ID_USUARIO
-        //                            AND A.ID_AREA = AU.ID_AREA
-        //                            GROUP BY A.DESCRIPCION_AREA
-        //                            ORDER BY 2 DESC,1 ;
-        //                             ";
-        //    cmd.Parameters.Clear();
-
-
-        //    cmd.CommandType = System.Data.CommandType.Text;
-        //    cmd.CommandText = consulta;
-        //    cn.Open();
-        //    cmd.Connection = cn;
-
-
-        //    DataTable Datos = new DataTable();
-        //    Datos.Load(cmd.ExecuteReader());
-        //    cn.Close();
-
-        //    string strDatos;
-
-        //    strDatos = "[['Area', 'Cantidad'],";
-
-        //    foreach (DataRow dr in Datos.Rows)
-        //    {
-
-        //        strDatos = strDatos + "[";
-        //        strDatos = strDatos + "'" + dr[0] + "'" + "," + dr[1];
-        //        strDatos = strDatos + "],";
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = consulta;
 
 
-        //    }
+                cn.Open();
+                cmd.Connection = cn;
+                SqlDataReader dr = cmd.ExecuteReader();
 
-        //    strDatos = strDatos + "]";
+                if (dr != null)
+                {
+                    while (dr.Read())
+                    {
+                        VMInventario nuevoReporte = new VMInventario();
+                        nuevoReporte.Id_articulo = int.Parse(dr["Id_articulo"].ToString());
+                        nuevoReporte.Nombre_articulo = dr["Nombre_articulo"].ToString();
+                        nuevoReporte.Modelo_articulo = dr["Modelo_articulo"].ToString();
+                        nuevoReporte.Desc_marca_articulo = dr["DESCRIPCION_MARCA"].ToString();
+                        nuevoReporte.Desc_tipo_articulo = dr["DESCRIPCION_TIPO_ARTICULO"].ToString();
+                        nuevoReporte.Stock = int.Parse(dr["Stock"].ToString());
+                        resultado.Add(nuevoReporte);
 
-        //    return strDatos;
-        //}
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            finally
+            {
+                cn.Close();
+            }
+
+            return resultado;
+        }
 
 
 

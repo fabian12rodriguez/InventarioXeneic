@@ -48,9 +48,7 @@ namespace Inventario.AccesoDatos
 
             foreach (DataRow dr in Datos.Rows)
             {
-                //strDatos = strDatos + "[";
-                //strDatos = strDatos + dr[0] + "," + dr[1];
-                //strDatos = strDatos + "],";
+                
                 strDatos = strDatos + "[";
                 strDatos = strDatos + "'" + dr[0] + "'" + "," + dr[1];
                 strDatos = strDatos + "],";
@@ -62,7 +60,8 @@ namespace Inventario.AccesoDatos
 
             return strDatos;
         }
-        //public static List<grafico> obtenerGrafico() {
+        //public static List<grafico> obtenerGrafico()
+        //{
 
         //    List<grafico> resultado = new List<grafico>();
         //    grafico headear = new grafico();

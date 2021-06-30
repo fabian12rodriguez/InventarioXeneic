@@ -17,16 +17,10 @@
 <br />
 @using (Html.BeginForm())
 {
-    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-        <div class="input-group">
-            <input class="form-control" type="text" placeholder="Buscar por..." aria-label="Search for..." aria-describedby="btnNavbarSearch" id="nombre_articulo"/>
-                <button class="btn btn-primary"  type="button" onclick = "refresh()"><i class="fas fa-search"></i></button>
+              @*//REUTILIZAR
+            <input class="form-control" type="text" placeholder="Buscar por..." aria-label="Search for..." aria-describedby="btnNavbarSearch" id="nombre_articulo" />
+            <button class="btn btn-primary" type="button" onclick="refresh()"><i class="fas fa-search"></i></button>*@
 
-            @*//REUTILIZAR
-            <input type="search" class="form-control rounded col-lg-4" placeholder="Filtrar resultados" aria-label="Search"
-                   aria-describedby="search-addon" id="txtFiltro" />*@
-        </div>
-    </form>
     <br />
     <br />
     <div class="row">
@@ -87,7 +81,7 @@
 
     }
 
-<script>
+@*<script>
 
     function refresh() {
         var cboTipoArt = document.getElementById("nombre_articulo").value;
@@ -107,16 +101,6 @@
         console.log(cboTipoArt);
         console.log("fuera if");
     }
-</script>
-
-@*<script src="~/lib/jquery/dist/jquery-ui-1.12.1.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#txtFiltro").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $("#listado tr").not(':first').filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-    });
 </script>*@
+
+

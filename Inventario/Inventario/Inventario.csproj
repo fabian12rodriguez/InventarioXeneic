@@ -194,8 +194,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Grafica3.aspx" />
     <Content Include="Images\1.png" />
-    <Content Include="Images\inventario.png" />
-    <Content Include="Images\inventario2.png" />
+    <Content Include="Images\xeneic_logo.png" />
     <Content Include="Rotativa\help-wkhtmltoimage.txt" />
     <Content Include="Rotativa\help-wkhtmltopdf.txt" />
     <Content Include="Scripts\bootstrap.bundle.js" />

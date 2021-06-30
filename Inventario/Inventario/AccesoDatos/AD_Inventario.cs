@@ -915,7 +915,7 @@ namespace Inventario.AccesoDatos
             {
                 SqlCommand cmd = new SqlCommand();
 
-                string consulta = @"select u.CODIGO_USUARIO, u.PASSWORD_USUARIO
+                string consulta = @"select u.CODIGO_USUARIO, u.PASSWORD_USUARIO, u.id_rol
                                     from usuarios u
                                     where u.CODIGO_USUARIO = @Codigo_usuario--'FABIANR'
                                     and u.PASSWORD_USUARIO = @Password_usuario--'123'
@@ -939,6 +939,7 @@ namespace Inventario.AccesoDatos
 
                         resultado.Codigo_usuario = dr["Codigo_usuario"].ToString();
                         resultado.Password_usuario = dr["Password_usuario"].ToString();
+                        resultado.Id_rol = int.Parse(dr["Id_rol"].ToString());
 
 
                     }

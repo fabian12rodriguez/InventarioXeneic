@@ -13,37 +13,34 @@ namespace Inventario.Controllers
         // GET: Login
         public ActionResult Login()
         {
+
+
             return View();
         }
         [HttpPost]
         public ActionResult Login(VMInventario model)
         {
-            if (ModelState.IsValid)
+            VMInventario resultado = AD_Inventario.ValidarUsuario(model);
+
+            if (resultado.Codigo_usuario != null & resultado.Password_usuario != null)
             {
-                VMInventario resultado = AD_Inventario.ValidarUsuario(model);
+                System.Web.HttpContext.Current.Session.Add("idRol", resultado.Id_rol);
+
                 return RedirectToAction("Index", "Home");
             }
             else
             {
+                ViewBag.Mensaje = "Usuario o contraseña incorrectos";
                 return View();
+                
             }
         }
-        /*public ActionResult ObtenerArticulo(VMInventario model)
+         public ActionResult Logout()
         {
-            if (ModelState.IsValid)
-            {
-                bool resultado = AD_Inventario.ValidarUsuario(model);
-                if (resultado)
-                {
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    return View(model);
-                }
-            }
-            return View();
+            Session.Clear();
+            return RedirectToAction("Login", "Login");
         }
-        */
+
+
     }
 }

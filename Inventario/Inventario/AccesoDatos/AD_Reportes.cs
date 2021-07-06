@@ -60,73 +60,108 @@ namespace Inventario.AccesoDatos
 
             return strDatos;
         }
-        //public static List<grafico> obtenerGrafico()
-        //{
+        public static string obtenerDatos2()
+        {
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
 
-        //    List<grafico> resultado = new List<grafico>();
-        //    grafico headear = new grafico();
-        //    headear.area = "Area";
-        //    headear.cantidad = "Cantidad";
-
-        //    resultado.Add(headear);
-        //    string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
-
-        //    SqlConnection cn = new SqlConnection(cadenaConexion);
-
-        //    try
-        //    {
-        //        SqlCommand cmd = new SqlCommand();
+            SqlConnection cn = new SqlConnection(cadenaConexion);
 
 
+            SqlCommand cmd = new SqlCommand();
 
-        //        string consulta = @"SELECT A.DESCRIPCION_AREA AREA, COUNT (*) CANTIDAD
-        //                            FROM USUARIOS U, AREAS A, AREAS_USUARIOS AU
-        //                            WHERE U.ID_USUARIO = AU.ID_USUARIO
-        //                            AND A.ID_AREA = AU.ID_AREA
-        //                            GROUP BY A.DESCRIPCION_AREA
-        //                            ORDER BY 2 DESC,1 ;
-        //                             ";
-        //        cmd.Parameters.Clear();
+            //Emitir listado de artículos por tipo.
 
-
-        //        cmd.CommandType = System.Data.CommandType.Text;
-        //        cmd.CommandText = consulta;
-
-
-
-        //        cn.Open();
-        //        cmd.Connection = cn;
-        //        SqlDataReader dr = cmd.ExecuteReader();
-
-        //        if (dr != null)
-        //        {
-        //            while (dr.Read())
-        //            {
-        //                grafico nuevoGrafico = new grafico();
-        //                nuevoGrafico.area = dr["area"].ToString();
-        //                nuevoGrafico.cantidad = dr["cantidad"].ToString();
-        //                resultado.Add(nuevoGrafico);
-
-        //            }
-        //        }
-
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-
-        //    finally
-        //    {
-        //        cn.Close();
-        //    }
-
-        //    return resultado;
+            string consulta = @"select   T.DESCRIPCION_TIPO_ARTICULO, 
+                            SUM(mvt.CANTIDAD_MVT)stock
+                            from articulos a join MOVIMIENTOS_STOCK mvt on a.ID_ARTICULO = mvt.ID_ARTICULO
+                            join MARCAS M on A.ID_MARCA = M.ID_MARCA
+                            join TIPOS_ARTICULOS T on A.ID_TIPO_ARTICULO  = T.ID_TIPO_ARTICULO
+                            where a.HABILITADO_ARTICULO = 1
+                            GROUP BY
+                            T.DESCRIPCION_TIPO_ARTICULO
+                            order by 1, 2 ;";
+            cmd.Parameters.Clear();
 
 
-        //}
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = consulta;
+            cn.Open();
+            cmd.Connection = cn;
 
+
+            DataTable Datos = new DataTable();
+            Datos.Load(cmd.ExecuteReader());
+            cn.Close();
+
+            string strDatos;
+
+            strDatos = "[['Tipo', 'Cantidad'],";
+
+            foreach (DataRow dr in Datos.Rows)
+            {
+
+                strDatos = strDatos + "[";
+                strDatos = strDatos + "'" + dr[0] + "'" + "," + dr[1];
+                strDatos = strDatos + "],";
+
+
+            }
+
+            strDatos = strDatos + "]";
+
+            return strDatos;
+        }
+        public static string obtenerDatos3()
+        {
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+
+            SqlCommand cmd = new SqlCommand();
+
+            //Emitir listado de artículos por tipo.
+
+            string consulta = @"select T.DESCRIPCION_TIPO_ARTICULO tipo, 
+                                SUM(m.CANTIDAD_MVT)stock
+                                from articulos a, TIPOS_ARTICULOS t, MOVIMIENTOS_STOCK m
+                                where m.ID_ARTICULO = a.ID_ARTICULO 
+                                and a.ID_TIPO_ARTICULO = t.ID_TIPO_ARTICULO
+                                and m.OBSERVACIONES_MVT like 'Aumentar stock'
+                                and m.FECHA_MVT > EOMONTH(getdate(),-1)
+                                GROUP BY T.DESCRIPCION_TIPO_ARTICULO
+                                Order by 1, 2 ;";
+            cmd.Parameters.Clear();
+
+
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = consulta;
+            cn.Open();
+            cmd.Connection = cn;
+
+
+            DataTable Datos = new DataTable();
+            Datos.Load(cmd.ExecuteReader());
+            cn.Close();
+
+            string strDatos;
+
+            strDatos = "[['Tipo', 'Cantidad'],";
+
+            foreach (DataRow dr in Datos.Rows)
+            {
+
+                strDatos = strDatos + "[";
+                strDatos = strDatos + "'" + dr[0] + "'" + "," + dr[1];
+                strDatos = strDatos + "],";
+
+
+            }
+
+            strDatos = strDatos + "]";
+
+            return strDatos;
+        }
         public static List<VMInventario> ListadoArtPorTipo()
         {
             List<VMInventario> resultado = new List<VMInventario>(); 

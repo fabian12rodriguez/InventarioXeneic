@@ -45,32 +45,66 @@
             @Html.TextBoxFor(model => model.Artstock, htmlAttributes: new { @class = "form-control", @id = "txtStock", @disabled = "disabled" })
         </div>
     </div>
-    <div class="form-group">
-        <label class="col-sm-6" control-label>Usuario</label>
-        <div class="col-sm-6">
-            @Html.DropDownList("id_usuario", itemsUsuarios, htmlAttributes: new { @class = "form-control", required = "required" })
+    @if (@ViewBag.cantStock == 0)
+    {
+        <div class="form-group">
+            <label class="col-sm-6" control-label>Usuario</label>
+            <div class="col-sm-6">
+                @Html.DropDownList("id_usuario", itemsUsuarios, htmlAttributes: new { @class = "form-control", @disabled = "disabled" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-6">Lista de usuarios asignados al articulo</label>
-        <div class="col-sm-6">
-            @*@Html.TextAreaFor("id_usuario", itemsUsuariosArt, htmlAttributes: new { @class = "form-control", @id = "txtModelo", @disabled = "disabled" })*@
-            @*@Html.TextBox(listado, listado, htmlAttributes: new { @class = "form-control", @id = "txtListaUsr" })*@
-            @Html.TextArea("a", listado, htmlAttributes: new { @class = "form-control", @id = "txtListaUsr", @disabled = "disabled", @resize = "none" })
+        <div class="form-group">
+            <label class="col-sm-6">Lista de usuarios asignados al articulo</label>
+            <div class="col-sm-6">
+                @Html.TextArea("a", listado, htmlAttributes: new { @class = "form-control", @id = "txtListaUsr", @disabled = "disabled", @resize = "none" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-6 control-label">Asignar usuario?</label>
-        <div class="col-sm-6">
-            <label>SI</label>
-            @Html.CheckBoxFor(model => model.Chk_asignado, htmlAttributes: new { @class = "checkbox", @id = "chkAsignado" })
+        <div class="form-group">
+            <label class="col-sm-6 control-label">Asignar usuario?</label>
+            <div class="col-sm-6">
+                <label>SI</label>
+                @Html.CheckBoxFor(model => model.Chk_asignado, htmlAttributes: new { @class = "checkbox", @id = "chkAsignado", @disabled = "disabled" })
+            </div>
         </div>
-    </div>
+        <div class="form-group" text-right>
+            <div class="col-sm-6">
+                <button class="btn btn-primary" type="submit" disabled>Sin stock</button>
+            </div>
+
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            <label class="col-sm-6" control-label>Usuario</label>
+            <div class="col-sm-6">
+                @Html.DropDownList("id_usuario", itemsUsuarios, htmlAttributes: new { @class = "form-control", required = "required" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-6">Lista de usuarios asignados al articulo</label>
+            <div class="col-sm-6">
+                @Html.TextArea("a", listado, htmlAttributes: new { @class = "form-control", @id = "txtListaUsr", @disabled = "disabled", @resize = "none" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-6 control-label">Asignar usuario?</label>
+            <div class="col-sm-6">
+                <label>SI</label>
+                @Html.CheckBoxFor(model => model.Chk_asignado, htmlAttributes: new { @class = "checkbox", @id = "chkAsignado" })
+            </div>
+        </div>
+        <div class="form-group" text-right>
+            <div class="col-sm-6">
+                <button class="btn btn-primary" type="submit">Confirmar</button>
+            </div>
+        </div>
+    }
 
     <div class="form-group" text-right>
-        <div class="col-sm-6">
-            <button class="btn btn-primary" type="submit">Confirmar</button>
-        </div>
+        @*<div class="col-sm-6">
+                <button class="btn btn-primary" type="submit">Confirmar</button>
+            </div>*@
         <br />
         <br />
         <div class="col-sm-6">

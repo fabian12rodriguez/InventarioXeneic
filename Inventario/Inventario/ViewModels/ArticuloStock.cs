@@ -24,6 +24,7 @@ namespace Inventario.ViewModels
         private string codigo_usuario;
         private bool chk_asignado;
         private int artstock;
+        private string motivo_baja;
 
         public int Id_articulo { get => id_articulo; set => id_articulo = value; }
         public string Nombre_articulo { get => nombre_articulo; set => nombre_articulo = value; }
@@ -42,5 +43,6 @@ namespace Inventario.ViewModels
         public string Codigo_usuario { get => codigo_usuario; set => codigo_usuario = value; }
         public bool Chk_asignado { get => chk_asignado; set => chk_asignado = value; }
         public int Artstock { get => artstock; set => artstock = value; }
+        public string Motivo_baja { get => motivo_baja; set => motivo_baja = value; }
     }
 }

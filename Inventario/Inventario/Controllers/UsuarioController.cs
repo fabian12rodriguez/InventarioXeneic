@@ -92,5 +92,63 @@ namespace Inventario.Controllers
                 return View(usuario);
             }
         }
+        public ActionResult RegistrarUsuario()
+        {
+            List<TipoRoles> listaTipoRoles = AD_Usuario.ListarTipoRoles();
+            List<SelectListItem> itemsRoles = listaTipoRoles.ConvertAll(i => {
+                return new SelectListItem()
+                {
+                    Text = i.Descripcion_rol,
+                    Value = i.Id_rol.ToString(),
+                    Selected = false
+                };
+            });
+
+            ViewBag.itemsRoles = itemsRoles;
+
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RegistrarUsuario(VMInventario usuario)
+        {
+            if (ModelState.IsValid)
+            {
+
+                AD_Usuario.registrarUsuario(usuario);
+                return RedirectToAction("Login", "Login");
+            }
+            else
+            {
+                return View(usuario);
+            }
+        }
+        public ActionResult ReestablecerUsuario()
+        {
+            return View();
+        }
+        public ActionResult ObtenerRecuperarUsr(string codigo_usuario)
+        {
+            VMInventario resultado = AD_Usuario.ObtenerRecuperarUsuario(codigo_usuario);
+
+            return View(resultado);
+        }
+        [HttpPost]
+        public ActionResult ObtenerRecuperarUsr(VMInventario model)
+        {
+            if (ModelState.IsValid)
+            {
+                bool resultado = AD_Usuario.ActualizarDatosRecuperarUsuarios(model);
+                if (resultado)
+                {
+                    return RedirectToAction("Login", "Login");
+                }
+                else
+                {
+                    return View(model);
+                }
+            }
+            return View();
+        }
     }
 }

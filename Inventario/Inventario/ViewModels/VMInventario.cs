@@ -50,6 +50,9 @@ namespace Inventario.ViewModels
         private string fecha_historial;
         private string observaciones_historial;
 
+        private string motivo_baja;
+
+
 
 
         /*Articulos*/
@@ -92,5 +95,7 @@ namespace Inventario.ViewModels
         public int Id_historial { get => id_historial; set => id_historial = value; }
         public string Fecha_historial { get => fecha_historial; set => fecha_historial = value; }
         public string Observaciones_historial { get => observaciones_historial; set => observaciones_historial = value; }
+
+        public string Motivo_baja { get => motivo_baja; set => motivo_baja = value; }
     }
 }

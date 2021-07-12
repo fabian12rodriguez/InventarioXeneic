@@ -14,7 +14,16 @@
 
 <div class="row">
     <div class="col-lg-9">
-        <table class="table table-bordered table-striped bg-light">
+        <br />
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input type="search" class="form-control rounded col-lg-12" placeholder="Filtrar resultados" aria-label="Search"
+                       aria-describedby="search-addon" id="txtFiltro" />
+            </div>
+        </form>
+        <br />
+        <br />
+        <table class="table table-bordered table-striped bg-light" id="listado">
             <thead>
                 <tr>
                     <th class="text-center">
@@ -52,3 +61,14 @@
         <a href="@Url.Action("Index", "Home")" class="btn btn-success">Inicio</a>
     </div>
 </div>
+<script src="~/lib/jquery/dist/jquery-ui-1.12.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#txtFiltro").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#listado tr").not(':first').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

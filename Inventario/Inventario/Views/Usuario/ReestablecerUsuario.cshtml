@@ -1,0 +1,32 @@
+﻿
+    <div class="form-horizontal">
+        <br />
+        <h4>Nuevo Usuario</h4>
+        <hr />
+
+
+    <form>
+        <div class="form-group">
+            <label class="sr-only" for="inlineFormInputGroup">Username</label>
+            <input type="text" class="form-control" id="Codigo_usuario" placeholder="Ingrese usuario">
+   
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+
+        <div class="form-group" text-right>
+            <div class="col-sm-6">
+                <a class="dropdown-item" href="@Url.Action("ObtenerRecuperarUsr", "Usuario", new { @Codigo_usuario = Model.Codigo_usuario})">Reestablecer</a>
+            </div>
+            <br />
+            <br />
+            <div class="col-sm-6">
+                <a href="@Url.Action("Login", "Login")" class="btn btn-info">Ir a login</a>
+            </div>
+        </div>
+    </form>
+
+    </div>
+

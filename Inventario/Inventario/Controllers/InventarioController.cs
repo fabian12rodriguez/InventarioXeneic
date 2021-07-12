@@ -235,6 +235,9 @@ namespace Inventario.Controllers
 
             ViewBag.itemsTipoArticulo = comboTipoArticulo;
 
+            int cant_stock = AD_Inventario.ObtenerArticuloCantStock(id_articulo);
+            ViewBag.cantStock = cant_stock;
+
             return View(resultado);
         }
         [HttpPost]
@@ -310,27 +313,6 @@ namespace Inventario.Controllers
                 listado += "-"+item.Codigo_usuario +  "\n";
 
             }
-
-            //List<SelectListItem> comboTipoUsuarioArt = ListarTipoUsuariosArt.ConvertAll(i =>
-            //{
-            //    return new SelectListItem()
-            //    {
-            //        Text = i.Codigo_usuario,
-            //        Value = i.Id_usuario.ToString(),
-
-            //        Selected = false
-            //    };
-            //});
-            //foreach (var item in comboTipoUsuarioArt)
-            //{
-            //    if (item.Value.Equals(resultado.Id_usuario.ToString()))
-            //    {
-            //        item.Selected = true;
-            //        break;
-            //    }
-            //}
-
-           // ViewBag.itemsUsuariosArt = listado;
             ViewBag.listado = listado;
             /***********************************************************************/
             List<TipoUsuarios> listaTipoUsuario = AD_Inventario.ListarTipoUsuarios();
@@ -354,6 +336,8 @@ namespace Inventario.Controllers
             }
 
             ViewBag.itemsUsuarios = comboTipoUsuario;
+            int cant_stock = AD_Inventario.ObtenerArticuloCantStock(id_articulo);
+            ViewBag.cantStock = cant_stock;
 
             return View(resultado);
 
@@ -378,7 +362,10 @@ namespace Inventario.Controllers
         }
         public ActionResult BajaStock(int id_articulo)
         {
-            VMInventario resultado = AD_Inventario.ObtenerArticulo(id_articulo);
+            VMInventario resultado = AD_Inventario.ObtenerArticulo(id_articulo); 
+
+            int cant_stock = AD_Inventario.ObtenerArticuloCantStock(id_articulo);
+            ViewBag.cantStock = cant_stock;
 
             return View(resultado);
         }

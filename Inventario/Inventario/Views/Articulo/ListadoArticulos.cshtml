@@ -14,7 +14,16 @@
 
 <div class="row">
     <div class="col-lg-9">
-        <table class="table table-bordered table-striped bg-light">
+        <br />
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+
+                <input type="search" class="form-control rounded col-lg-4" placeholder="Filtrar resultados" aria-label="Search"
+                       aria-describedby="search-addon" id="txtFiltro" />
+            </div>
+        </form>
+        <br />
+        <table class="table table-bordered table-striped bg-light" id="listado">
             <thead>
                 <tr>
                     <th class="text-center">
@@ -45,43 +54,43 @@
             <tbody>
                 @foreach (var articulo in Model)
                 {
-                <tr class="text-center">
-                    <td>
-                        @articulo.Id_articulo
-                    </td>
-                    <td>
-                        @articulo.Nombre_articulo
-                    </td>
-                    <td>
-                        @articulo.Modelo_articulo
-                    </td>
-                    <td>
-                        @articulo.Desc_marca_articulo
-                    </td>
-                    <td>
-                        @articulo.Desc_tipo_articulo
-                    </td>
-                    @if (@articulo.Habilitado_articulo)
-                    {
+                    <tr class="text-center">
                         <td>
-                            S
+                            @articulo.Id_articulo
                         </td>
-
-                    }
-                    else
-                    {
                         <td>
-                            N
+                            @articulo.Nombre_articulo
                         </td>
+                        <td>
+                            @articulo.Modelo_articulo
+                        </td>
+                        <td>
+                            @articulo.Desc_marca_articulo
+                        </td>
+                        <td>
+                            @articulo.Desc_tipo_articulo
+                        </td>
+                        @if (@articulo.Habilitado_articulo)
+                        {
+                            <td>
+                                S
+                            </td>
 
-                    }
-                    <td>
-                        <a href="@Url.Action("ObtenerArticulo", "Articulo", new { @id_articulo=articulo.Id_articulo})" class="btn btn-warning">asa</a>
+                        }
+                        else
+                        {
+                            <td>
+                                N
+                            </td>
 
-                        <a href="@Url.Action("ObtenerArticulo", "Articulo", new { @id_articulo=articulo.Id_articulo})" class="btn btn-warning">Editar</a>
-                        @* <a href="@Url.Action("ObtenerArticulo", "Articulo", new { @id_articulo=articulo.Id_articulo})" class="btn btn-danger">Deshabilitar</a>*@
-                    </td>
-                </tr>
+                        }
+                        <td>
+                            <a href="@Url.Action("ObtenerArticulo", "Articulo", new { @id_articulo=articulo.Id_articulo})" class="btn btn-warning">asa</a>
+
+                            <a href="@Url.Action("ObtenerArticulo", "Articulo", new { @id_articulo=articulo.Id_articulo})" class="btn btn-warning">Editar</a>
+                            @* <a href="@Url.Action("ObtenerArticulo", "Articulo", new { @id_articulo=articulo.Id_articulo})" class="btn btn-danger">Deshabilitar</a>*@
+                        </td>
+                    </tr>
                 }
             </tbody>
 
@@ -91,3 +100,15 @@
         <a href="@Url.Action("Index", "Home")" class="btn btn-success">Inicio</a>
     </div>
 </div>
+
+<script src="~/lib/jquery/dist/jquery-ui-1.12.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#txtFiltro").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#listado tr").not(':first').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>

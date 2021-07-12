@@ -374,6 +374,9 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Shared\_LayoutTecnico.cshtml" />
     <Content Include="Views\Reporte\ListadoReportes4Filtrado.cshtml" />
+    <Content Include="Views\Usuario\RegistrarUsuario.cshtml" />
+    <Content Include="Views\Usuario\ReestablecerUsuario.cshtml" />
+    <Content Include="Views\Usuario\ObtenerRecuperarUsr.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

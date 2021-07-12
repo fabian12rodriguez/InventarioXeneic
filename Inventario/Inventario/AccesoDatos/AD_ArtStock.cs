@@ -286,6 +286,7 @@ namespace Inventario.AccesoDatos
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@id_articulo", articulo.Id_articulo));
+                cmd.Parameters.Add(new SqlParameter("@motivo_baja", articulo.Motivo_baja));
 
 
                 cn.Open();

@@ -3,6 +3,8 @@
 @{
     ViewBag.Title = "Listado de Articulos";
 }
+
+
 <br />
 <div class="row">
     <div class="col-sm-12">
@@ -99,16 +101,19 @@
     <div class="col-lg-9">
         <a href="@Url.Action("Index", "Home")" class="btn btn-success">Inicio</a>
     </div>
+
 </div>
 
 <script src="~/lib/jquery/dist/jquery-ui-1.12.1.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#txtFiltro").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $("#listado tr").not(':first').filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    <script>
+        $(document).ready(function () {
+            $("#txtFiltro").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#listado tr").not(':first').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
             });
         });
-    });
-</script>
+    </script>
+
+

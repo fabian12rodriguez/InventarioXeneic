@@ -60,15 +60,15 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-6 control-label">Asignar usuario?</label>
+            <label class="col-sm-6 control-label">Tildar para asignar articulo a usuario, caso contrario para desasignar</label>
             <div class="col-sm-6">
-                <label>SI</label>
+                <label>Asignar?</label>
                 @Html.CheckBoxFor(model => model.Chk_asignado, htmlAttributes: new { @class = "checkbox", @id = "chkAsignado", @disabled = "disabled" })
             </div>
         </div>
         <div class="form-group" text-right>
             <div class="col-sm-6">
-                <button class="btn btn-primary" type="submit" disabled>Sin stock</button>
+                <button class="btn btn-danger" type="submit" disabled>Sin stock</button>
             </div>
 
         </div>

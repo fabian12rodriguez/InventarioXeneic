@@ -308,6 +308,7 @@
     <Content Include="Scripts\src\utils\setAttributes.js" />
     <Content Include="Scripts\src\utils\setStyles.js" />
     <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\sweetalert2.min.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
@@ -375,8 +376,8 @@
     <Content Include="Views\Shared\_LayoutTecnico.cshtml" />
     <Content Include="Views\Reporte\ListadoReportes4Filtrado.cshtml" />
     <Content Include="Views\Usuario\RegistrarUsuario.cshtml" />
-    <Content Include="Views\Usuario\ReestablecerUsuario.cshtml" />
     <Content Include="Views\Usuario\ObtenerRecuperarUsr.cshtml" />
+    <Content Include="Views\Usuario\ReestablecerUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

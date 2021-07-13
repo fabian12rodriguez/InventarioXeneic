@@ -115,12 +115,12 @@ namespace Inventario.Controllers
         }
         public ActionResult Print4()
         {
-            return new ActionAsPdf("ListadoReportes4", new { nombre = "Xeneic" }) { FileName = "reporte.pdf" };
+            return new ActionAsPdf("PDFListadoReportes4", new { nombre = "Xeneic" }) { FileName = "reporte.pdf" };
         }
-        public ActionResult Print5()
-        {
-            return new ActionAsPdf("ListadoReportes4Filtrado", new { nombre = "Xeneic" }) { FileName = "reporte.pdf" };
-        }
+        //public ActionResult Print5()
+        //{
+        //    return new ActionAsPdf("ListadoReportes4Filtrado", new { nombre = "Xeneic" }) { FileName = "reporte.pdf" };
+        //}
 
 
 

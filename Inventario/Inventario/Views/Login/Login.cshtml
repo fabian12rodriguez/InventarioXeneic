@@ -1,54 +1,60 @@
 ﻿@model Inventario.ViewModels.VMInventario
 @{
     ViewBag.Title = "Login2";
-    Layout = null;
+    Layout = "~/Views/Shared/_LayoutTecnico.cshtml";
 }
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+@*<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="~/Content/Login2.css" rel="stylesheet" />
 <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">*@
 <!------ Include the above in your HEAD tag ---------->
 
 @using (Html.BeginForm())
 {
-    <div class="sidenav">
+    @*<div class="sidenav">
         <div class="login-main-text text-center">
             <img src="~/Images/xeneic_logo.png" />
            
             <br />
         </div>
-        </div>
-    <div class="main">
-        <div class="col-md-6 col-sm-12">
-            <div class="login-form">
-                <form>
-                    <div class="form-group">
-                        <label>Usuario</label>
-                        @Html.TextBoxFor(model => model.Codigo_usuario, htmlAttributes: new { @class = "form-control", @id = "txtNombre", placeholder = "User", required = "required" })
-                    </div>
-                    <div class="form-group">
-                        <label>Contraseña</label>
-                        @Html.PasswordFor(model => model.Password_usuario, htmlAttributes: new { @class = "form-control", @id = "txtPassword", placeholder = "Password", required = "required" })
-                    </div>
-                    <label class="text-danger mb-4">@ViewBag.Mensaje</label>
+        </div>*@
+<div class="main">
 
-                    <div class="form-group" text-right>
-                        <div class="row">
-                            <div class="col-sm-12 float-left">
-                                <button type="submit" class="btn btn-black mr-4">Login</button>
-                                <a href="@Url.Action("RegistrarUsuario", "Usuario")" class="btn btn-warning ml-4">Registrar</a>
-                            </div>
-                            <div class="col-sm-12 p-2">
-                                <a class="btn-link pl-2 text-muted" href="@Url.Action("ReestablecerUsuario","Usuario",new {})">Reestablecer cuenta</a>
-                            </div>
+    <div class="col-md-6 col-sm-12">
 
-                        </div>
-                    </div>
-                </form>
+        <div class="login-form">
+            <div class="form-horizontal">
+                <h4>Inicio de sesion</h4>
+                <br />
             </div>
+            <form>
+                <div class="form-group">
+                    <br />
+                    <label>Usuario</label>
+                    @Html.TextBoxFor(model => model.Codigo_usuario, htmlAttributes: new { @class = "form-control", @id = "txtNombre", placeholder = "User", required = "required" })
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    @Html.PasswordFor(model => model.Password_usuario, htmlAttributes: new { @class = "form-control", @id = "txtPassword", placeholder = "Password", required = "required" })
+                </div>
+                <label class="text-danger mb-4">@ViewBag.Mensaje</label>
+
+                <div class="form-group" text-right>
+                    <div class="row">
+                        <div class="col-sm-12 float-left">
+                            <button type="submit" class="btn btn-warning font-weight-bold mr-4">Login</button>
+                            <a href="@Url.Action("RegistrarUsuario", "Usuario")" class="btn btn-outline-dark font-weight-bolder ml-4">Registrar</a>
+                        </div>
+                        <div class="col-sm-12 p-2">
+                            <a class="btn-link pl-2 text-muted" href="@Url.Action("ReestablecerUsuario","Usuario",new {@recuperar = true, @usuario = ""})">Reestablecer cuenta</a>
+                        </div>
+
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
+</div>
 }

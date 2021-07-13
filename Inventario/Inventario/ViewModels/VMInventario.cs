@@ -26,7 +26,7 @@ namespace Inventario.ViewModels
         private int stock;
         /*Usuarios*/
         private int id_usuario;
-        private string codigo_usuario;
+        private string codigo_usuario ;
         private string password_usuario;
         private string nombre_usuario;
         private string apellido_usuario;

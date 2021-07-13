@@ -17,6 +17,7 @@ namespace Inventario.Controllers
             List<VMInventario> lista = AD_Usuario.ListarUsuarios();
             return View(lista);
         }
+   
         public ActionResult ObtenerUsuario(int id_usuario)
         {
             VMInventario resultado = AD_Usuario.ObtenerUsuario(id_usuario);
@@ -126,11 +127,32 @@ namespace Inventario.Controllers
         public ActionResult ReestablecerUsuario()
         {
             return View();
+
+        }
+        [HttpPost]
+        public ActionResult ReestablecerUsuario(VMInventario model)
+        {
+            VMInventario resultado = AD_Usuario.ObtenerRecuperarUsuario(model.Codigo_usuario);
+
+            /*bool resultado = AD_Usuario.ActualizarDatosRecuperarUsuarios(model);*/
+
+            if (resultado.Codigo_usuario != null)
+            {
+
+                return RedirectToAction("ObtenerRecuperarUsr", "Usuario", new { resultado.Codigo_usuario });
+            }
+            else
+            {
+                ViewBag.Mensaje = "Usuario o contraseña incorrectos";
+                return View();
+
+            }
+
         }
         public ActionResult ObtenerRecuperarUsr(string codigo_usuario)
         {
             VMInventario resultado = AD_Usuario.ObtenerRecuperarUsuario(codigo_usuario);
-
+            resultado.Password_usuario = "";
             return View(resultado);
         }
         [HttpPost]

@@ -81,26 +81,3 @@
 
     }
 
-@*<script>
-
-    function refresh() {
-        var cboTipoArt = document.getElementById("nombre_articulo").value;
-        console.log(cboTipoArt);
-        if (cboTipoArt.value === null /*|| cboTipoArt.value === undefined */)
-        {
-            cboTipoArt.value == "";
-          /*  cboTipoArt.addEventListener("change", refresh);*/
-            window.location.href = "@Url.Content("~/Reporte/ListadoReportes4")";
-            console.log("Entra if");
-        }
-        else {
-            /*cboTipoArt.addEventListener("change", refresh);*/
-            window.location.href = "@Url.Content("~/Reporte/ListadoReportes4Filtrado")" + "?nombre_articulo=" + cboTipoArt;
-
-        }
-        console.log(cboTipoArt);
-        console.log("fuera if");
-    }
-</script>*@
-
-

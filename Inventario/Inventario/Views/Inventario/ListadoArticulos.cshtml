@@ -4,7 +4,7 @@
     ViewBag.Title = "Listado de Articulos";
 }
 
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
 <br />
 <div class="row">
     <div class="col-sm-12">
@@ -105,15 +105,15 @@
 </div>
 
 <script src="~/lib/jquery/dist/jquery-ui-1.12.1.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $("#txtFiltro").on("keyup", function () {
-                var value = $(this).val().toLowerCase();
-                $("#listado tr").not(':first').filter(function () {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
+<script>
+    $(document).ready(function () {
+        $("#txtFiltro").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#listado tr").not(':first').filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
-    </script>
+    });
+</script>
 
 

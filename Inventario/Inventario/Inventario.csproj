@@ -230,6 +230,7 @@
     <Content Include="App_Browsers\qt.browser" />
     <Content Include="Archivos\Terminos y condiciones XENEIC INVENTORY.docx" />
     <Content Include="Archivos\TerminosYCondiciones_XeneicInventory.pdf" />
+    <Content Include="Archivos\TerminosYCondiciones_XI.pdf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

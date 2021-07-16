@@ -21,7 +21,9 @@
     <div class="row">
         <div class="col-sm-12">
             <div>
-                <h3>Listado de Inventario</h3>
+                <h3>CONTROL DE STOCK</h3>
+                <hr />
+
             </div>
         </div>
     </div>
@@ -45,7 +47,7 @@
                 <thead class="bg-primary text-white">
                     <tr>
                         <th class="text-center">
-                            Nombre
+                            Articulo
                         </th>
                         <th class="text-center">
                             Modelo
@@ -60,7 +62,7 @@
                             Stock
                         </th>
                         <th class="text-center">
-                            Acciones
+                            
                         </th>
 
 
@@ -95,7 +97,7 @@
                                         <a class="dropdown-item" href="@Url.Action("AgregarStock", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Agregar/Quitar Stock</a>
                                         <a class="dropdown-item" href="@Url.Action("AsignarStock", "Inventario", new { @id_articulo = VMInventario.Id_articulo })">Asignar/Desasignar Usuario</a>
                                         <a class="dropdown-item" href="@Url.Action("ListadoHistorialArt", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Historial</a>
-                                        <a class="dropdown-item" href="@Url.Action("BajaStock", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Dar de baja de stock</a>
+                                        <a class="dropdown-item" href="@Url.Action("BajaStock", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Dar de baja stock</a>
                                     </div>
                                 </div>
                             </td>
@@ -107,7 +109,7 @@
             </table>
         </div>
         <div class="col-lg-9">
-            <a href="@Url.Action("Index", "Home")" class="btn btn-info">Volver</a>
+            <a href="@Url.Action("Index", "Home")" class="btn btn-warning">Volver</a>
         </div>
 
     </div>

@@ -12,73 +12,75 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<div class="col-lg-12 text-center">
+    <img src="~/images/xeneic_logo.png" width="200" height="200">
+</div>
 <br />
-<br />
-<h2>Usuarios con articulos asignados</h2>
-<br />
+<h2 class="text-center">Usuarios con articulos asignados</h2>
+<hr>
 @using (Html.BeginForm())
 {
-<div class="row">
-    <div class="col-lg-6">
-        <div class="col-sm-12">
-        </div>
-        <table class="table table-bordered table-striped">
-            <thead class="bg-warning text-white">
-                <tr>
-                    <th class="text-center">
-                        Area
-                    </th>
-                    <th class="text-center">
-                        Codigo Usuario
-                    </th>
-                    <th class="text-center">
-                        Nombre Usuario
-                    </th>
-                    <th class="text-center">
-                        Articulo
-                    </th>
-                    <th class="text-center">
-                        Modelo
-                    </th>
-                    <th class="text-center">
-                        Marca
-                    </th>
-                    <th class="text-center">
-                        Tipo
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr class="table-light text-center text-dark">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Area)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Codigo_usuario)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nombre_usuario)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nombre_articulo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Modelo_articulo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Desc_marca_articulo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Desc_tipo_articulo)
-                        </td>
-
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="col-sm-12">
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead class="bg-warning text-white">
+                    <tr>
+                        <th class="text-center">
+                            Area
+                        </th>
+                        <th class="text-center">
+                            Codigo Usuario
+                        </th>
+                        <th class="text-center">
+                            Nombre Usuario
+                        </th>
+                        <th class="text-center">
+                            Articulo
+                        </th>
+                        <th class="text-center">
+                            Modelo
+                        </th>
+                        <th class="text-center">
+                            Marca
+                        </th>
+                        <th class="text-center">
+                            Tipo
+                        </th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="table-light text-center text-dark">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Area)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Codigo_usuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre_usuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre_articulo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Modelo_articulo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Desc_marca_articulo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Desc_tipo_articulo)
+                            </td>
 
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
     </div>
-</div>
-        }
+}

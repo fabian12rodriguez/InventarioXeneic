@@ -19,7 +19,7 @@
 
 <div class="form-horizontal">
     <br />
-    <h4>Agregar Stock</h4>
+    <h4>ASIGNAR O DESASIGNAR ARTICULO A UN USUARIO</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -60,7 +60,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-6 control-label">Tildar para asignar articulo a usuario, caso contrario para desasignar</label>
+            <label class="col-sm-6 control-label">*Tildar para asignar articulo a usuario, caso contrario para desasignar</label>
             <div class="col-sm-6">
                 <label>Asignar?</label>
                 @Html.CheckBoxFor(model => model.Chk_asignado, htmlAttributes: new { @class = "checkbox", @id = "chkAsignado", @disabled = "disabled" })
@@ -88,6 +88,7 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-6 control-label">*Tildar para asignar articulo a usuario, caso contrario para desasignar</label>
             <label class="col-sm-6 control-label">Asignar usuario?</label>
             <div class="col-sm-6">
                 <label>SI</label>
@@ -108,7 +109,7 @@
         <br />
         <br />
         <div class="col-sm-6">
-            <a href="@Url.Action("ListadoAsignarUsr", "Inventario")" class="btn btn-info">Volver</a>
+            <a href="@Url.Action("ListadoAsignarUsr", "Inventario")" class="btn btn-warning">Volver</a>
         </div>
     </div>
 </div>

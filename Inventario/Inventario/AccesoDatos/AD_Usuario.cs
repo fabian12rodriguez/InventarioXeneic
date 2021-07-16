@@ -256,7 +256,7 @@ namespace Inventario.AccesoDatos
             try
             {
                 SqlCommand cmd = new SqlCommand();
-                string consultaSql = "SELECT Id_rol, Descripcion_rol FROM roles";
+                string consultaSql = "SELECT Id_rol, Descripcion_rol FROM roles  order by 2;";
                 cmd.Parameters.Clear();
 
                 cmd.CommandType = System.Data.CommandType.Text;

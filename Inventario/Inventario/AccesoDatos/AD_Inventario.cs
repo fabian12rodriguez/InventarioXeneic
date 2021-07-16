@@ -294,7 +294,7 @@ namespace Inventario.AccesoDatos
             {
                 SqlCommand cmd = new SqlCommand();
                 string consultaSql =
-                    @"SELECT id_usuario, codigo_usuario FROM usuarios;";
+                    @"SELECT id_usuario, codigo_usuario FROM usuarios order by 2;";
 
                 cmd.Parameters.Clear();
 

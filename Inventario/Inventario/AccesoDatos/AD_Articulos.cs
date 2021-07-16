@@ -211,7 +211,7 @@ namespace Inventario.AccesoDatos
             try
             {
                 SqlCommand cmd = new SqlCommand();
-                string consultaSql = "SELECT Id_marca, Descripcion_marca FROM Marcas";
+                string consultaSql = "SELECT Id_marca, Descripcion_marca FROM Marcas  order by 2;";
                 cmd.Parameters.Clear();
 
                 cmd.CommandType = System.Data.CommandType.Text;
@@ -255,7 +255,7 @@ namespace Inventario.AccesoDatos
             try
             {
                 SqlCommand cmd = new SqlCommand();
-                string consultaSql = "SELECT Id_tipo_articulo, Descripcion_tipo_articulo FROM tipos_articulos";
+                string consultaSql = "SELECT Id_tipo_articulo, Descripcion_tipo_articulo FROM tipos_articulos order by 2;";
                 cmd.Parameters.Clear();
 
                 cmd.CommandType = System.Data.CommandType.Text;

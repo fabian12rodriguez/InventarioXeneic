@@ -1,6 +1,5 @@
 ﻿@model IEnumerable<Inventario.ViewModels.VMInventario>
 
-@*@model Concesionario_236.ViewModels.Reportes.InfoGralVM*@
 
 @{
     ViewBag.Title = "Reporte";
@@ -12,28 +11,18 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<div class="col-lg-12 text-center">
+    <img src="~/images/xeneic_logo.png" width="200" height="200">
+</div>
 <br />
-<br />
-<h2>Stock de articulos con cantidades menores a 5 unidades</h2>
-<br />
+<h2 class="text-center">Stock de articulos con cantidades menores a 5 unidades</h2>
+<hr>
 @using (Html.BeginForm())
 {
-    <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-        <div class="input-group">
-            @*<input class="form-control" type="search" placeholder="Buscar por..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>*@
 
-            <input type="search" class="form-control rounded col-lg-4" placeholder="Filtrar resultados" aria-label="Search"
-                   aria-describedby="search-addon" id="txtFiltro" />
-
-
-
-        </div>
-    </form>
-    <br />
-    <br />
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
+            <br />
             <table class="table table-bordered table-striped" id="listado">
                 <thead class="bg-warning text-white">
                     <tr>

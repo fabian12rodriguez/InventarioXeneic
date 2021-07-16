@@ -143,7 +143,7 @@ namespace Inventario.Controllers
             }
             else
             {
-                ViewBag.Mensaje = "Usuario o contraseña incorrectos";
+                ViewBag.Mensaje = "Usuario inexistente";
                 return View();
 
             }

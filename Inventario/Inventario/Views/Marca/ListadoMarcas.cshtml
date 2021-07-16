@@ -24,7 +24,8 @@
         <br />
         <br />
         <table class="table table-bordered table-striped bg-light" id="listado">
-            <thead>
+            <thead class="bg-primary text-white">
+
                 <tr>
                     <th class="text-center">
                         ID
@@ -40,7 +41,7 @@
             <tbody>
                 @foreach (var marca in Model)
                 {
-                    <tr class="text-center">
+                    <tr class="table-light text-center text-dark">
                         <td>
                             @marca.Id_marca
                         </td>

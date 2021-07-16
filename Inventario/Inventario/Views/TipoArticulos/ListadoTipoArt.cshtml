@@ -24,7 +24,7 @@
         <br />
         <br />
         <table class="table table-bordered table-striped bg-light" id="listado">
-            <thead>
+            <thead class="bg-primary text-white">
                 <tr>
                     <th class="text-center">
                         ID
@@ -40,7 +40,7 @@
             <tbody>
                 @foreach (var tipo_articulo in Model)
                 {
-                    <tr class="text-center">
+                    <tr class="table-light text-center text-dark">
                         <td>
                             @tipo_articulo.Id_tipo_articulo
                         </td>

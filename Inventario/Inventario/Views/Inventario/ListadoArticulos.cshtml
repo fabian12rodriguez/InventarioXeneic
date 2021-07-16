@@ -4,6 +4,8 @@
     ViewBag.Title = "Listado de Articulos";
 }
 
+
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
 <br />
 <div class="row">
@@ -15,7 +17,7 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-9">
+    <div class="col-lg-12">
         <br />
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group">
@@ -26,7 +28,8 @@
         <br />
         <br />
         <table class="table table-bordered table-striped bg-light" id="listado">
-            <thead>
+            <thead class="bg-primary text-white">
+
                 <tr>
                     <th class="text-center">
                         ID
@@ -57,7 +60,8 @@
             <tbody>
                 @foreach (var VMInventario in Model)
                 {
-                    <tr class="text-center">
+                    <tr class="table-light text-center text-dark">
+
                         <td>
                             @VMInventario.Id_articulo
                         </td>
@@ -102,18 +106,47 @@
         <a href="@Url.Action("Index", "Home")" class="btn btn-success">Inicio</a>
     </div>
 
+    <div class="col-lg-9">
+        <button class="btn btn-primary" onclick="mensaje()" >MENSAJE</button>
+    </div>
+
 </div>
 
-<script src="~/lib/jquery/dist/jquery-ui-1.12.1.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $("#txtFiltro").on("keyup", function () {
-            var value = $(this).val().toLowerCase();
-            $("#listado tr").not(':first').filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+@*<script src="~/lib/jquery/dist/jquery-ui-1.12.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#txtFiltro").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#listado tr").not(':first').filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
             });
         });
-    });
-</script>
+    </script>*@
+<script>
+    function mensaje() {
+        elemento = document.getElementById(id);
+        elemento = document.getElementById(id);
+        elemento = document.getElementById(id);
+        elemento = document.getElementById(id);
+        Swal.fire({
+            position: 'top-center',
+            icon: 'success',
+            title: 'Puede volver a habilitar el articulo desde el menú        ->'
+                + '        abm - articulos -  listado',
+            showConfirmButton: true,
+            showCancelButton: true,
+            //timer: 7000,
+            confirmButtonText: 'Si, votar',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                alert("ALAN")
+            }
+                
+                })
+        
+    }
 
+</script>
 

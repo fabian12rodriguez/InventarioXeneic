@@ -272,7 +272,41 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
-        public static bool BajaStock(ArticuloStock articulo)
+        //public static bool BajaStock(ArticuloStock articulo)
+        //{
+        //    bool resultado = false;
+        //    string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+        //    SqlConnection cn = new SqlConnection(cadenaConexion);
+
+        //    try
+        //    {
+        //        SqlCommand cmd = cn.CreateCommand();
+        //        cmd.CommandText = "p_BajaStock";
+        //        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        //        cmd.Parameters.Clear();
+        //        cmd.Parameters.Add(new SqlParameter("@id_articulo", articulo.Id_articulo));
+        //        cmd.Parameters.Add(new SqlParameter("@motivo_baja", articulo.Motivo_baja));
+
+
+        //        cn.Open();
+        //        cmd.Connection = cn;
+        //        cmd.ExecuteNonQuery();
+        //        resultado = true;
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+        //    finally
+        //    {
+        //        cn.Close();
+        //    }
+
+        //    return resultado;
+        //}
+        public static bool BajaStock(int Id_articulo, string Motivo_baja)
         {
             bool resultado = false;
             string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
@@ -285,8 +319,8 @@ namespace Inventario.AccesoDatos
                 cmd.CommandText = "p_BajaStock";
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Clear();
-                cmd.Parameters.Add(new SqlParameter("@id_articulo", articulo.Id_articulo));
-                cmd.Parameters.Add(new SqlParameter("@motivo_baja", articulo.Motivo_baja));
+                cmd.Parameters.Add(new SqlParameter("@id_articulo", Id_articulo));
+                cmd.Parameters.Add(new SqlParameter("@motivo_baja", Motivo_baja));
 
 
                 cn.Open();

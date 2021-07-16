@@ -360,28 +360,68 @@ namespace Inventario.Controllers
             List<VMInventario> lista = AD_Inventario.ListarHistorialArt(id_articulo);
             return View(lista);
         }
-        public ActionResult BajaStock(int id_articulo)
-        {
-            VMInventario resultado = AD_Inventario.ObtenerArticulo(id_articulo); 
+        //public ActionResult BajaStock(int id_articulo)
+        //{
+        //    VMInventario resultado = AD_Inventario.ObtenerArticulo(id_articulo); 
 
-            int cant_stock = AD_Inventario.ObtenerArticuloCantStock(id_articulo);
-            ViewBag.cantStock = cant_stock;
+        //    int cant_stock = AD_Inventario.ObtenerArticuloCantStock(id_articulo);
+        //    ViewBag.cantStock = cant_stock;
 
-            return View(resultado);
-        }
-        [HttpPost]
-        public ActionResult BajaStock(ArticuloStock articulo)
+        //    return View(resultado);
+        //}
+        //[HttpPost]
+        //public ActionResult BajaStock(ArticuloStock articulo)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        AD_ArtStock.BajaStock(articulo);
+        //        return RedirectToAction("ListadoAsignarUsr", "Inventario");
+        //    }
+        //    else
+        //    {
+        //        return View(articulo);
+        //    }
+        //}
+
+        public ActionResult BajaStock(int id_articulo, string Motivo_baja)
         {
-            if (ModelState.IsValid)
+            if (Motivo_baja != null)
             {
-                AD_ArtStock.BajaStock(articulo);
+                if (id_articulo != 0)
+                {
+                    AD_ArtStock.BajaStock(id_articulo, Motivo_baja);
+                    return RedirectToAction("ListadoAsignarUsr", "Inventario");
+                }
+                else
+                {
+                    return View();
+                }
+            }
+            else {
+
+                VMInventario resultado = AD_Inventario.ObtenerArticulo(id_articulo);
+
+                int cant_stock = AD_Inventario.ObtenerArticuloCantStock(id_articulo);
+                ViewBag.cantStock = cant_stock;
+
+                return View(resultado);
+
+            }
+        }
+
+        /*[HttpPost]
+        public ActionResult BajaStock(int Id_articulo, string Motivo_baja)
+        {
+            if (Id_articulo != 0)
+            {
+                AD_ArtStock.BajaStock(Id_articulo,Motivo_baja);
                 return RedirectToAction("ListadoAsignarUsr", "Inventario");
             }
             else
             {
-                return View(articulo);
+                return View();
             }
-        }
+        }*/
 
 
 

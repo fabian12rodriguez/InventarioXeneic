@@ -45,7 +45,7 @@
         </div>
         <div class="col-lg-12">
             <table class="table table-bordered table-striped bg-light">
-                <thead>
+                <thead class="bg-primary text-white">
                     <tr>
                         <th class="text-center">
                             Imagen
@@ -71,26 +71,26 @@
                 <tbody>
                     @foreach (var VMInventario in Model)
                     {
-                    <tr class="text-center">
-                        <td>
-                            <img src="@VMInventario.Imagen_articulo" width="200" height="100">
-                        </td>
-                        <td>
-                            @VMInventario.Nombre_articulo
-                        </td>
-                        <td>
-                            @VMInventario.Modelo_articulo
-                        </td>
-                        <td>
-                            @VMInventario.Desc_marca_articulo
-                        </td>
-                        <td>
-                            @VMInventario.Desc_tipo_articulo
-                        </td>
-                        <td>
-                            @VMInventario.Stock
-                        </td>
-                    </tr>
+                        <tr class="table-light text-center text-dark">
+                            <td>
+                                <img src="@VMInventario.Imagen_articulo" width="200" height="100">
+                            </td>
+                            <td>
+                                @VMInventario.Nombre_articulo
+                            </td>
+                            <td>
+                                @VMInventario.Modelo_articulo
+                            </td>
+                            <td>
+                                @VMInventario.Desc_marca_articulo
+                            </td>
+                            <td>
+                                @VMInventario.Desc_tipo_articulo
+                            </td>
+                            <td>
+                                @VMInventario.Stock
+                            </td>
+                        </tr>
                     }
                 </tbody>
 

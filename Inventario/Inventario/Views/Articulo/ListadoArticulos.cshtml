@@ -24,7 +24,7 @@
         </form>
         <br />
         <table class="table table-bordered table-striped bg-light" id="listado">
-            <thead>
+            <thead class="bg-primary text-white">
                 <tr>
                     <th class="text-center">
                         ID
@@ -54,7 +54,7 @@
             <tbody>
                 @foreach (var articulo in Model)
                 {
-                    <tr class="text-center">
+                    <tr class="table-light text-center text-dark">
                         <td>
                             @articulo.Id_articulo
                         </td>

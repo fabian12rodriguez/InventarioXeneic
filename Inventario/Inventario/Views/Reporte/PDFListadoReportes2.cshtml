@@ -21,7 +21,7 @@
         <div class="col-lg-6">
 
             <table class="table table-bordered table-striped">
-                <thead>
+                <thead class="bg-warning text-white">
                     <tr>
                         <th class="text-center">
                             Area
@@ -34,7 +34,7 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr class="text-center">
+                        <tr class="table-light text-center text-dark">
                             <td>
                                 @Html.DisplayFor(modelItem => item.Area)
                             </td>

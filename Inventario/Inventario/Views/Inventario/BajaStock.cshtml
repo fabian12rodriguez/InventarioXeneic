@@ -3,7 +3,6 @@
 @{
     ViewBag.Title = "ObtenerArticulo";
 
-
 }
 
 
@@ -14,113 +13,156 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <br />
-        <h4>Dar de baja stock de articulo</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+<div class="form-horizontal">
+    <br />
+    <h4>Dar de baja stock de articulo</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
+    @Html.TextBoxFor(model => model.Id_articulo, htmlAttributes: new { @class = "form-control", @id = "txtId_articulo", @disabled = "disabled"})
 
-
-        <div class="form-group">
-            <label class="col-sm-6" control-label>Nombre</label>
-            <div class="col-sm-6">
-                @Html.TextBoxFor(model => model.Nombre_articulo, htmlAttributes: new { @class = "form-control", @id = "txtNombre", @disabled = "disabled" })
-            </div>
+    <div class="form-group">
+        <label class="col-sm-6" control-label>Nombre</label>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(model => model.Nombre_articulo, htmlAttributes: new { @class = "form-control", @id = "txtNombre", @disabled = "disabled" })
         </div>
-
-
-        <div class="form-group">
-            <label class="col-sm-6" control-label>Modelo</label>
-            <div class="col-sm-6">
-                @Html.TextBoxFor(model => model.Modelo_articulo, htmlAttributes: new { @class = "form-control", @id = "txtModelo", @disabled = "disabled" })
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-6" control-label>Stock actual</label>
-            <div class="col-sm-6">
-                @Html.TextBoxFor(model => model.Stock, htmlAttributes: new { @class = "form-control", @id = "txtStock", @disabled = "disabled" })
-            </div>
-        </div>
-        <div class="form-group" text-right>
-            @if (@ViewBag.cantStock == 0)
-            {<div class="form-group">
-                    <label class="col-sm-6" control-label>Motivo de baja</label>
-                    <div class="col-sm-6">
-                        @Html.TextBoxFor(model => model.Motivo_baja, htmlAttributes: new { @class = "form-control", @id = "txtStock", @disabled = "disabled" })
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <button class="btn btn-danger" type="submit" disabled>Sin stock</button>
-                </div>
-            }
-            else
-            { <div class="form-group">
-                    <label class="col-sm-6" control-label>Motivo de baja</label>
-                    <div class="col-sm-6">
-                        @Html.TextBoxFor(model => model.Motivo_baja, htmlAttributes: new { @class = "form-control", @id = "txtStock", required = "required" })
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <button class="btn btn-primary" type="submit" onclick="mensaje()" id="btn-submit" >Dar de baja</button>
-                </div>
-            }
-            <br />
-            <br />
-            <div class="col-sm-6">
-                <a href="@Url.Action("ListadoAsignarUsr", "Inventario")" class="btn btn-info">Volver</a>
-            </div>
-        </div>
-
     </div>
+
+
+    <div class="form-group">
+        <label class="col-sm-6" control-label>Modelo</label>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(model => model.Modelo_articulo, htmlAttributes: new { @class = "form-control", @id = "txtModelo", @disabled = "disabled" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6" control-label>Stock actual</label>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(model => model.Stock, htmlAttributes: new { @class = "form-control", @id = "txtStock", @disabled = "disabled" })
+        </div>
+    </div>
+    <div class="form-group" text-right>
+        @if (@ViewBag.cantStock == 0)
+        {<div class="form-group">
+                <label class="col-sm-6" control-label>Motivo de baja</label>
+                <div class="col-sm-6">
+                    @Html.TextBoxFor(model => model.Motivo_baja, htmlAttributes: new { @class = "form-control", @id = "txtMotivoInhab", required = "required" })
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <button class="btn btn-danger" type="submit">Inhabilitar articulo</button>
+            </div>
+            <br />
+        }
+        else
+        { <div class="form-group">
+                <label class="col-sm-6" control-label>Motivo de baja</label>
+                <div class="col-sm-6">
+
+                                 @*@Html.TextBoxFor(model => model.Motivo_baja, htmlAttributes: new { @class = "form-control", @id = " ", required = "required" })*@
+                    <input type="text" id="txt_motivo">
+                </div>
+            </div>
+          <div class="col-sm-6">
+              @*<input class="btn btn-primary" type="button" value="Dar de baja" onclick="mensaje()"/>*@
+              <a class="btn btn-info" onclick="mensaje(txt_motivo)">Dar de baja</a>
+
+          </div>
+        }
+        <br />
+        <br />
+        <div class="col-sm-6">
+            <a href="@Url.Action("ListadoAsignarUsr", "Inventario")" class="btn btn-info">Volver</a>
+        </div>
+    </div>
+
+</div>
 }
-@*<script>
-    function mensaje() {
+<script type="text/javascript" src="lib.js"></script>
+
+<script>
+    var id_articulo = document.getElementById("txtId_articulo").value;
+    var texto = document.getElementById("txt_motivo").val();
+
+    function mensaje(texto) {
+        var motivo = texto;
+        console.log(motivo);
+
         Swal.fire({
             position: 'top-center',
-            icon: 'success',
+            icon: 'info',
             title: 'Puede volver a habilitar el articulo desde el menú        ->'
                 + '        abm - articulos -  listado',
-            showConfirmButton: false,
-            timer: 7000
+            showConfirmButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Si, dar de baja',
+            cancelButtonText: 'No'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                //  window.location.href = "@Url.Content("~/Inventario/BajaStock")" + "?id_articulo="id_articulo
+                window.location = 'BajaStock?id_articulo=' + id_articulo + '&Motivo_baja=' + motivo
+            }
+
         })
-    }
 
-</script>*@
-@*<script>
-    $('#btn-submit').on('click', function mensaje(e) {
-        e.preventDefault();
-        var form = $(this).parents('form');
-        swal({
-            title: "Are you sure?",
-            text: "You will not be able to recover this imaginary file!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, delete it!",
-            closeOnConfirm: false
-        }, function (isConfirm) {
-            if (isConfirm) form.submit();
-        });
-    });
-
-</script>*@
-<script>
-    function mensaje(e) {
-        e.preventDefault();
-        swal({
-            title: "Are you sure?",
-            text: "You will not be able to recover this imaginary file!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#DD6B55",
-            confirmButtonText: "Yes, delete it!",
-            closeOnConfirm: false
-        }, function (isConfirm) {
-            if (isConfirm) form.submit();
-        });
     }
 </script>
 
 
+@*
+    var nombre = document.getElementById(txtNombre).value;
+    var modelo = document.getElementById(txtModelo).value;
+    var stock_actual = document.getElementById(txtStock).value;
+    var motivo_baja = document.getElementById(txtMotivo).value;
+    var modelo2 = @Model;
 
+*@
+@*<script>
+        function SubmitForm() {
+
+            var r = Swal.fire("Are you sure you want to submit?");
+            if (r == false) {
+                return false;
+            }
+        }
+    </script>*@
+@*var r = confirm("Are you sure you want to submit?");
+      if (r == false) {
+        return false;
+      }
+    }
+    <script>
+        function SubmitForm() {
+
+            var r = Swal.fire({
+                position: 'top-center',
+                icon: 'success',
+                title: 'Puede volver a habilitar el articulo desde el menú        ->'
+                    + '        abm - articulos -  listado',
+                showConfirmButton: true,
+                showCancelButton: true,
+                timer: 7000,
+                confirmButtonText: 'Si, votar',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    r = true;
+                    Swal.fire(
+                        'LISTO!',
+                        'Articulo dado de baja.',
+                        'success'
+                    )
+                }
+                else if (result.dismiss === Swal.DismissReason.cancel) {
+                    r = false;
+                    Swal.fire(
+                        'Cancelado',
+                        'La operación se cancelo con exito :)',
+                        'error'
+                    )
+
+                }
+
+            })
+        }
+    </script>*@

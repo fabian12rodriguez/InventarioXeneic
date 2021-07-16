@@ -42,7 +42,7 @@
             </form>
             <br />
             <table class="table table-bordered table-striped bg-light" id="listado">
-                <thead>
+                <thead class="bg-primary text-white">
                     <tr>
                         <th class="text-center">
                             Nombre
@@ -69,7 +69,8 @@
                 <tbody>
                     @foreach (var VMInventario in Model)
                     {
-                        <tr class="text-center">
+                        <tr class="table-light text-center text-dark">
+
                             <td>
                                 @VMInventario.Nombre_articulo
                             </td>
@@ -87,14 +88,14 @@
                             </td>
                             <td>
                                 <div class="dropdown">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                                    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
                                         Acciones
                                     </button>
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="@Url.Action("AgregarStock", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Agregar/Quitar Stock</a>
                                         <a class="dropdown-item" href="@Url.Action("AsignarStock", "Inventario", new { @id_articulo = VMInventario.Id_articulo })">Asignar/Desasignar Usuario</a>
                                         <a class="dropdown-item" href="@Url.Action("ListadoHistorialArt", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Historial</a>
-                                        <a class="dropdown-item" href="@Url.Action("BajaStock", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Dar de baja</a>
+                                        <a class="dropdown-item" href="@Url.Action("BajaStock", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Dar de baja de stock</a>
                                     </div>
                                 </div>
                             </td>

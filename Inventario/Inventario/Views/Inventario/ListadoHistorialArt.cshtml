@@ -24,7 +24,7 @@
     <div class="row">
         <div class="col-lg-9">
             <table class="table table-bordered table-striped bg-light">
-                <thead>
+                <thead class="bg-primary text-white">
                     <tr>
                         <th class="text-center">
                             Fecha
@@ -53,29 +53,29 @@
                 <tbody>
                     @foreach (var VMInventario in Model)
                     {
-                    <tr class="text-center">
-                        <td>
-                            @VMInventario.Fecha_historial
-                        </td>
-                        <td>
-                            @VMInventario.Nombre_articulo
-                        </td>
-                        <td>
-                            @VMInventario.Modelo_articulo
-                        </td>
-                        <td>
-                            @VMInventario.Cantidad_mvt
-                        </td>
-                        <td>
-                            @VMInventario.Codigo_usuario
-                        </td>
-                        <td>
-                            @VMInventario.Nro_ticket
-                        </td>
-                        <td>
-                            @VMInventario.Observaciones_historial
-                        </td>
-                    </tr>
+                        <tr class="table-light text-center text-dark">
+                            <td>
+                                @VMInventario.Fecha_historial
+                            </td>
+                            <td>
+                                @VMInventario.Nombre_articulo
+                            </td>
+                            <td>
+                                @VMInventario.Modelo_articulo
+                            </td>
+                            <td>
+                                @VMInventario.Cantidad_mvt
+                            </td>
+                            <td>
+                                @VMInventario.Codigo_usuario
+                            </td>
+                            <td>
+                                @VMInventario.Nro_ticket
+                            </td>
+                            <td>
+                                @VMInventario.Observaciones_historial
+                            </td>
+                        </tr>
                     }
                 </tbody>
 

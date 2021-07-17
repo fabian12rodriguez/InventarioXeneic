@@ -20,20 +20,31 @@ namespace Inventario.Controllers
         [HttpPost]
         public ActionResult Login(VMInventario model)
         {
-            VMInventario resultado = AD_Inventario.ValidarUsuario(model);
+            VMInventario resultado = AD_Inventario.ValidarUsuario(model.Codigo_usuario, model.Password_usuario);
 
-            if (resultado.Codigo_usuario.ToUpper() != null & resultado.Password_usuario != null)
+            if (resultado.Codigo_usuario != null & resultado.Password_usuario != null)
             {
-                System.Web.HttpContext.Current.Session.Add("idRol", resultado.Id_rol);
+                if (resultado.Id_rol == 1)
+                {
+                    System.Web.HttpContext.Current.Session.Add("idRol", resultado.Id_rol);
 
-                return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    System.Web.HttpContext.Current.Session.Add("idRol", resultado.Id_rol);
+
+                    return RedirectToAction("ListadoInventario", "Inventario");
+                }
             }
             else
             {
                 ViewBag.Mensaje = "Usuario o contraseña incorrectos";
                 return View();
-                
+
             }
+
+
         }
          public ActionResult Logout()
         {

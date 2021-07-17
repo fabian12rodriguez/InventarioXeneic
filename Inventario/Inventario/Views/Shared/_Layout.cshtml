@@ -30,8 +30,15 @@
 <body class="sb-nav-fixed">
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="@Url.Action("Index","Home",new {})">XENEIC Inventory</a>
+        @if (Rol.Equals("1"))
+        {
+            <a class="navbar-brand ps-3" href="@Url.Action("Index", "Home", new { })">XENEIC Inventory</a>
+        }
+        else
+        {
+            <a class="navbar-brand ps-3" href="@Url.Action("ListadoInventario", "Inventario", new { })">XENEIC Inventory</a>
 
+        }
 
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
@@ -49,7 +56,7 @@
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     @*<li><hr class="dropdown-divider" /></li>*@
                     <li><a class="dropdown-item" href="@Url.Action("Logout","Login",new {})">Cerrar Sesion</a></li>
-                   
+
 
                 </ul>
             </li>
@@ -118,53 +125,48 @@
                             </nav>
                         </div>
                         <div class="sb-sidenav-menu-heading">Estadisticas</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsReporte" aria-expanded="false" aria-controls="collapseLayoutsReporte">
-                            <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                            Reportes
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="collapseLayoutsReporte" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                @if (Rol.Equals("1"))
-                                {
+                        @if (Rol.Equals("1"))
+                        {
+                            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayoutsReporte" aria-expanded="false" aria-controls="collapseLayoutsReporte">
+                                <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                                Reportes
+                                <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                            </a>
+                            <div class="collapse" id="collapseLayoutsReporte" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                                <nav class="sb-sidenav-menu-nested nav">
+
                                     @*<a class="nav-link" href="@Url.Action("Index", "Reporte",new {})">General</a>*@
                                     <a class="nav-link" href="@Url.Action("ListadoReportes4", "Reporte",new {})">Articulos con Stock bajo</a>
                                     <a class="nav-link" href="@Url.Action("ListadoReportes1", "Reporte",new {})">Artículos por tipo</a>
                                     <a class="nav-link" href="@Url.Action("ListadoReportes3", "Reporte",new {})">Usuarios con articulos asignados</a>
                                     <a class="nav-link" href="@Url.Action("ListadoReportes2", "Reporte",new {})">Usuarios por área</a>
-
-                                }
-                                else
-                                {
-                                    <a class="nav-link" href="@Url.Action("ListadoReportes3", "Reporte",new {})">Usuarios con articulos asignados</a>
-
-                                }
-                            </nav>
-                        </div>
-                        @if (Rol.Equals("1"))
-                        {
-                            <div class="sb-sidenav-menu-heading">Administracion</div>
-                            <a class="nav-link" href="@Url.Action("ListadoUsuarios","Usuario",new {})">
-                                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                                Usuarios
+                                   
+                                </nav>
+                            </div>
+                      
+                                <div class="sb-sidenav-menu-heading">Administracion</div>
+                                <a class="nav-link" href="@Url.Action("ListadoUsuarios","Usuario",new {})">
+                                    <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                                    Usuarios
+                                </a>
+                            }
+                            else
+                            {
+                            }
+                            @*<div class="sb-sidenav-menu-heading">Administracion</div>
+            <a class="nav-link" href="@Url.Action("ListadoUsuarios","Usuario",new {})">
+                <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
+                Usuarios
+            </a>*@
+                            <a class="nav-link" href="@Url.Action("Ayuda","Reporte",new {})">
+                                <div class="sb-nav-link-icon"><i class="far fa-question-circle"></i></div>
+                                Ayuda
                             </a>
-                        }
-                        else { 
-                        }
-                        @*<div class="sb-sidenav-menu-heading">Administracion</div>
-                        <a class="nav-link" href="@Url.Action("ListadoUsuarios","Usuario",new {})">
-                            <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
-                            Usuarios
-                        </a>*@
-                        <a class="nav-link" href="@Url.Action("Ayuda","Reporte",new {})">
-                            <div class="sb-nav-link-icon"><i class="far fa-question-circle"></i></div>
-                            Ayuda
-                        </a>
-                        <a class="nav-link" href="~/Archivos/TerminosYCondiciones_XI.pdf" target="_blank">
-                            <div class="sb-nav-link-icon"><i class="fas fa-file-signature"></i></div>
-                            Terminos y condiciones
-                        </a>
-                    </div>
+                            <a class="nav-link" href="~/Archivos/TerminosYCondiciones_XI.pdf" target="_blank">
+                                <div class="sb-nav-link-icon"><i class="fas fa-file-signature"></i></div>
+                                Terminos y condiciones
+                            </a>
+                        </div>
 
                 </div>
                 <div class="sb-sidenav-footer">

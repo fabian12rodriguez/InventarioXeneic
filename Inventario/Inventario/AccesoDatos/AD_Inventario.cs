@@ -770,7 +770,7 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
-        public static VMInventario ValidarUsuario(VMInventario usuario)
+        public static VMInventario ValidarUsuario(string Codigo_usuario, string Password_usuario)
         {
             VMInventario resultado = new VMInventario();
             string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
@@ -787,8 +787,8 @@ namespace Inventario.AccesoDatos
                                     and u.PASSWORD_USUARIO = @Password_usuario--'123'
                                     ;";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@Codigo_usuario", usuario.Codigo_usuario);
-                cmd.Parameters.AddWithValue("@Password_usuario", usuario.Password_usuario);
+                cmd.Parameters.AddWithValue("@Codigo_usuario", Codigo_usuario.ToUpper());
+                cmd.Parameters.AddWithValue("@Password_usuario",Password_usuario);
 
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = consulta;

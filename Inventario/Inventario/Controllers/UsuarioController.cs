@@ -48,16 +48,50 @@ namespace Inventario.Controllers
         [HttpPost]
         public ActionResult ObtenerUsuario(VMInventario model)
         {
+            VMInventario codigo_usr = AD_Usuario.ObtenerRecuperarUsuario(model.Codigo_usuario);
+
             if (ModelState.IsValid)
             {
-                bool resultado = AD_Usuario.ActualizarDatosUsuarios(model);
-                if (resultado)
+                if (model.Codigo_usuario.ToUpper() != codigo_usr.Codigo_usuario)
                 {
-                    return RedirectToAction("ListadoUsuarios", "Usuario");
+                    bool resultado = AD_Usuario.ActualizarDatosUsuarios(model);
+                    if (resultado)
+                    {
+                        return RedirectToAction("ListadoUsuarios", "Usuario");
+                    }
+                    else
+                    {
+                        return View(model);
+                    }
                 }
                 else
                 {
-                    return View(model);
+                    VMInventario resultado = AD_Usuario.ObtenerUsuario(model.Id_usuario);
+                    List<TipoRoles> listaRoles = AD_Usuario.ListarTipoRoles();
+                    List<SelectListItem> comboRoles = listaRoles.ConvertAll(i =>
+                    {
+                        return new SelectListItem()
+                        {
+                            Text = i.Descripcion_rol,
+                            Value = i.Id_rol.ToString(),
+                            Selected = false
+                        };
+                    });
+
+                    foreach (var item in comboRoles)
+                    {
+                        if (item.Value.Equals(resultado.Id_rol.ToString()))
+                        {
+                            item.Selected = true;
+                            break;
+                        }
+                    }
+
+                    ViewBag.itemsRoles = comboRoles;
+                    ViewBag.Mensaje = "Usuario existente";
+                    return View(resultado);
+                    
+
                 }
             }
             return View();
@@ -82,11 +116,37 @@ namespace Inventario.Controllers
         [HttpPost]
         public ActionResult AltaUsuario(VMInventario usuario)
         {
+            VMInventario resultado = AD_Usuario.ObtenerRecuperarUsuario(usuario.Codigo_usuario);
+
+
             if (ModelState.IsValid)
             {
+                if (usuario.Codigo_usuario.ToUpper() != resultado.Codigo_usuario)
+                {
+                    AD_Usuario.InsertarUsuario(usuario);
+                    return RedirectToAction("ListadoUsuarios", "Usuario");
+                }
+                else
+                {
 
-                AD_Usuario.InsertarUsuario(usuario);
-                return RedirectToAction("ListadoUsuarios", "Usuario");
+                    List<TipoRoles> listaTipoRoles = AD_Usuario.ListarTipoRoles();
+                    List<SelectListItem> itemsRoles = listaTipoRoles.ConvertAll(i => {
+                        return new SelectListItem()
+                        {
+                            Text = i.Descripcion_rol,
+                            Value = i.Id_rol.ToString(),
+                            Selected = false
+                        };
+                    });
+
+                    ViewBag.itemsRoles = itemsRoles;
+                    ViewBag.Mensaje = "Usuario existente";
+
+                    return View();
+
+                }
+
+
             }
             else
             {
@@ -113,11 +173,32 @@ namespace Inventario.Controllers
         [HttpPost]
         public ActionResult RegistrarUsuario(VMInventario usuario)
         {
+            VMInventario resultado = AD_Usuario.ObtenerRecuperarUsuario(usuario.Codigo_usuario);
+
             if (ModelState.IsValid)
             {
+                if (usuario.Codigo_usuario.ToUpper() != resultado.Codigo_usuario)
+                {
+                    AD_Usuario.registrarUsuario(usuario);
+                    return RedirectToAction("Login", "Login");
+                }
+                else
+                {
+                    List<TipoRoles> listaTipoRoles = AD_Usuario.ListarTipoRoles();
+                    List<SelectListItem> itemsRoles = listaTipoRoles.ConvertAll(i =>
+                    {
+                        return new SelectListItem()
+                        {
+                            Text = i.Descripcion_rol,
+                            Value = i.Id_rol.ToString(),
+                            Selected = false
+                        };
+                    });
 
-                AD_Usuario.registrarUsuario(usuario);
-                return RedirectToAction("Login", "Login");
+                    ViewBag.itemsRoles = itemsRoles;
+                    ViewBag.Mensaje = "Usuario existente";
+                    return View();
+                }
             }
             else
             {
@@ -134,9 +215,8 @@ namespace Inventario.Controllers
         {
             VMInventario resultado = AD_Usuario.ObtenerRecuperarUsuario(model.Codigo_usuario);
 
-            /*bool resultado = AD_Usuario.ActualizarDatosRecuperarUsuarios(model);*/
 
-            if (resultado.Codigo_usuario != null)
+            if (resultado.Codigo_usuario.ToUpper() != null)
             {
 
                 return RedirectToAction("ObtenerRecuperarUsr", "Usuario", new { resultado.Codigo_usuario });

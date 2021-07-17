@@ -22,7 +22,7 @@ namespace Inventario.Controllers
         {
             VMInventario resultado = AD_Inventario.ValidarUsuario(model);
 
-            if (resultado.Codigo_usuario != null & resultado.Password_usuario != null)
+            if (resultado.Codigo_usuario.ToUpper() != null & resultado.Password_usuario != null)
             {
                 System.Web.HttpContext.Current.Session.Add("idRol", resultado.Id_rol);
 

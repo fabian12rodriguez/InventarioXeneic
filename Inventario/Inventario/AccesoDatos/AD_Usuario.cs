@@ -83,7 +83,7 @@ namespace Inventario.AccesoDatos
                 SqlCommand cmd = new SqlCommand();
                 string consultaSql = "INSERT INTO usuarios VALUES(@Codigo_usuario, @Password_usuario, @Nombre_usuario, @Apellido_usuario, @Mail_usuario,@Habilitado_usuario,@Id_rol)";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@Codigo_usuario", usuario.Codigo_usuario);
+                cmd.Parameters.AddWithValue("@Codigo_usuario", usuario.Codigo_usuario.ToUpper());
                 cmd.Parameters.AddWithValue("@Password_usuario", usuario.Password_usuario);
                 cmd.Parameters.AddWithValue("@Nombre_usuario", usuario.Nombre_usuario);
                 cmd.Parameters.AddWithValue("@Apellido_usuario", usuario.Apellido_usuario);
@@ -123,7 +123,7 @@ namespace Inventario.AccesoDatos
                 SqlCommand cmd = new SqlCommand();
                 string consultaSql = "INSERT INTO usuarios VALUES(@Codigo_usuario, @Password_usuario, @Nombre_usuario, @Apellido_usuario, @Mail_usuario,1,3)";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@Codigo_usuario", usuario.Codigo_usuario);
+                cmd.Parameters.AddWithValue("@Codigo_usuario", usuario.Codigo_usuario.ToUpper());
                 cmd.Parameters.AddWithValue("@Password_usuario", usuario.Password_usuario);
                 cmd.Parameters.AddWithValue("@Nombre_usuario", usuario.Nombre_usuario);
                 cmd.Parameters.AddWithValue("@Apellido_usuario", usuario.Apellido_usuario);
@@ -303,7 +303,7 @@ namespace Inventario.AccesoDatos
 
                 string consulta = "SELECT * FROM usuarios WHERE codigo_usuario =@codigo_usuario";
                 cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@codigo_usuario", codigo_usuario);
+                cmd.Parameters.AddWithValue("@codigo_usuario", codigo_usuario.ToUpper());
 
                 cmd.CommandType = System.Data.CommandType.Text;
                 cmd.CommandText = consulta;

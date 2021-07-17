@@ -9,8 +9,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10.10.1/dist/sweetalert2.all.min.js"></script>
 
 
-@using (Html.BeginForm())
-{
+@*@using (Html.BeginForm())
+{*@
     @Html.AntiForgeryToken()
 
 <div class="form-horizontal">
@@ -19,7 +19,7 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    @Html.TextBoxFor(model => model.Id_articulo, htmlAttributes: new { @class = "form-control", @id = "txtId_articulo", @disabled = "disabled"})
+    @Html.HiddenFor(model => model.Id_articulo, htmlAttributes: new { @class = "form-control", @id = "txtId_articulo", @disabled = "disabled"})
 
     <div class="form-group">
         <label class="col-sm-6" control-label>Nombre</label>
@@ -46,12 +46,13 @@
         {<div class="form-group">
                 <label class="col-sm-6" control-label>Motivo de baja</label>
                 <div class="col-sm-6">
-                    @Html.TextBoxFor(model => model.Motivo_baja, htmlAttributes: new { @class = "form-control", @id = "txtMotivoInhab", required = "required" })
+                    @Html.TextBoxFor(model => model.Motivo_baja, htmlAttributes: new { @class = "form-control", @id = "txt_motivo", @required = "required" })
+                    <label class="text-danger">@ViewBag.MensajeError</label>
                 </div>
             </div>
-            <div class="col-sm-6">
-                <button class="btn btn-danger" type="submit">Inhabilitar articulo</button>
-            </div>
+         <div class="col-sm-6">
+             <input class="btn btn-danger" type="button" value="Inhabilitar articulo" onclick="mensaje()" />
+         </div>
             <br />
         }
         else
@@ -59,15 +60,16 @@
                 <label class="col-sm-6" control-label>Motivo de baja</label>
                 <div class="col-sm-6">
 
-                @*@Html.TextBoxFor(model => model.Motivo_baja, htmlAttributes: new { @class = "form-control", @id= "",@value = Model.Motivo_baja, required = "required" })*@
-                    <input type="text" id="txt_motivo">
+                    @Html.TextBoxFor(model => model.Motivo_baja, htmlAttributes: new { @class = "form-control", @id="txt_motivo", @required = "required" })
+                    <label class="text-danger">@ViewBag.MensajeError</label> 
+                    @*<input type="text" id="txt_motivo">*@
                 </div>
             </div>
           <div class="col-sm-6">
-              @*<input class="btn btn-primary" type="button" value="Dar de baja" onclick="mensaje()"/>*@
-              <a class="btn btn-info" onclick="mensaje(txt_motivo)">Dar de baja</a>
+              <input class="btn btn-primary" type="button" value="Dar de baja" onclick="mensaje()"/>
+              @*<a class="btn btn-info" onclick="mensaje(txt_motivo)">Dar de baja</a>*@
 
-              <a class="btn btn-info" onclick="mensaje()">Dar de baja</a>
+              @*<a class="btn btn-info" onclick="mensaje()">Dar de baja</a>*@
 
           </div>
         }
@@ -79,16 +81,14 @@
     </div>
 
 </div>
-}
+@*}*@
 <script type="text/javascript" src="lib.js"></script>
 
 <script>
     var id_articulo = document.getElementById("txtId_articulo").value;
-    var texto = document.getElementById("txt_motivo").val();
+    var texto = document.getElementById("txt_motivo");
 
-    function mensaje(texto) {
-        var motivo = texto;
-        console.log(motivo);
+    function mensaje() {
 
         Swal.fire({
             position: 'top-center',
@@ -102,7 +102,7 @@
         }).then((result) => {
             if (result.isConfirmed) {
                 //  window.location.href = "@Url.Content("~/Inventario/BajaStock")" + "?id_articulo="id_articulo
-                window.location = 'BajaStock?id_articulo=' + id_articulo + '&Motivo_baja=' + motivo
+                window.location = 'BajaStock?id_articulo=' + id_articulo + '&Motivo_baja=' + texto.value
             }
 
         })

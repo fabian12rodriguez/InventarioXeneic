@@ -66,26 +66,36 @@
                 <tbody>
                     @foreach (var VMInventario in Model)
                     {
-                        <tr class="table-light text-center text-dark">
-                            <td>
-                                <img src="@VMInventario.Imagen_articulo" width="200" height="100">
+                    <tr class="table-light text-center text-dark">
+                        <td>
+                            <img src="@VMInventario.Imagen_articulo" width="200" height="100">
+                        </td>
+                        <td>
+                            @VMInventario.Nombre_articulo
+                        </td>
+                        <td>
+                            @VMInventario.Modelo_articulo
+                        </td>
+                        <td>
+                            @VMInventario.Desc_marca_articulo
+                        </td>
+                        <td>
+                            @VMInventario.Desc_tipo_articulo
+                        </td>
+                        @if (@VMInventario.Stock < 2)
+                        {
+                            <td class="text-danger font-weight-bolder">
+                                @VMInventario.Stock
                             </td>
-                            <td>
-                                @VMInventario.Nombre_articulo
-                            </td>
-                            <td>
-                                @VMInventario.Modelo_articulo
-                            </td>
-                            <td>
-                                @VMInventario.Desc_marca_articulo
-                            </td>
-                            <td>
-                                @VMInventario.Desc_tipo_articulo
-                            </td>
+
+                        }
+                        else
+                        {
                             <td>
                                 @VMInventario.Stock
                             </td>
-                        </tr>
+                        }
+                    </tr>
                     }
                 </tbody>
 

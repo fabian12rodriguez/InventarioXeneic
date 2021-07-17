@@ -428,63 +428,7 @@ namespace Inventario.AccesoDatos
          * 
          * 
          * ****************/
-        //public static List<VMInventario> ListarArticulos()
-        //{
-        //    List<VMInventario> resultado = new List<VMInventario>();
-        //    string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
 
-        //    SqlConnection cn = new SqlConnection(cadenaConexion);
-
-        //    try
-        //    {
-        //        SqlCommand cmd = new SqlCommand();
-        //        string consultaSql =
-        //            @"select A.ID_ARTICULO, A.NOMBRE_ARTICULO, A.MODELO_ARTICULO, A.ID_MARCA,M.DESCRIPCION_MARCA, T.ID_TIPO_ARTICULO,T.DESCRIPCION_TIPO_ARTICULO, A.IMAGEN_ARTICULO
-        //                from ARTICULOS A, MARCAS M , TIPOS_ARTICULOS T
-        //                WHERE A.ID_MARCA = M.ID_MARCA
-        //                AND A.ID_TIPO_ARTICULO  = T.ID_TIPO_ARTICULO";
-
-        //        cmd.Parameters.Clear();
-
-        //        cmd.CommandType = System.Data.CommandType.Text;
-        //        cmd.CommandText = consultaSql;
-
-        //        cn.Open();
-        //        cmd.Connection = cn;
-
-        //        SqlDataReader dr = cmd.ExecuteReader();
-
-        //        if (dr != null)
-        //        {
-        //            while (dr.Read())
-        //            {
-        //                VMInventario aux = new VMInventario();
-        //                aux.Id_articulo = int.Parse(dr["Id_articulo"].ToString());
-        //                aux.Nombre_articulo = dr["Nombre_articulo"].ToString();
-        //                aux.Modelo_articulo = dr["Modelo_articulo"].ToString();
-        //                aux.Desc_marca_articulo = dr["DESCRIPCION_MARCA"].ToString();
-        //                aux.Desc_tipo_articulo = dr["DESCRIPCION_TIPO_ARTICULO"].ToString();
-        //                aux.Imagen_articulo = dr["Imagen_articulo"].ToString();
-
-
-        //                resultado.Add(aux);
-
-
-        //            }
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-        //    finally
-        //    {
-        //        cn.Close();
-        //    }
-
-        //    return resultado;
-        //}
         public static List<VMInventario> ListarArticulos()
         {
             List<VMInventario> resultado = new List<VMInventario>();
@@ -582,59 +526,6 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
-        /*public static VMInventario ObtenerArticulo(int id_articulo)
-        {
-            VMInventario resultado = new VMInventario();
-            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
-
-            SqlConnection cn = new SqlConnection(cadenaConexion);
-
-            try
-            {
-                SqlCommand cmd = new SqlCommand();
-
-                string consulta = "SELECT * FROM Articulos WHERE id_articulo =@id";
-                cmd.Parameters.Clear();
-                cmd.Parameters.AddWithValue("@id", id_articulo);
-
-                cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = consulta;
-
-
-                cn.Open();
-                cmd.Connection = cn;
-                SqlDataReader dr = cmd.ExecuteReader();
-
-                if (dr != null)
-                {
-                    while (dr.Read())
-                    {
-
-                        resultado.Id_articulo = int.Parse(dr["Id_articulo"].ToString());
-                        resultado.Nombre_articulo = dr["Nombre_articulo"].ToString();
-                        resultado.Modelo_articulo = dr["Modelo_articulo"].ToString();
-                        resultado.Id_marca = int.Parse(dr["Id_marca"].ToString());
-                        resultado.Id_tipo_articulo = int.Parse(dr["Id_tipo_articulo"].ToString());
-                        resultado.Imagen_articulo = dr["Imagen_articulo"].ToString();
-
-
-                    }
-                }
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-            finally
-            {
-                cn.Close();
-            }
-
-            return resultado;
-        }*/
 
         public static VMInventario ObtenerArticulo(int id_articulo)
         {
@@ -750,13 +641,6 @@ namespace Inventario.AccesoDatos
                     while (dr.Read())
                     {
 
-                        //resultado.Id_articulo = int.Parse(dr["Id_articulo"].ToString());
-                        //resultado.Nombre_articulo = dr["Nombre_articulo"].ToString();
-                        //resultado.Modelo_articulo = dr["Modelo_articulo"].ToString();
-                        //resultado.Id_marca = int.Parse(dr["Id_marca"].ToString());
-                        //resultado.Id_tipo_articulo = int.Parse(dr["Id_tipo_articulo"].ToString());
-                        //resultado.Habilitado_articulo = bool.Parse(dr["Habilitado_articulo"].ToString());
-                        //resultado.Imagen_articulo = dr["Imagen_articulo"].ToString();
                         resultado = int.Parse(dr["Stock"].ToString());
 
                     }
@@ -779,46 +663,6 @@ namespace Inventario.AccesoDatos
 
 
 
-        //public static bool ActualizarDatosArticulos(VMInventario articulo)
-        //{
-        //    bool resultado = false;
-        //    string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
-        //    SqlConnection cn = new SqlConnection(cadenaConexion);
-
-        //    try
-        //    {
-        //        SqlCommand cmd = new SqlCommand();
-
-        //        string consulta = "UPDATE articulos SET Nombre_articulo = @Nombre_articulo, Modelo_articulo = @Modelo_articulo, Id_marca = @Id_marca, Id_tipo_articulo = @Id_tipo_articulo, Imagen_articulo = @Imagen_articulo where Id_articulo = @Id_articulo";
-        //        cmd.Parameters.Clear();
-        //        cmd.Parameters.AddWithValue("@Id_articulo", articulo.Id_articulo);
-        //        cmd.Parameters.AddWithValue("@Nombre_articulo", articulo.Nombre_articulo);
-        //        cmd.Parameters.AddWithValue("@Modelo_articulo", articulo.Modelo_articulo);
-        //        cmd.Parameters.AddWithValue("@Id_marca", articulo.Id_marca);
-        //        cmd.Parameters.AddWithValue("@Id_tipo_articulo", articulo.Id_tipo_articulo);
-        //        cmd.Parameters.AddWithValue("@Imagen_articulo", articulo.Imagen_articulo);
-
-        //        cmd.CommandType = System.Data.CommandType.Text;
-        //        cmd.CommandText = consulta;
-        //        cn.Open
-        //        ();
-        //        cmd.Connection = cn;
-        //        cmd.ExecuteNonQuery();
-        //        resultado = true;
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-
-        //    finally
-        //    {
-        //        cn.Close();
-        //    }
-
-        //    return resultado;
-        //}
         public static bool ActualizarDatosArticulos(VMInventario articulo)
         {
             bool resultado = false;
@@ -926,7 +770,6 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
-       /* public static bool ActualizarDatosArticulos(VMInventario articulo)*/
         public static VMInventario ValidarUsuario(VMInventario usuario)
         {
             VMInventario resultado = new VMInventario();

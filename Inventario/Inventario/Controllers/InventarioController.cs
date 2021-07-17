@@ -387,14 +387,27 @@ namespace Inventario.Controllers
         {
             if (Motivo_baja != null)
             {
-                if (id_articulo != 0)
+                if (Motivo_baja != "")
                 {
-                    AD_ArtStock.BajaStock(id_articulo, Motivo_baja);
-                    return RedirectToAction("ListadoAsignarUsr", "Inventario");
+                    if (id_articulo != 0)
+                    {
+                        AD_ArtStock.BajaStock(id_articulo, Motivo_baja);
+                        return RedirectToAction("ListadoAsignarUsr", "Inventario");
+                    }
+                    else
+                    {
+                        return View();
+                    }
                 }
                 else
                 {
-                    return View();
+                    VMInventario resultado = AD_Inventario.ObtenerArticulo(id_articulo);
+
+                    int cant_stock = AD_Inventario.ObtenerArticuloCantStock(id_articulo);
+                    ViewBag.cantStock = cant_stock;
+                    ViewBag.MensajeError = "Debe ingresar un motivo de baja";
+
+                    return View(resultado);
                 }
             }
             else {

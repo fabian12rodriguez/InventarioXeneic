@@ -33,11 +33,7 @@
             <br />
             <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
                 <div class="input-group">
-                    @*//REUTILIZAR
-                        <input class="form-control" type="text" placeholder="Buscar por..." aria-label="Search for..." aria-describedby="btnNavbarSearch" id="nombre_articulo" />
-                        <button class="btn btn-primary" type="button" onclick="refresh()"><i class="fas fa-search"></i></button>*@
-
-
+ 
                     <input type="search" class="form-control rounded col-lg-4" placeholder="Filtrar resultados" aria-label="Search"
                            aria-describedby="search-addon" id="txtFiltro" />
                 </div>
@@ -64,45 +60,55 @@
                         <th class="text-center">
                             
                         </th>
-
-
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var VMInventario in Model)
                     {
-                        <tr class="table-light text-center text-dark">
+                    <tr class="table-light text-center text-dark">
 
-                            <td>
-                                @VMInventario.Nombre_articulo
+                        <td>
+                            @VMInventario.Nombre_articulo
+                        </td>
+                        <td>
+                            @VMInventario.Modelo_articulo
+                        </td>
+                        <td>
+                            @VMInventario.Desc_marca_articulo
+                        </td>
+                        <td>
+                            @VMInventario.Desc_tipo_articulo
+                        </td>
+
+                        @if (@VMInventario.Stock < 2)
+                        {
+                            <td class="text-danger font-weight-bolder">
+                                @VMInventario.Stock
                             </td>
-                            <td>
-                                @VMInventario.Modelo_articulo
-                            </td>
-                            <td>
-                                @VMInventario.Desc_marca_articulo
-                            </td>
-                            <td>
-                                @VMInventario.Desc_tipo_articulo
-                            </td>
+
+                        }
+                        else
+                        {
                             <td>
                                 @VMInventario.Stock
                             </td>
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
-                                        Acciones
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="@Url.Action("AgregarStock", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Agregar/Quitar Stock</a>
-                                        <a class="dropdown-item" href="@Url.Action("AsignarStock", "Inventario", new { @id_articulo = VMInventario.Id_articulo })">Asignar/Desasignar Usuario</a>
-                                        <a class="dropdown-item" href="@Url.Action("ListadoHistorialArt", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Historial</a>
-                                        <a class="dropdown-item" href="@Url.Action("BajaStock", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Dar de baja stock</a>
-                                    </div>
-                                </div>
-                            </td>
+                         }
 
-                        </tr>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown">
+                                    Acciones
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="@Url.Action("AgregarStock", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Agregar/Quitar Stock</a>
+                                    <a class="dropdown-item" href="@Url.Action("AsignarStock", "Inventario", new { @id_articulo = VMInventario.Id_articulo })">Asignar/Desasignar Usuario</a>
+                                    <a class="dropdown-item" href="@Url.Action("ListadoHistorialArt", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Historial</a>
+                                    <a class="dropdown-item" href="@Url.Action("BajaStock", "Inventario", new { @id_articulo=VMInventario.Id_articulo})">Dar de baja stock</a>
+                                </div>
+                            </div>
+                        </td>
+
+                    </tr>
                     }
                 </tbody>
 

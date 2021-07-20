@@ -63,11 +63,6 @@ namespace Inventario.Controllers
             return View(lista);
         }
 
-        /*
-         * 
-         * 
-         * 
-         * */
         public ActionResult ListadoArticulos()
         {
             List<VMInventario> lista = AD_Inventario.ListarArticulos();
@@ -188,71 +183,85 @@ namespace Inventario.Controllers
             }
             return View();
         }
-        public ActionResult AgregarStock(int id_articulo)
+        public ActionResult AgregarStock(int id_articulo, int Cantidad_mvt)
         {
-            VMInventario resultado = AD_Inventario.ObtenerArticulo(id_articulo);
-            List<TipoMarca> listaMarca = AD_Articulos.ListarTipoMarcas();
-            List<SelectListItem> comboMarca = listaMarca.ConvertAll(i =>
+            if (Cantidad_mvt == 0)
             {
-                return new SelectListItem()
+                VMInventario resultado = AD_Inventario.ObtenerArticulo(id_articulo);
+                List<TipoMarca> listaMarca = AD_Articulos.ListarTipoMarcas();
+                List<SelectListItem> comboMarca = listaMarca.ConvertAll(i =>
                 {
-                    Text = i.Descripcion_marca,
-                    Value = i.Id_marca.ToString(),
-                    Selected = false
-                };
-            });
+                    return new SelectListItem()
+                    {
+                        Text = i.Descripcion_marca,
+                        Value = i.Id_marca.ToString(),
+                        Selected = false
+                    };
+                });
 
-            foreach (var item in comboMarca)
-            {
-                if (item.Value.Equals(resultado.Id_marca.ToString()))
+                foreach (var item in comboMarca)
                 {
-                    item.Selected = true;
-                    break;
+                    if (item.Value.Equals(resultado.Id_marca.ToString()))
+                    {
+                        item.Selected = true;
+                        break;
+                    }
                 }
-            }
 
-            ViewBag.itemsMarca = comboMarca;
+                ViewBag.itemsMarca = comboMarca;
 
-            List<TipoArticulo> listaTipoArticulo = AD_Articulos.ListarTipoArticulos();
-            List<SelectListItem> comboTipoArticulo = listaTipoArticulo.ConvertAll(i =>
-            {
-                return new SelectListItem()
+                List<TipoArticulo> listaTipoArticulo = AD_Articulos.ListarTipoArticulos();
+                List<SelectListItem> comboTipoArticulo = listaTipoArticulo.ConvertAll(i =>
                 {
-                    Text = i.Descripcion_tipo_articulo,
-                    Value = i.Id_tipo_articulo.ToString(),
+                    return new SelectListItem()
+                    {
+                        Text = i.Descripcion_tipo_articulo,
+                        Value = i.Id_tipo_articulo.ToString(),
 
-                    Selected = false
-                };
-            });
-            foreach (var item in comboTipoArticulo)
-            {
-                if (item.Value.Equals(resultado.Id_tipo_articulo.ToString()))
+                        Selected = false
+                    };
+                });
+                foreach (var item in comboTipoArticulo)
                 {
-                    item.Selected = true;
-                    break;
+                    if (item.Value.Equals(resultado.Id_tipo_articulo.ToString()))
+                    {
+                        item.Selected = true;
+                        break;
+                    }
                 }
+
+                ViewBag.itemsTipoArticulo = comboTipoArticulo;
+
+                int cant_stock = AD_Inventario.ObtenerArticuloCantStock(id_articulo);
+                ViewBag.cantStock = cant_stock;
+
+                return View(resultado);
             }
-
-            ViewBag.itemsTipoArticulo = comboTipoArticulo;
-
-            int cant_stock = AD_Inventario.ObtenerArticuloCantStock(id_articulo);
-            ViewBag.cantStock = cant_stock;
-
-            return View(resultado);
-        }
-        [HttpPost]
-        public ActionResult AgregarStock(ArticuloStock articulo)
-        {
-            if (ModelState.IsValid)
-            {
-                AD_ArtStock.AgregarStock(articulo);
-                return RedirectToAction("ListadoAsignarUsr", "Inventario");
-            }
-            else
-            {
-                return View(articulo);
+            else {
+                    if (ModelState.IsValid)
+                    {
+                        AD_ArtStock.AgregarStock(id_articulo, Cantidad_mvt);
+                        return RedirectToAction("ListadoAsignarUsr", "Inventario");
+                    }
+                    else
+                    {
+                        return View();
+                    }
             }
         }
+        //[HttpPost]
+        //public ActionResult AgregarStock(ArticuloStock articulo)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        AD_ArtStock.AgregarStock(articulo);
+        //        return RedirectToAction("ListadoAsignarUsr", "Inventario");
+        //    }
+        //    else
+        //    {
+        //        return View(articulo);
+        //    }
+        //}
 
         /******************
          * **
@@ -360,28 +369,7 @@ namespace Inventario.Controllers
             List<VMInventario> lista = AD_Inventario.ListarHistorialArt(id_articulo);
             return View(lista);
         }
-        //public ActionResult BajaStock(int id_articulo)
-        //{
-        //    VMInventario resultado = AD_Inventario.ObtenerArticulo(id_articulo); 
-
-        //    int cant_stock = AD_Inventario.ObtenerArticuloCantStock(id_articulo);
-        //    ViewBag.cantStock = cant_stock;
-
-        //    return View(resultado);
-        //}
-        //[HttpPost]
-        //public ActionResult BajaStock(ArticuloStock articulo)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        AD_ArtStock.BajaStock(articulo);
-        //        return RedirectToAction("ListadoAsignarUsr", "Inventario");
-        //    }
-        //    else
-        //    {
-        //        return View(articulo);
-        //    }
-        //}
+ 
 
         public ActionResult BajaStock(int id_articulo, string Motivo_baja)
         {
@@ -422,19 +410,7 @@ namespace Inventario.Controllers
             }
         }
 
-        /*[HttpPost]
-        public ActionResult BajaStock(int Id_articulo, string Motivo_baja)
-        {
-            if (Id_articulo != 0)
-            {
-                AD_ArtStock.BajaStock(Id_articulo,Motivo_baja);
-                return RedirectToAction("ListadoAsignarUsr", "Inventario");
-            }
-            else
-            {
-                return View();
-            }
-        }*/
+
 
 
 

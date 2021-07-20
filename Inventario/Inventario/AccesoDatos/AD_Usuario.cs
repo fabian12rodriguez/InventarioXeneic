@@ -121,7 +121,7 @@ namespace Inventario.AccesoDatos
             try
             {
                 SqlCommand cmd = new SqlCommand();
-                string consultaSql = "INSERT INTO usuarios VALUES(@Codigo_usuario, @Password_usuario, @Nombre_usuario, @Apellido_usuario, @Mail_usuario,1,3)";
+                string consultaSql = "INSERT INTO usuarios VALUES(@Codigo_usuario, @Password_usuario, @Nombre_usuario, @Apellido_usuario, @Mail_usuario,1,2)";
                 cmd.Parameters.Clear();
                 cmd.Parameters.AddWithValue("@Codigo_usuario", usuario.Codigo_usuario.ToUpper());
                 cmd.Parameters.AddWithValue("@Password_usuario", usuario.Password_usuario);

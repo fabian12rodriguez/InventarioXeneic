@@ -30,11 +30,17 @@ namespace Inventario.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
-                else
+                else if(resultado.Id_rol == 2)
                 {
                     System.Web.HttpContext.Current.Session.Add("idRol", resultado.Id_rol);
 
                     return RedirectToAction("ListadoInventario", "Inventario");
+                }
+                else
+                {
+                    ViewBag.Mensaje = "Clientes internos no tienen acceso al sistema";
+                    return View();
+
                 }
             }
             else

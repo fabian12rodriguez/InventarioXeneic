@@ -21,6 +21,10 @@ namespace Inventario.Controllers
 
             string tabla3 = AD_Reportes.obtenerDatos3();
             ViewBag.grafico3 = tabla3;
+
+            string tabla4 = AD_Reportes.obtenerDatos4();
+            ViewBag.grafico4 = tabla4;
+
             return View();
         }
  

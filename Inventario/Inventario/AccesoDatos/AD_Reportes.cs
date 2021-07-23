@@ -120,17 +120,26 @@ namespace Inventario.AccesoDatos
 
             SqlCommand cmd = new SqlCommand();
 
-            //Emitir listado de artículos por tipo.
+            //Emitir listado de altas de articulos por mes
 
-            string consulta = @"select T.DESCRIPCION_TIPO_ARTICULO tipo, 
-                                SUM(m.CANTIDAD_MVT)stock
-                                from articulos a, TIPOS_ARTICULOS t, MOVIMIENTOS_STOCK m
-                                where m.ID_ARTICULO = a.ID_ARTICULO 
-                                and a.ID_TIPO_ARTICULO = t.ID_TIPO_ARTICULO
-                                and m.OBSERVACIONES_MVT like 'Aumentar stock'
-                                and m.FECHA_MVT > EOMONTH(getdate(),-1)
-                                GROUP BY T.DESCRIPCION_TIPO_ARTICULO
-                                Order by 1, 2 ;";
+            string consulta = @"select 
+                                CASE
+                                    WHEN  month(h.FECHA_HISTORIAL) = 1 THEN 'enero'
+                                    WHEN  month(h.FECHA_HISTORIAL) = 2 THEN 'febrero'
+	                                WHEN  month(h.FECHA_HISTORIAL) = 3 THEN 'marzo'
+	                                WHEN  month(h.FECHA_HISTORIAL) = 4 THEN 'abril'
+	                                WHEN  month(h.FECHA_HISTORIAL) = 5 THEN 'mayo'
+	                                WHEN  month(h.FECHA_HISTORIAL) = 6 THEN 'junio'
+	                                WHEN  month(h.FECHA_HISTORIAL) = 7 THEN 'julio'
+	                                WHEN  month(h.FECHA_HISTORIAL) = 8 THEN 'agosto'
+	                                WHEN  month(h.FECHA_HISTORIAL) = 9 THEN 'septiembre'
+	                                WHEN  month(h.FECHA_HISTORIAL) = 10 THEN 'octubre'
+	                                WHEN  month(h.FECHA_HISTORIAL) = 11 THEN 'noviembre'
+                                    ELSE 'diciembre'
+                                END as mes, count(*) cantidad
+                                from HISTORIAL_ARTICULOS h
+                                where h.OBSERVACIONES_HISTORIAL like '%Alta de articulo%'
+                                group by month(h.FECHA_HISTORIAL) ;";
             cmd.Parameters.Clear();
 
 
@@ -146,7 +155,53 @@ namespace Inventario.AccesoDatos
 
             string strDatos;
 
-            strDatos = "[['Tipo', 'Cantidad'],";
+            strDatos = "[['Mes', 'Cantidad'],";
+
+            foreach (DataRow dr in Datos.Rows)
+            {
+
+                strDatos = strDatos + "[";
+                strDatos = strDatos + "'" + dr[0] + "'" + "," + dr[1];
+                strDatos = strDatos + "],";
+
+
+            }
+
+            strDatos = strDatos + "]";
+
+            return strDatos;
+        }
+        public static string obtenerDatos4()
+        {
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+
+            SqlCommand cmd = new SqlCommand();
+
+            //Emitir listado de artículos por tipo.
+
+            string consulta = @"SELECT R.DESCRIPCION_ROL ROL, COUNT(*) CANTIDAD
+                                FROM USUARIOS U, ROLES R
+                                WHERE U.ID_ROL	= R.ID_ROL
+                                GROUP BY R.DESCRIPCION_ROL";
+            cmd.Parameters.Clear();
+
+
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = consulta;
+            cn.Open();
+            cmd.Connection = cn;
+
+
+            DataTable Datos = new DataTable();
+            Datos.Load(cmd.ExecuteReader());
+            cn.Close();
+
+            string strDatos;
+
+            strDatos = "[['Rol', 'Cantidad'],";
 
             foreach (DataRow dr in Datos.Rows)
             {

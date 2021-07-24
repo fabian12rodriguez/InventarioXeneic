@@ -50,8 +50,8 @@ namespace Inventario.ViewModels
         private string fecha_historial;
         private string observaciones_historial;
 
+        /*otros*/
         private string motivo_baja;
-
 
 
 

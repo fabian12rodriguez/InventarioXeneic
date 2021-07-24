@@ -203,7 +203,7 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
-        public static bool AgregarStock(int Id_articulo, int Cantidad_mvt)
+        public static bool AgregarStock(int Id_articulo, int Cantidad_mvt, string nro_ticket)
         {
             bool resultado = false;
             string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
@@ -218,6 +218,7 @@ namespace Inventario.AccesoDatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@id_articulo", Id_articulo));
                 cmd.Parameters.Add(new SqlParameter("@cantidad_ingresada", Cantidad_mvt));
+                cmd.Parameters.Add(new SqlParameter("@nro_ticket", nro_ticket));
 
 
                 cn.Open();
@@ -287,6 +288,7 @@ namespace Inventario.AccesoDatos
                 cmd.Parameters.Add(new SqlParameter("@id_usuario", articulo.Id_usuario));
                 cmd.Parameters.Add(new SqlParameter("@id_articulo", articulo.Id_articulo));
                 cmd.Parameters.Add(new SqlParameter("@asignar", articulo.Chk_asignado));
+                cmd.Parameters.Add(new SqlParameter("@Nro_ticket", articulo.Nro_ticket));
 
 
                 cn.Open();
@@ -340,7 +342,7 @@ namespace Inventario.AccesoDatos
 
         //    return resultado;
         //}
-        public static bool BajaStock(int Id_articulo, string Motivo_baja)
+        public static bool BajaStock(int Id_articulo, string Motivo_baja, string nro_ticket)
         {
             bool resultado = false;
             string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
@@ -355,6 +357,7 @@ namespace Inventario.AccesoDatos
                 cmd.Parameters.Clear();
                 cmd.Parameters.Add(new SqlParameter("@id_articulo", Id_articulo));
                 cmd.Parameters.Add(new SqlParameter("@motivo_baja", Motivo_baja));
+                cmd.Parameters.Add(new SqlParameter("@nro_ticket", nro_ticket));
 
 
                 cn.Open();

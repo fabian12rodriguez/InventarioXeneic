@@ -25,6 +25,8 @@ namespace Inventario.ViewModels
         private bool chk_asignado;
         private int artstock;
         private string motivo_baja;
+        private string nro_ticket;
+
 
         public int Id_articulo { get => id_articulo; set => id_articulo = value; }
         public string Nombre_articulo { get => nombre_articulo; set => nombre_articulo = value; }
@@ -44,5 +46,6 @@ namespace Inventario.ViewModels
         public bool Chk_asignado { get => chk_asignado; set => chk_asignado = value; }
         public int Artstock { get => artstock; set => artstock = value; }
         public string Motivo_baja { get => motivo_baja; set => motivo_baja = value; }
+        public string Nro_ticket { get => nro_ticket; set => nro_ticket = value; }
     }
 }

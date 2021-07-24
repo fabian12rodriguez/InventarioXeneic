@@ -45,7 +45,7 @@
             @Html.TextBoxFor(model => model.Artstock, htmlAttributes: new { @class = "form-control", @id = "txtStock", @disabled = "disabled" })
         </div>
     </div>
-    @if (@ViewBag.cantStock == 0)
+    @*@if (@ViewBag.cantStock == 0)
     {
         <div class="form-group">
             <label class="col-sm-6" control-label>Usuario</label>
@@ -57,6 +57,12 @@
             <label class="col-sm-6">Lista de usuarios asignados al articulo</label>
             <div class="col-sm-6">
                 @Html.TextArea("a", listado, htmlAttributes: new { @class = "form-control", @id = "txtListaUsr", @disabled = "disabled", @resize = "none" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-6" control-label>Numero de ticket</label>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(model => model.Nro_ticket, htmlAttributes: new { @class = "form-control", @id = "txtNroTicket", required = "required" })
             </div>
         </div>
         <div class="form-group">
@@ -74,7 +80,7 @@
         </div>
     }
     else
-    {
+    {*@
         <div class="form-group">
             <label class="col-sm-6" control-label>Usuario</label>
             <div class="col-sm-6">
@@ -88,7 +94,13 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-6 control-label">*Tildar para asignar articulo a usuario, caso contrario para desasignar</label>
+            <label class="col-sm-6" control-label>Numero de ticket</label>
+            <div class="col-sm-6">
+                @Html.TextBoxFor(model => model.Nro_ticket, htmlAttributes: new { @class = "form-control", @id = "txtNroTicket", required = "required" })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-6 control-label font-weight-bolder">*Tildar para asignar articulo a usuario, caso contrario para desasignar</label>
             <label class="col-sm-6 control-label">Asignar usuario?</label>
             <div class="col-sm-6">
                 <label>SI</label>
@@ -100,7 +112,7 @@
                 <button class="btn btn-primary" type="submit">Confirmar</button>
             </div>
         </div>
-    }
+    @*}*@
 
     <div class="form-group" text-right>
         @*<div class="col-sm-6">

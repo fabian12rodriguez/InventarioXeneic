@@ -16,7 +16,7 @@
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-    @Html.HiddenFor(model => model.Id_articulo, htmlAttributes: new { @class = "form-control", @id = "txtId_articulo", @disabled = "disabled"})
+    @Html.HiddenFor(model => model.Id_articulo, htmlAttributes: new { @class = "form-control", @id = "txtId_articulo", @disabled = "disabled" })
 
     <div class="form-group">
         <label class="col-sm-6" control-label>Nombre</label>
@@ -38,6 +38,12 @@
             @Html.TextBoxFor(model => model.Stock, htmlAttributes: new { @class = "form-control", @id = "txtStock", @disabled = "disabled" })
         </div>
     </div>
+    <div class="form-group">
+        <label class="col-sm-6" control-label>Numero de ticket</label>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(model => model.Nro_ticket, htmlAttributes: new { @class = "form-control", @id = "txtNroTicket", required = "required" })
+        </div>
+    </div>
     <div class="form-group" text-right>
         @if (@ViewBag.cantStock == 0)
         {<div class="form-group">
@@ -47,9 +53,9 @@
                     <label class="text-danger">@ViewBag.MensajeError</label>
                 </div>
             </div>
-         <div class="col-sm-6">
-             <input class="btn btn-danger" type="button" value="Inhabilitar articulo" onclick="mensaje()" />
-         </div>
+            <div class="col-sm-6">
+                <input class="btn btn-danger" type="button" value="Inhabilitar articulo" onclick="mensaje()" />
+            </div>
             <br />
         }
         else
@@ -57,14 +63,14 @@
                 <label class="col-sm-6" control-label>Motivo de baja</label>
                 <div class="col-sm-6">
 
-                    @Html.TextBoxFor(model => model.Motivo_baja, htmlAttributes: new { @class = "form-control", @id="txt_motivo", @required = "required" })
-                    <label class="text-danger">@ViewBag.MensajeError</label> 
+                    @Html.TextBoxFor(model => model.Motivo_baja, htmlAttributes: new { @class = "form-control", @id = "txt_motivo", @required = "required" })
+                    <label class="text-danger">@ViewBag.MensajeError</label>
                 </div>
             </div>
-          <div class="col-sm-6">
-              <input class="btn btn-primary" type="button" value="Dar de baja" onclick="mensaje()"/>
+            <div class="col-sm-6">
+                <input class="btn btn-primary" type="button" value="Dar de baja" onclick="mensaje()" />
 
-          </div>
+            </div>
         }
         <br />
         <br />
@@ -79,6 +85,7 @@
 <script>
     var id_articulo = document.getElementById("txtId_articulo").value;
     var texto = document.getElementById("txt_motivo");
+    var nro_ticket = document.getElementById("txtNroTicket");
 
     function mensaje() {
 
@@ -93,7 +100,7 @@
             cancelButtonText: 'No'
         }).then((result) => {
             if (result.isConfirmed) {
-               window.location = 'BajaStock?id_articulo=' + id_articulo + '&Motivo_baja=' + texto.value
+                window.location = 'BajaStock?id_articulo=' + id_articulo + '&Motivo_baja=' + texto.value + '&nro_ticket=' + nro_ticket.value
             }
 
         })

@@ -183,7 +183,7 @@ namespace Inventario.Controllers
             }
             return View();
         }
-        public ActionResult AgregarStock(int id_articulo, int Cantidad_mvt)
+        public ActionResult AgregarStock(int id_articulo, int Cantidad_mvt, string nro_ticket)
         {
             if (Cantidad_mvt == 0)
             {
@@ -240,7 +240,7 @@ namespace Inventario.Controllers
             else {
                     if (ModelState.IsValid)
                     {
-                        AD_ArtStock.AgregarStock(id_articulo, Cantidad_mvt);
+                        AD_ArtStock.AgregarStock(id_articulo, Cantidad_mvt, nro_ticket);
                         return RedirectToAction("ListadoAsignarUsr", "Inventario");
                     }
                     else
@@ -249,24 +249,7 @@ namespace Inventario.Controllers
                     }
             }
         }
-        //[HttpPost]
-        //public ActionResult AgregarStock(ArticuloStock articulo)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        AD_ArtStock.AgregarStock(articulo);
-        //        return RedirectToAction("ListadoAsignarUsr", "Inventario");
-        //    }
-        //    else
-        //    {
-        //        return View(articulo);
-        //    }
-        //}
 
-        /******************
-         * **
-         * 
-         */
         public ActionResult ObtenerArtAsignado(int id_articulo)
         {
             ArticuloStock resultado = AD_ArtStock.ObtenerArtAsignadoUsr(id_articulo);
@@ -371,7 +354,7 @@ namespace Inventario.Controllers
         }
  
 
-        public ActionResult BajaStock(int id_articulo, string Motivo_baja)
+        public ActionResult BajaStock(int id_articulo, string Motivo_baja, string nro_ticket)
         {
             if (Motivo_baja != null)
             {
@@ -379,7 +362,7 @@ namespace Inventario.Controllers
                 {
                     if (id_articulo != 0)
                     {
-                        AD_ArtStock.BajaStock(id_articulo, Motivo_baja);
+                        AD_ArtStock.BajaStock(id_articulo, Motivo_baja, nro_ticket);
                         return RedirectToAction("ListadoAsignarUsr", "Inventario");
                     }
                     else

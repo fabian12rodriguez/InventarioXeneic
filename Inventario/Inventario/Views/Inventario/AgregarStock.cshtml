@@ -43,13 +43,19 @@
             @Html.TextBoxFor(model => model.Stock, htmlAttributes: new { @class = "form-control", @id = "txtStock", @disabled = "disabled" })
         </div>
     </div>
-
-        <div class="form-group">
-            <label class="col-sm-6" control-label>Cantidad</label>
-            <div class="col-sm-6">
-                @Html.TextBoxFor(model => model.Cantidad_mvt, htmlAttributes: new { @class = "form-control", @id = "txtCantidad", required = "required", pattern = "^[0-9]+" })
-            </div>
+    <div class="form-group">
+        <label class="col-sm-6" control-label>Numero de ticket</label>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(model => model.Nro_ticket, htmlAttributes: new { @class = "form-control", @id = "txtNroTicket", required = "required" })
         </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-6" control-label>Cantidad</label>
+        <div class="col-sm-6">
+            @Html.TextBoxFor(model => model.Cantidad_mvt, htmlAttributes: new { @class = "form-control", @id = "txtCantidad", required = "required", pattern = "^[0-9]+" })
+        </div>
+    </div>
 
     <div class="form-group" text-right>
         <div class="col-sm-6">
@@ -69,6 +75,7 @@
     var id_articulo = document.getElementById("txtId_articulo").value;
     var stock = document.getElementById("txtStock").value;
     var cantidad_ingresada = document.getElementById("txtCantidad");
+    var nro_ticket = document.getElementById("txtNroTicket");
 
     function mensaje() {
         if (isNaN(cantidad_ingresada.value) == false) {
@@ -87,7 +94,7 @@
                         cancelButtonText: 'No'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location = 'AgregarStock?id_articulo=' + id_articulo + '&Cantidad_mvt=' + cantidad_ingresada.value
+                            window.location = 'AgregarStock?id_articulo=' + id_articulo + '&Cantidad_mvt=' + cantidad_ingresada.value + '&nro_ticket=' + nro_ticket.value
                         }
 
                     })
@@ -108,7 +115,7 @@
                         cancelButtonText: 'No'
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            window.location = 'AgregarStock?id_articulo=' + id_articulo + '&Cantidad_mvt=' + cantidad_ingresada.value
+                            window.location = 'AgregarStock?id_articulo=' + id_articulo + '&Cantidad_mvt=' + cantidad_ingresada.value + '&nro_ticket=' + nro_ticket.value
                         }
 
                     })

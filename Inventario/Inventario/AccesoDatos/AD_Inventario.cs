@@ -719,7 +719,7 @@ namespace Inventario.AccesoDatos
 		                                    a.MODELO_ARTICULO,
 		                                    m.CANTIDAD_MVT Stock,
 		                                    u.CODIGO_USUARIO, 
-		                                    au.nro_ticket, 
+		                                    h.nro_ticket, 
 		                                    h.OBSERVACIONES_HISTORIAL
                                     from HISTORIAL_ARTICULOS h 
                                     JOIN MOVIMIENTOS_STOCK M on m.ID_MVT = h.ID_MVT

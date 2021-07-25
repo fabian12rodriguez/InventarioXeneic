@@ -294,6 +294,7 @@ namespace Inventario.Controllers
             }
             return View();
         }
+        /**********************************************/
         public ActionResult AsignarStock(int id_articulo)
         {
             ArticuloStock resultado = AD_ArtStock.ObtenerArtAsignadoUsr(id_articulo);
@@ -306,6 +307,10 @@ namespace Inventario.Controllers
 
             }
             ViewBag.listado = listado;
+            /***********************************************************************/
+            List<VMInventario> listarUsuarios = AD_Inventario.listarUsuariosArtAsignado(id_articulo);
+            ViewBag.listadoUSR = listarUsuarios;
+
             /***********************************************************************/
             List<TipoUsuarios> listaTipoUsuario = AD_Inventario.ListarTipoUsuarios();
             List<SelectListItem> comboTipoUsuario = listaTipoUsuario.ConvertAll(i =>
@@ -347,6 +352,9 @@ namespace Inventario.Controllers
                 return View(articulo);
             }
         }
+
+      
+        /**********************************************/
         public ActionResult ListadoHistorialArt(int id_articulo)
         {
             List<VMInventario> lista = AD_Inventario.ListarHistorialArt(id_articulo);

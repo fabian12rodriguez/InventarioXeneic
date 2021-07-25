@@ -387,6 +387,58 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
+        public static List<VMInventario> listarUsuariosArtAsignado(int id_articulo)
+        {
+            List<VMInventario> resultado = new List<VMInventario>();
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = @"select u.Id_usuario
+                                    from ARTICULOS_USUARIOS u
+                                    where u.ID_ARTICULO  = @id_articulo";
+
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id_articulo", id_articulo);
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = consulta;
+
+
+                cn.Open();
+                cmd.Connection = cn;
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr != null)
+                {
+                    while (dr.Read())
+                    {
+                        VMInventario aux = new VMInventario();
+                        aux.Id_usuario = int.Parse(dr["Id_usuario"].ToString());
+                        resultado.Add(aux);
+
+
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            finally
+            {
+                cn.Close();
+            }
+
+            return resultado;
+        }
         public static bool ActualizarArticuloAsignado(VMInventario articulo)
         {
             bool resultado = false;

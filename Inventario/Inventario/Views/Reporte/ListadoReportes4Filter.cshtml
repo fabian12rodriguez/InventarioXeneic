@@ -1,14 +1,10 @@
 ﻿@model IEnumerable<Inventario.ViewModels.VMInventario>
 
-@*@model Concesionario_236.ViewModels.Reportes.InfoGralVM*@
 
 @{
     ViewBag.Title = "Reporte";
-    List<SelectListItem> itemsTipoArticulos = (List<SelectListItem>)ViewBag.itemsTipoArticulos;
-
+    Layout = null;
 }
-
-
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -20,24 +16,12 @@
 <hr />
 @using (Html.BeginForm())
 {
-    @*//REUTILIZAR
-        <input class="form-control" type="text" placeholder="Buscar por..." aria-label="Search for..." aria-describedby="btnNavbarSearch" id="nombre_articulo" />
-        <button class="btn btn-primary" type="button" onclick="refresh()"><i class="fas fa-search"></i></button>*@
+
 
     <br />
     <div class="row">
         <div class="col-lg-12 text-center">
             <img src="~/images/xeneic_logo.png" width="200" height="200">
-        </div>
-        <div class="form-group">
-            <label class="col-sm-6" control-label>Filtrar por tipo de articulos</label>
-            <div class="col-sm-6">
-
-                @Html.DropDownList("Id_tipo_articulo", itemsTipoArticulos, "Seleccione un tipo", htmlAttributes: new { @class = "form-control", @onchange = "refresh()" })
-
-            </div>
-            <br />
-
         </div>
         <div class="col-lg-12">
             <br />
@@ -88,28 +72,7 @@
             </table>
 
         </div>
-        <div class="form-group" text-right>
-            <div class="col-sm-6">
-                 <a href="@Url.Action("Print4", "Reporte",new {@id_tipo_articulo = ViewBag.id})" class="btn btn-info" target="_blank">Imprimir PDF</a>
-            </div>
-        </div>
     </div>
 
 }
-<script>
-
-    function refresh() {
-        var cboTipoArt = document.getElementById("Id_tipo_articulo");
-
-        if (cboTipoArt.value === "" || cboTipoArt.value === null || cboTipoArt.value === undefined) {
-            cboTipoArt.addEventListener("change", refresh);
-            window.location.href = ("@Url.Content("~/Reporte/ListadoReportes4")" + "?Id_tipo_articulo= 0");
-        }
-        else {
-            cboTipoArt.addEventListener("change", refresh);
-            window.location.href = ("@Url.Content("~/Reporte/ListadoReportes4")" + "?Id_tipo_articulo=" + cboTipoArt.value);
-        }
-    }
-</script>
-
 

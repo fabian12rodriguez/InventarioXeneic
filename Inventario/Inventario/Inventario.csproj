@@ -380,6 +380,7 @@
     <Content Include="Views\Usuario\RegistrarUsuario.cshtml" />
     <Content Include="Views\Usuario\ObtenerRecuperarUsr.cshtml" />
     <Content Include="Views\Usuario\ReestablecerUsuario.cshtml" />
+    <Content Include="Views\Reporte\ListadoReportes4Filter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -478,6 +478,80 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
+        public static List<VMInventario> ListadoCantTipoNBKFilter(int id_tipo_articulo)
+        {
+            List<VMInventario> resultado = new List<VMInventario>();
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                string consulta = @"select A.Id_articulo,
+                                    A.NOMBRE_ARTICULO, 
+                                    A.MODELO_ARTICULO, 
+                                    M.DESCRIPCION_MARCA, 
+                                    T.DESCRIPCION_TIPO_ARTICULO, 
+                                    SUM(mvt.CANTIDAD_MVT)stock
+                                    from articulos a join MOVIMIENTOS_STOCK mvt on a.ID_ARTICULO = mvt.ID_ARTICULO
+                                    join MARCAS M on A.ID_MARCA = M.ID_MARCA
+                                    join TIPOS_ARTICULOS T on A.ID_TIPO_ARTICULO  = T.ID_TIPO_ARTICULO
+                                    where a.HABILITADO_ARTICULO = 1
+                                    and t.id_tipo_articulo = @id_tipo_articulo
+                                    GROUP BY
+							        A.Id_articulo,
+                                    A.NOMBRE_ARTICULO, 
+                                    A.MODELO_ARTICULO, 
+                                    A.ID_MARCA,
+                                    M.DESCRIPCION_MARCA, 
+                                    A.ID_TIPO_ARTICULO,
+                                    T.DESCRIPCION_TIPO_ARTICULO
+							        HAVING SUM(mvt.CANTIDAD_MVT) < 5
+                                    order by 6,5,2 ;";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id_tipo_articulo", id_tipo_articulo);
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = consulta;
+
+
+
+                cn.Open();
+                cmd.Connection = cn;
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr != null)
+                {
+                    while (dr.Read())
+                    {
+                        VMInventario nuevoReporte = new VMInventario();
+                        nuevoReporte.Id_articulo = int.Parse(dr["Id_articulo"].ToString());
+                        nuevoReporte.Nombre_articulo = dr["Nombre_articulo"].ToString();
+                        nuevoReporte.Modelo_articulo = dr["Modelo_articulo"].ToString();
+                        nuevoReporte.Desc_marca_articulo = dr["DESCRIPCION_MARCA"].ToString();
+                        nuevoReporte.Desc_tipo_articulo = dr["DESCRIPCION_TIPO_ARTICULO"].ToString();
+                        nuevoReporte.Stock = int.Parse(dr["Stock"].ToString());
+                        resultado.Add(nuevoReporte);
+
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            finally
+            {
+                cn.Close();
+            }
+
+            return resultado;
+        }
         public static List<VMInventario> ListadoStockFiltrado(string nombre_articulo)
         {
             List<VMInventario> resultado = new List<VMInventario>();

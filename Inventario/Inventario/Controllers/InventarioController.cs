@@ -307,10 +307,7 @@ namespace Inventario.Controllers
 
             }
             ViewBag.listado = listado;
-            /***********************************************************************/
-            List<VMInventario> listarUsuarios = AD_Inventario.listarUsuariosArtAsignado(id_articulo);
-            ViewBag.listadoUSR = listarUsuarios;
-
+    
             /***********************************************************************/
             List<TipoUsuarios> listaTipoUsuario = AD_Inventario.ListarTipoUsuarios();
             List<SelectListItem> comboTipoUsuario = listaTipoUsuario.ConvertAll(i =>
@@ -342,14 +339,76 @@ namespace Inventario.Controllers
         [HttpPost]
         public ActionResult AsignarStock(ArticuloStock articulo)
         {
-            if (ModelState.IsValid)
+            List<VMInventario> listarUsuarios = AD_Inventario.listarUsuariosArtAsignado(articulo.Id_articulo);
+            bool bandera = false;
+
+            foreach (var item in listarUsuarios)
+            {
+                if (item.Id_usuario == articulo.Id_usuario)
+                {
+                    bandera = true;
+                    break;
+                }
+            }
+            /**ASIGNAR*/
+            if (ModelState.IsValid & articulo.Chk_asignado)
             {
                 AD_ArtStock.AsignarStock(articulo);
                 return RedirectToAction("ListadoAsignarUsr", "Inventario");
             }
             else
             {
-                return View(articulo);
+                /*DES-ASIGNAR*/
+
+                if (ModelState.IsValid & bandera)
+                {
+                    AD_ArtStock.AsignarStock(articulo);
+                    return RedirectToAction("ListadoAsignarUsr", "Inventario");
+                }
+                else
+                {
+                    /*****************GET**************************/
+                    ArticuloStock resultado = AD_ArtStock.ObtenerArtAsignadoUsr(articulo.Id_articulo);
+
+                    List<VMInventario> ListarTipoUsuariosArt = AD_Inventario.ListarTipoUsuariosArt(articulo.Id_articulo);
+                    string listado = "";
+                    foreach (var item in ListarTipoUsuariosArt)
+                    {
+
+                        listado += "-" + item.Codigo_usuario + "\n";
+
+                    }
+                    ViewBag.listado = listado;
+
+                    List<TipoUsuarios> listaTipoUsuario = AD_Inventario.ListarTipoUsuarios();
+                    List<SelectListItem> comboTipoUsuario = listaTipoUsuario.ConvertAll(i =>
+                    {
+                        return new SelectListItem()
+                        {
+                            Text = i.Codigo_usuario,
+                            Value = i.Id_usuario.ToString(),
+
+                            Selected = false
+                        };
+                    });
+                    foreach (var item in comboTipoUsuario)
+                    {
+                        if (item.Value.Equals(resultado.Id_usuario.ToString()))
+                        {
+                            item.Selected = true;
+                            break;
+                        }
+                    }
+
+                    ViewBag.itemsUsuarios = comboTipoUsuario;
+                    int cant_stock = AD_Inventario.ObtenerArticuloCantStock(articulo.Id_articulo);
+                    ViewBag.cantStock = cant_stock;
+
+                    /*****************GET**************************/
+
+                    ViewBag.Mensaje = "El usuario seleccionado no tiene este articulo asignado";
+                    return View(resultado);
+                }
             }
         }
 

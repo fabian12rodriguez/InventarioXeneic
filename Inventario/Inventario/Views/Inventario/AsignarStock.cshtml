@@ -49,7 +49,9 @@
         <label class="col-sm-6" control-label>Usuario</label>
         <div class="col-sm-6">
             @Html.DropDownList("id_usuario", itemsUsuarios, htmlAttributes: new { @class = "form-control", required = "required" })
+            <label class="text-danger mb-4">@ViewBag.Mensaje</label>
         </div>
+        
     </div>
     <div class="form-group">
         <label class="col-sm-6">Lista de usuarios asignados al articulo</label>

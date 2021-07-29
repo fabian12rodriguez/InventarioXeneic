@@ -330,6 +330,7 @@ namespace Inventario.Controllers
             }
 
             ViewBag.itemsUsuarios = comboTipoUsuario;
+
             int cant_stock = AD_Inventario.ObtenerArticuloCantStock(id_articulo);
             ViewBag.cantStock = cant_stock;
 

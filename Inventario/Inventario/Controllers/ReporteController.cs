@@ -30,10 +30,74 @@ namespace Inventario.Controllers
             List<VMInventario> lista = AD_Reportes.ListadoUsrPorArea();
             return View(lista);
         }
-        public ActionResult ListadoReportes3()
+        /* public ActionResult ListadoReportes3()
+         {
+             List<VMInventario> lista = AD_Reportes.ListadoSinUsrAsignado();
+             return View(lista);
+         }*/
+        public ActionResult ListadoReportes3(int id_usuario)
         {
-            List<VMInventario> lista = AD_Reportes.ListadoSinUsrAsignado();
-            return View(lista);
+            //List<VMInventario> lista = AD_Reportes.ListadoSinUsrAsignado();
+
+            List<TipoUsuarios> listaTipoUsuario = AD_Inventario.ListarTipoUsuarios();
+            List<SelectListItem> comboTipoUsuario = listaTipoUsuario.ConvertAll(i =>
+            {
+                return new SelectListItem()
+                {
+                    Text = i.Codigo_usuario,
+                    Value = i.Id_usuario.ToString(),
+
+                    Selected = false
+                };
+            });
+
+            ViewBag.itemsUsuarios = comboTipoUsuario;
+
+            if (id_usuario == 0 || id_usuario.ToString() is null)
+            {
+                ViewBag.id = id_usuario;
+                List<VMInventario> lista = AD_Reportes.ListadoSinUsrAsignado();
+                return View(lista);
+            }
+            else
+            {
+                ViewBag.id = id_usuario;
+                List<VMInventario> lista = AD_Reportes.ListadoSinUsrAsignadoFilter(id_usuario);
+                return View(lista);
+            }
+
+        }
+        public ActionResult ListadoReportes3Filter(int id_usuario)
+        {
+            //List<VMInventario> lista = AD_Reportes.ListadoSinUsrAsignado();
+
+            List<TipoUsuarios> listaTipoUsuario = AD_Inventario.ListarTipoUsuarios();
+            List<SelectListItem> comboTipoUsuario = listaTipoUsuario.ConvertAll(i =>
+            {
+                return new SelectListItem()
+                {
+                    Text = i.Codigo_usuario,
+                    Value = i.Id_usuario.ToString(),
+
+                    Selected = false
+                };
+            });
+
+            ViewBag.itemsUsuarios = comboTipoUsuario;
+
+            if (id_usuario == 0 || id_usuario.ToString() is null)
+            {
+                ViewBag.id = id_usuario;
+                List<VMInventario> lista = AD_Reportes.ListadoSinUsrAsignado();
+                return View(lista);
+            }
+            else
+            {
+                ViewBag.id = id_usuario;
+                List<VMInventario> lista = AD_Reportes.ListadoSinUsrAsignadoFilter(id_usuario);
+                return View(lista);
+            }
+
         }
         public ActionResult ListadoReportes4(int Id_tipo_articulo)
         {
@@ -139,9 +203,17 @@ namespace Inventario.Controllers
             List<VMInventario> lista = AD_Reportes.ListadoSinUsrAsignado();
             return View(lista);
         }
-        public ActionResult Print3()
+        public ActionResult Print3(int id_usuario)
         {
-            return new ActionAsPdf("PDFListadoReportes3", new { nombre = "Xeneic" }) { FileName = "reporte.pdf" };
+            if (id_usuario == 0 || id_usuario.ToString() is null)
+            {
+                return new ActionAsPdf("ListadoReportes3Filter", new { id_usuario }) { FileName = "reporte3.pdf" };
+
+            }
+            else
+            {
+                return new ActionAsPdf("ListadoReportes3Filter", new { id_usuario }) { FileName = "reporte3.pdf" };
+            }
         }
         //------------ListadoReportes4
         public ActionResult PDFListadoReportes4()

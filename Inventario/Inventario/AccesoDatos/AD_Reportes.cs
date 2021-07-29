@@ -403,6 +403,79 @@ namespace Inventario.AccesoDatos
 
             return resultado;
         }
+
+        public static List<VMInventario> ListadoSinUsrAsignadoFilter(int id_usuario)
+        {
+            List<VMInventario> resultado = new List<VMInventario>();
+            string cadenaConexion = System.Configuration.ConfigurationManager.AppSettings["CadenaBD"].ToString();
+
+            SqlConnection cn = new SqlConnection(cadenaConexion);
+
+            try
+            {
+                SqlCommand cmd = new SqlCommand();
+
+                //listado de usuarios con articulos asignados filtrado
+
+                string consulta = @"select ar.DESCRIPCION_AREA area, 
+                                    u.CODIGO_USUARIO,
+                                    U.APELLIDO_USUARIO+' '+U.NOMBRE_USUARIO NOMBRE,
+                                    A.NOMBRE_ARTICULO, 
+                                    A.MODELO_ARTICULO, 
+                                    M.DESCRIPCION_MARCA, 
+                                    T.DESCRIPCION_TIPO_ARTICULO
+                                    from articulos a left join ARTICULOS_USUARIOS au on a.ID_ARTICULO = au.ID_ARTICULO
+                                    join MARCAS M on A.ID_MARCA = M.ID_MARCA
+                                    join TIPOS_ARTICULOS T on A.ID_TIPO_ARTICULO  = T.ID_TIPO_ARTICULO
+                                    LEFT join USUARIOS U on au.ID_USUARIO = U.ID_USUARIO
+									join AREAS_USUARIOS aru on aru.ID_USUARIO = u.ID_USUARIO
+									join AREAS ar on ar.ID_AREA = aru.ID_AREA
+                                    where a.HABILITADO_ARTICULO = 1
+                                    and u.id_usuario = @id_usuario;";
+                cmd.Parameters.Clear();
+                cmd.Parameters.AddWithValue("@id_usuario", id_usuario);
+
+                cmd.CommandType = System.Data.CommandType.Text;
+                cmd.CommandText = consulta;
+
+
+
+                cn.Open();
+                cmd.Connection = cn;
+                SqlDataReader dr = cmd.ExecuteReader();
+
+                if (dr != null)
+                {
+                    while (dr.Read())
+                    {
+                        VMInventario nuevoReporte = new VMInventario();
+                        nuevoReporte.Area = dr["Area"].ToString();
+                        nuevoReporte.Codigo_usuario = dr["Codigo_usuario"].ToString();
+                        nuevoReporte.Nombre_usuario = dr["Nombre"].ToString();
+                        nuevoReporte.Nombre_articulo = dr["NOMBRE_ARTICULO"].ToString();
+                        nuevoReporte.Modelo_articulo = dr["MODELO_ARTICULO"].ToString();
+                        nuevoReporte.Desc_marca_articulo = dr["DESCRIPCION_MARCA"].ToString();
+                        nuevoReporte.Desc_tipo_articulo = dr["DESCRIPCION_TIPO_ARTICULO"].ToString();
+
+                        resultado.Add(nuevoReporte);
+
+                    }
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            finally
+            {
+                cn.Close();
+            }
+
+            return resultado;
+        }
         public static List<VMInventario> ListadoCantTipoNBK()
         {
             List<VMInventario> resultado = new List<VMInventario>();

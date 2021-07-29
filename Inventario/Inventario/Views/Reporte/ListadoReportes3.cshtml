@@ -3,6 +3,7 @@
 
 @{
     ViewBag.Title = "Reporte";
+    List<SelectListItem> itemsUsuarios = (List<SelectListItem>)ViewBag.itemsUsuarios;
 }
 
 
@@ -17,76 +18,102 @@
 </h2>
 <hr />
 
+
+
 @using (Html.BeginForm())
 {
-<div class="row">
-    <div class="col-lg-12 text-center">
-        <img src="~/images/xeneic_logo.png" width="200" height="200">
-    </div>
-    <div class="col-lg-12  text-center">
-        <br />
-        <table class="table table-bordered table-striped">
-            <thead class="bg-warning text-white">
-                <tr>
-                    <th class="text-center">
-                        Area
-                    </th>
-                    <th class="text-center">
-                        Codigo Usuario
-                    </th>
-                    <th class="text-center">
-                        Nombre Usuario
-                    </th>
-                    <th class="text-center">
-                        Articulo
-                    </th>
-                    <th class="text-center">
-                        Modelo
-                    </th>
-                    <th class="text-center">
-                        Marca
-                    </th>
-                    <th class="text-center">
-                        Tipo
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr class="table-light text-center text-dark">
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Area)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Codigo_usuario)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nombre_usuario)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Nombre_articulo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Modelo_articulo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Desc_marca_articulo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Desc_tipo_articulo)
-                        </td>
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <img src="~/images/xeneic_logo.png" width="200" height="200">
+        </div>
+        <div class="form-group">
+            <label class="col-sm-6" control-label>Filtrar por usuario</label>
+            <div class="col-sm-6">
+                @Html.DropDownList("id_usuario", itemsUsuarios, "Seleccione un tipo", htmlAttributes: new { @class = "form-control", @onchange = "refresh()" })
+            </div>
 
+        </div>
+        <div class="col-lg-12  text-center">
+            <br />
+            <table class="table table-bordered table-striped">
+                <thead class="bg-warning text-white">
+                    <tr>
+                        <th class="text-center">
+                            Area
+                        </th>
+                        <th class="text-center">
+                            Codigo Usuario
+                        </th>
+                        <th class="text-center">
+                            Nombre Usuario
+                        </th>
+                        <th class="text-center">
+                            Articulo
+                        </th>
+                        <th class="text-center">
+                            Modelo
+                        </th>
+                        <th class="text-center">
+                            Marca
+                        </th>
+                        <th class="text-center">
+                            Tipo
+                        </th>
                     </tr>
-                }
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="table-light text-center text-dark">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Area)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Codigo_usuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre_usuario)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre_articulo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Modelo_articulo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Desc_marca_articulo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Desc_tipo_articulo)
+                            </td>
 
-    </div>
-    <div class="form-group" text-right>
-        <div class="col-sm-6">
-            <a href="@Url.Action("Print3", "Reporte")" class="btn btn-info" target="_blank">Imprimir PDF</a>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+        <div class="form-group" text-right>
+            <div class="col-sm-6">
+                <a href="@Url.Action("Print3", "Reporte",new {@id_usuario = ViewBag.id})" class="btn btn-info" target="_blank">Imprimir PDF</a>
+            </div>
         </div>
     </div>
-</div>
 }
+
+<script>
+
+    function refresh() {
+        var cboTipoArt = document.getElementById("id_usuario");
+
+        if (cboTipoArt.value === "" || cboTipoArt.value === null || cboTipoArt.value === undefined) {
+            cboTipoArt.addEventListener("change", refresh);
+            window.location.href = ("@Url.Content("~/Reporte/ListadoReportes3")" + "?id_usuario= 0");
+        }
+        else {
+            cboTipoArt.addEventListener("change", refresh);
+            window.location.href = ("@Url.Content("~/Reporte/ListadoReportes3")" + "?id_usuario=" + cboTipoArt.value);
+        }
+    }
+</script>
+
